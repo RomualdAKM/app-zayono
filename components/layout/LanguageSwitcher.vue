@@ -32,8 +32,11 @@ async function switchLocale(code: string) {
   align-items: center;
   gap: 2px;
   padding: 2px;
-  background: var(--ze-surface-sunken, #f3f4f6);
-  border: 1px solid var(--ze-border, #e5e7eb);
+  /* Use the existing semantic tokens — `--ze-surface-*` were typos that
+     fell back to hardcoded light colors in dark mode, leaving the
+     inactive "FR" button invisible. */
+  background: var(--ze-bg-subtle);
+  border: 1px solid var(--ze-border);
   border-radius: 6px;
 }
 
@@ -46,7 +49,7 @@ async function switchLocale(code: string) {
   padding: 0 6px;
   border: none;
   background: transparent;
-  color: var(--ze-text-muted, #6b7280);
+  color: var(--ze-text-muted);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -56,18 +59,18 @@ async function switchLocale(code: string) {
 }
 
 .lang-btn:hover:not(.lang-btn--active) {
-  color: var(--ze-text-strong, #111827);
-  background: rgba(0, 0, 0, 0.04);
+  color: var(--ze-text-strong);
+  background: var(--ze-bg-hover);
 }
 
 .lang-btn--active {
-  background: var(--ze-surface, #ffffff);
-  color: var(--ze-text-strong, #111827);
+  background: var(--ze-bg-card);
+  color: var(--ze-text-strong);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .lang-btn:focus-visible {
-  outline: 2px solid var(--ze-primary, #2563eb);
+  outline: 2px solid var(--ze-brand);
   outline-offset: 1px;
 }
 

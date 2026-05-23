@@ -40,21 +40,22 @@ const formattedValue = computed(() => {
   gap: 18px;
 }
 
-/* Pastel tints stay hardcoded — they're intentionally identical in light
-   and dark mode, otherwise the four-card "rainbow" identity collapses
-   into a monochrome grey block. The black icon disc + white glyph keeps
-   enough contrast on each pastel in both themes. */
-.kpi-card--blue    { background: #EEF4FF; }
-.kpi-card--green   { background: #ECFDF5; }
-.kpi-card--yellow  { background: #FEFCE8; }
-.kpi-card--neutral { background: #F3F4F6; }
+/* Pastel tints via tokens so the four-card "rainbow" stays in both
+   themes — light mode keeps the soft pastels, dark mode swaps for
+   tinted-transparent equivalents (defined in main.css under .dark-mode).
+   Using the tokens here (instead of hardcoded hex) avoids the scoped-
+   CSS specificity war that previously left dark mode unstyled. */
+.kpi-card--blue    { background: var(--ze-kpi-blue); }
+.kpi-card--green   { background: var(--ze-kpi-green); }
+.kpi-card--yellow  { background: var(--ze-kpi-yellow); }
+.kpi-card--neutral { background: var(--ze-kpi-neutral); }
 
 .kpi-icon {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #0f172a;
-  color: #ffffff;
+  background: var(--ze-icon-circle-bg);
+  color: var(--ze-icon-circle-fg);
   display: flex;
   align-items: center;
   justify-content: center;
