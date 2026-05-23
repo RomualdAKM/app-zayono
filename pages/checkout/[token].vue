@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Deploy: 2026-05-23 — session_status derive fix + auto-redirect on terminal states
 import { useFailureCopy } from '~/composables/useFailureCopy'
 
 definePageMeta({ layout: 'checkout' })
