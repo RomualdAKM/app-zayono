@@ -561,7 +561,9 @@ async function manualStatusCheck() {
   }
 }
 
-// Auto-redirect to merchant after success ───────────────────────
+// Auto-redirect to merchant after terminal outcome ─────────────
+// Success → return_url, failure/expired/cancelled → cancel_url
+// (fallback to return_url if cancel_url not provided).
 let autoRedirectTimer: ReturnType<typeof setTimeout> | null = null
 function scheduleAutoRedirectToReturnUrl() {
   // R2 audit Edge N8: cancel any previously-scheduled timer first.
@@ -578,12 +580,39 @@ function scheduleAutoRedirectToReturnUrl() {
   }, 8000)
 }
 
+// Symmetric to scheduleAutoRedirectToReturnUrl but for terminal
+// non-success outcomes (failed / expired / cancelled). Falls back to
+// return_url when cancel_url wasn't provided by the merchant — better
+// to return SOMEWHERE than strand the customer on the failure screen.
+function scheduleAutoRedirectToCancelUrl() {
+  cancelAutoRedirect()
+  const target = session.value?.cancel_url || session.value?.return_url
+  if (!target) return
+  autoRedirectTimer = setTimeout(() => {
+    navigateSafely(target)
+  }, 8000)
+}
+
 function cancelAutoRedirect() {
   if (autoRedirectTimer) {
     clearTimeout(autoRedirectTimer)
     autoRedirectTimer = null
   }
 }
+
+// Single source of truth for auto-redirect on TERMINAL states. The
+// success path already schedules its own redirect inline (so the
+// `pageState = 'success'` site can decide when), but every failure /
+// expired / cancelled / timeout transition used to leave the customer
+// stranded on the screen with no way back to the merchant. Watching
+// pageState here means every site that flips into a terminal-fail
+// state gets the 8-second redirect to cancel_url for free.
+const TERMINAL_FAIL_STATES = ['failed', 'expired', 'merchant_cancelled', 'timeout', 'aggregator_down']
+watch(pageState, (next) => {
+  if (TERMINAL_FAIL_STATES.includes(next)) {
+    scheduleAutoRedirectToCancelUrl()
+  }
+})
 
 // Failure copy / retry  ─────────────────────────────────────────
 const failureCopy = computed(() => {
