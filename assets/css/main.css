@@ -1,0 +1,1854 @@
+/* Icon font (pi-*) — required everywhere in the UI */
+@import 'primeicons/primeicons.css';
+
+/*
+  Zayono design tokens — single source of truth.
+  Inspired by Stripe, Linear, Vercel: 4px-base spacing, 8px radius
+  default, semantic colors in 50/100/300/500/700 shades.
+*/
+:root {
+  /* ─── Spacing (4px base) ───────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ─── Border radius (unified) ──────────────────────── */
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-full: 999px;
+
+  /* ─── Shadows (elevation levels) ───────────────────── */
+  --shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --shadow-sm: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.04);
+  --shadow-md: 0 4px 8px -2px rgba(16, 24, 40, 0.10), 0 2px 4px -2px rgba(16, 24, 40, 0.06);
+  --shadow-lg: 0 12px 24px -6px rgba(16, 24, 40, 0.12), 0 4px 8px -2px rgba(16, 24, 40, 0.06);
+
+  /* ─── Neutral palette ──────────────────────────────── */
+  --neutral-50:  #F9FAFB;
+  --neutral-100: #F3F4F6;
+  --neutral-200: #E5E7EB;
+  --neutral-300: #D1D5DB;
+  --neutral-400: #9CA3AF;
+  --neutral-500: #6B7280;
+  --neutral-600: #4B5563;
+  --neutral-700: #374151;
+  --neutral-900: #111827;
+
+  /* ─── Primary (indigo) ─────────────────────────────── */
+  --primary-50:  #EEF2FF;
+  --primary-100: #E0E7FF;
+  --primary-200: #C7D2FE;
+  --primary-300: #A5B4FC;
+  --primary-500: #4F46E5;
+  --primary-700: #4338CA;
+  --primary-900: #312E81;
+
+  /* ─── Semantic ─────────────────────────────────────── */
+  --success-50:  #ECFDF5;
+  --success-100: #D1FAE5;
+  --success-300: #6EE7B7;
+  --success-500: #10B981;
+  --success-700: #047857;
+
+  --warning-50:  #FFFBEB;
+  --warning-100: #FEF3C7;
+  --warning-300: #FCD34D;
+  --warning-500: #F59E0B;
+  --warning-700: #B45309;
+
+  --danger-50:  #FEF2F2;
+  --danger-100: #FEE2E2;
+  --danger-300: #FCA5A5;
+  --danger-500: #EF4444;
+  --danger-700: #B91C1C;
+
+  --info-50:  #EFF6FF;
+  --info-100: #DBEAFE;
+  --info-300: #93C5FD;
+  --info-500: #3B82F6;
+  --info-700: #1D4ED8;
+
+  /* ─── PrimeVue overrides ─────────────────────────────
+     Aura ships with an indigo primary by default. We re-tint the entire
+     `--p-primary-*` palette to Zayono's blue so PrimeVue Buttons,
+     Tags, Inputs focus rings, Selects, Calendars… all align with the
+     brand instead of looking violet next to our blue CTAs. */
+  --p-border-radius: var(--radius);
+  --p-content-border-radius: var(--radius);
+  --p-overlay-shadow: var(--shadow-md);
+  --p-card-shadow: var(--shadow-xs);
+
+  --p-primary-50:  #EFF6FF;
+  --p-primary-100: #DBEAFE;
+  --p-primary-200: #BFDBFE;
+  --p-primary-300: #93C5FD;
+  --p-primary-400: #60A5FA;
+  --p-primary-500: #3B82F6;
+  --p-primary-600: #2563EB;
+  --p-primary-700: #1D4ED8;
+  --p-primary-800: #1E40AF;
+  --p-primary-900: #1E3A8A;
+  --p-primary-950: #172554;
+  --p-primary-color: #2563EB;
+  --p-primary-contrast-color: #ffffff;
+  --p-primary-hover-color: #1D4ED8;
+  --p-primary-active-color: #1E40AF;
+
+  /* ─── Semantic theme tokens (light) ────────────────── */
+  /* These switch under .dark-mode. Prefer var(--ze-*) over hardcoded
+     colours in new code so dark/light Just Works. */
+  --ze-bg-page: #FFFFFF;
+  --ze-bg-card: #FFFFFF;
+  --ze-bg-subtle: #F9FAFB;
+  --ze-bg-hover: #F3F4F6;
+  --ze-bg-input: #FFFFFF;
+
+  --ze-border: #E5E7EB;
+  --ze-border-subtle: #F3F4F6;
+  --ze-border-strong: #D1D5DB;
+
+  --ze-text-strong: #0F172A;
+  --ze-text-body: #111827;
+  --ze-text-label: #4B5563;
+  --ze-text-muted: #6B7280;
+  --ze-text-disabled: #9CA3AF;
+
+  --ze-brand: #2563EB;
+  --ze-brand-hover: #1D4ED8;
+  --ze-brand-fg: #FFFFFF;
+  --ze-brand-bg-soft: #EFF6FF;
+  --ze-brand-border: #BFDBFE;
+
+  --ze-success-bg: #ECFDF5;
+  --ze-success-fg: #047857;
+  --ze-success-border: #A7F3D0;
+  --ze-danger-bg: #FEF2F2;
+  --ze-danger-fg: #B91C1C;
+  --ze-danger-border: #FECACA;
+  --ze-warning-bg: #FEF3C7;
+  --ze-warning-fg: #92400E;
+  --ze-warning-border: #FDE68A;
+
+  --ze-sidebar-bg: #FFFFFF;
+  --ze-sidebar-border: #E5E7EB;
+  --ze-sidebar-text: #4B5563;
+  --ze-sidebar-text-hover: #111827;
+  --ze-sidebar-bg-hover: #F3F4F6;
+  --ze-sidebar-text-active: #2563EB;
+  --ze-sidebar-bg-active: #EFF6FF;
+
+  --ze-icon-circle-bg: #0F172A;
+  --ze-icon-circle-fg: #FFFFFF;
+
+  --ze-kpi-blue: #EEF4FF;
+  --ze-kpi-green: #ECFDF5;
+  --ze-kpi-yellow: #FEFCE8;
+  --ze-kpi-neutral: #F3F4F6;
+
+  --ze-shadow-overlay: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ─── Dark mode token overrides ─────────────────────────
+   Activated by adding `dark-mode` class on <html>. Both the Zayono
+   semantic tokens AND the PrimeVue `--p-*` tokens flip so Aura
+   components (Buttons, DataTable, Dropdowns…) follow along. */
+.dark-mode {
+  /* Brighter blues for dark surfaces — accessible contrast (~7:1) */
+  --p-primary-color: #3B82F6;
+  --p-primary-hover-color: #60A5FA;
+  --p-primary-active-color: #2563EB;
+  --p-content-background: #161A22;
+  --p-content-border-color: #2A3142;
+  --ze-bg-page: #0F1115;
+  --ze-bg-card: #161A22;
+  --ze-bg-subtle: #1A1F28;
+  --ze-bg-hover: #1F242F;
+  --ze-bg-input: #1A1F28;
+
+  --ze-border: #2A3142;
+  --ze-border-subtle: #1F2733;
+  --ze-border-strong: #3A4257;
+
+  --ze-text-strong: #F9FAFB;
+  --ze-text-body: #E5E7EB;
+  --ze-text-label: #D1D5DB;
+  --ze-text-muted: #9CA3AF;
+  --ze-text-disabled: #6B7280;
+
+  --ze-brand: #3B82F6;
+  --ze-brand-hover: #60A5FA;
+  --ze-brand-fg: #FFFFFF;
+  --ze-brand-bg-soft: rgba(59, 130, 246, 0.15);
+  --ze-brand-border: rgba(59, 130, 246, 0.45);
+
+  --ze-success-bg: rgba(16, 185, 129, 0.15);
+  --ze-success-fg: #34D399;
+  --ze-success-border: rgba(16, 185, 129, 0.4);
+  --ze-danger-bg: rgba(239, 68, 68, 0.15);
+  --ze-danger-fg: #F87171;
+  --ze-danger-border: rgba(239, 68, 68, 0.4);
+  --ze-warning-bg: rgba(245, 158, 11, 0.15);
+  --ze-warning-fg: #FBBF24;
+  --ze-warning-border: rgba(245, 158, 11, 0.4);
+
+  --ze-sidebar-bg: #161A22;
+  --ze-sidebar-border: #2A3142;
+  --ze-sidebar-text: #9CA3AF;
+  --ze-sidebar-text-hover: #F9FAFB;
+  --ze-sidebar-bg-hover: #1F242F;
+  --ze-sidebar-text-active: #60A5FA;
+  --ze-sidebar-bg-active: rgba(59, 130, 246, 0.15);
+
+  --ze-icon-circle-bg: #2A3142;
+  --ze-icon-circle-fg: #F9FAFB;
+
+  --ze-kpi-blue: rgba(59, 130, 246, 0.12);
+  --ze-kpi-green: rgba(16, 185, 129, 0.12);
+  --ze-kpi-yellow: rgba(245, 158, 11, 0.12);
+  --ze-kpi-neutral: #1F242F;
+
+  --ze-shadow-overlay: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Reset basique */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  /* Sora is the Zayono brand font (matches the logo). Self-hosted via
+     fontsource (see nuxt.config.ts) so it works offline.
+     Perf phase 0: Inter dropped from the fallback chain (was loaded as a
+     fontsource variable, ~150 KB). The system stack handles the FOUT
+     window in &lt;100 ms — visually indistinguishable from Inter on body
+     text but ships zero bytes. */
+  font-family: 'Sora Variable', 'Sora',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+               'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  color: var(--ze-text-body);
+  background: var(--ze-bg-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* `tnum` keeps figures monospaced across rows (essential for amount
+     columns in tables). Sora doesn't ship the Inter-specific stylistic
+     sets, so we drop `cv11/ss01/ss03` and only request tabular numerals. */
+  font-feature-settings: 'tnum';
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+/*
+ * Bespoke SVG icons inside common "icon container" classes.
+ *
+ * Pages historically used `font-size: 2rem` (or similar) on classes like
+ * `.empty-icon` to scale up a `<i class="pi pi-x">` glyph — the font
+ * inherited the size. SVGs don't respond to font-size unless their
+ * width/height attributes use `em` units, which they don't here.
+ *
+ * Solution: when an AppIcon SVG lands inside one of these size-bearing
+ * containers, override its width/height to match the container's font
+ * size. The selectors only target our SVGs (via `.app-icon` class added
+ * by the AppIcon wrapper) so we don't accidentally resize Chart.js or
+ * other third-party SVGs.
+ */
+.empty-icon.app-icon,
+.empty-icon .app-icon,
+.search-icon.app-icon,
+.search-icon .app-icon,
+.lock-icon.app-icon,
+.lock-icon .app-icon,
+.back-icon.app-icon,
+.back-icon .app-icon,
+.env-swap-icon.app-icon,
+.env-swap-icon .app-icon {
+  width: 1em;
+  height: 1em;
+}
+
+/*
+ * Auth layout — login / register screens.
+ *
+ * Lives in main.css (NOT in `layouts/auth.vue`'s scoped block) on
+ * purpose: scoped layout CSS ships as a separate Vite chunk that
+ * sometimes lands AFTER the HTML during hydration. That window made
+ * the page render briefly with the card stuck at top-left, since the
+ * `display: grid + place-items: center` rule hadn't applied yet.
+ *
+ * Keeping the centering here means the rules are part of the main
+ * critical CSS bundle that blocks first paint — there's no async gap.
+ *
+ * We use `grid` + `place-items: center` (instead of flex) because
+ * grid's auto-row sizing handles tall content (e.g. the register
+ * form with all its fields) without overflowing the viewport.
+ */
+.auth-layout {
+  min-height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--ze-bg-page);
+  padding: 24px;
+  box-sizing: border-box;
+  transition: background-color 0.18s ease;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  /* Belt-and-suspenders horizontal centering — survives even if the
+     grid parent fails to apply (e.g. mid-hydration). */
+  margin: 0 auto;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ze-text-strong);
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.auth-subtitle {
+  font-size: 13px;
+  color: var(--ze-text-muted);
+  margin: 6px 0 0;
+}
+
+.auth-card {
+  background: var(--ze-bg-card);
+  border: 1px solid var(--ze-border);
+  border-radius: 8px;
+  padding: 32px;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+@media (max-width: 480px) {
+  .auth-layout {
+    padding: 16px;
+  }
+  .auth-card {
+    padding: 24px;
+  }
+}
+
+/* Tabular-num utility — apply on financial figures (amounts, KPIs, tables). */
+.tabular,
+.amount,
+.kpi-value,
+td.col-amount,
+td.col-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* Card — subtle elevation instead of flat */
+.p-card {
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius);
+  background: #ffffff;
+}
+
+/* Datatable — Stripe/Linear-like density */
+.p-datatable {
+  border-radius: var(--radius);
+}
+
+.p-datatable .p-datatable-header {
+  background: transparent;
+  border: none;
+  padding: 0 0 var(--space-3);
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  background: var(--neutral-50);
+  border-bottom: 1px solid var(--neutral-200);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--neutral-500);
+  padding: 10px var(--space-4);
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 12px var(--space-4);
+  font-size: 13px;
+  border-bottom: 1px solid var(--neutral-100);
+  color: var(--neutral-900);
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background: var(--neutral-50);
+}
+
+/* Right-aligned amount column convention (financial dashboards). */
+.p-datatable .p-datatable-tbody > tr > td.col-amount,
+.p-datatable .p-datatable-thead > tr > th.col-amount {
+  text-align: right;
+}
+.col-amount .amount-currency {
+  color: var(--neutral-500);
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+/* Buttons — unified 8px radius, semantic colors via tokens */
+.p-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: 13px;
+  padding: 9px 14px;
+  cursor: pointer;
+  background: var(--primary-500);
+  color: #ffffff;
+  border: 1px solid var(--primary-500);
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s, transform 0.05s;
+}
+
+.p-button:hover:not(:disabled):not(.p-disabled) {
+  background: var(--primary-700);
+  border-color: var(--primary-700);
+}
+
+.p-button:active:not(:disabled):not(.p-disabled) {
+  transform: translateY(1px);
+}
+
+.p-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.20);
+}
+
+/* Secondary */
+.p-button.p-button-secondary {
+  background: #F3F4F6;
+  color: #374151;
+  border-color: #F3F4F6;
+}
+
+.p-button.p-button-secondary:hover:not(:disabled):not(.p-disabled) {
+  background: #E5E7EB;
+  border-color: #E5E7EB;
+}
+
+/* Success / Warn / Danger / Info / Help / Contrast */
+.p-button.p-button-success { background: #10B981; border-color: #10B981; }
+.p-button.p-button-success:hover:not(:disabled):not(.p-disabled) { background: #059669; border-color: #059669; }
+
+.p-button.p-button-warn,
+.p-button.p-button-warning {
+  background: #F59E0B;
+  border-color: #F59E0B;
+  color: #ffffff;
+}
+.p-button.p-button-warn:hover:not(:disabled):not(.p-disabled),
+.p-button.p-button-warning:hover:not(:disabled):not(.p-disabled) {
+  background: #D97706;
+  border-color: #D97706;
+}
+
+.p-button.p-button-danger { background: #DC2626; border-color: #DC2626; }
+.p-button.p-button-danger:hover:not(:disabled):not(.p-disabled) { background: #B91C1C; border-color: #B91C1C; }
+
+.p-button.p-button-info { background: #3B82F6; border-color: #3B82F6; }
+.p-button.p-button-info:hover:not(:disabled):not(.p-disabled) { background: #2563EB; border-color: #2563EB; }
+
+/* Outlined — keep the severity colour but invert it */
+.p-button.p-button-outlined {
+  background: transparent;
+  color: #4F46E5;
+  border: 1px solid #C7D2FE;
+}
+.p-button.p-button-outlined:hover:not(:disabled):not(.p-disabled) {
+  background: #EEF2FF;
+  border-color: #4F46E5;
+}
+
+.p-button.p-button-outlined.p-button-secondary {
+  color: #4B5563;
+  border-color: #D1D5DB;
+}
+.p-button.p-button-outlined.p-button-secondary:hover:not(:disabled):not(.p-disabled) {
+  background: #F9FAFB;
+  border-color: #9CA3AF;
+}
+
+.p-button.p-button-outlined.p-button-danger {
+  color: #DC2626;
+  border-color: #FECACA;
+}
+.p-button.p-button-outlined.p-button-danger:hover:not(:disabled):not(.p-disabled) {
+  background: #FEF2F2;
+  border-color: #DC2626;
+}
+
+.p-button.p-button-outlined.p-button-success {
+  color: #059669;
+  border-color: #A7F3D0;
+}
+.p-button.p-button-outlined.p-button-success:hover:not(:disabled):not(.p-disabled) {
+  background: #ECFDF5;
+  border-color: #10B981;
+}
+
+/* Text (no background, no border) */
+.p-button.p-button-text {
+  background: transparent;
+  color: #4F46E5;
+  border-color: transparent;
+}
+.p-button.p-button-text:hover:not(:disabled):not(.p-disabled) {
+  background: #EEF2FF;
+  border-color: transparent;
+}
+.p-button.p-button-text.p-button-secondary {
+  color: #4B5563;
+}
+.p-button.p-button-text.p-button-secondary:hover:not(:disabled):not(.p-disabled) {
+  background: #F3F4F6;
+}
+.p-button.p-button-text.p-button-danger {
+  color: #DC2626;
+}
+.p-button.p-button-text.p-button-danger:hover:not(:disabled):not(.p-disabled) {
+  background: #FEF2F2;
+}
+
+/* Icon-only buttons (rounded) */
+.p-button.p-button-icon-only {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+}
+.p-button.p-button-icon-only.p-button-rounded {
+  border-radius: 50%;
+}
+
+/* Sizes */
+.p-button.p-button-sm,
+.p-button-sm.p-button {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+.p-button.p-button-lg,
+.p-button-lg.p-button {
+  padding: 11px 18px;
+  font-size: 14px;
+}
+
+/* Disabled / loading */
+.p-button:disabled,
+.p-button.p-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.p-button .p-button-loading-icon {
+  margin-right: 6px;
+}
+
+/* Icon spacing inside label */
+.p-button .p-button-icon-left {
+  margin-right: 4px;
+}
+.p-button .p-button-icon-right {
+  margin-left: 4px;
+}
+
+/* Form controls — explicit border declarations so PrimeVue Aura defaults aren't dropped */
+.p-inputtext,
+.p-password input,
+.p-password-input,
+.p-inputnumber input,
+.p-inputnumber-input,
+.p-datepicker-input,
+.p-calendar input,
+.p-textarea,
+.p-iconfield .p-inputtext {
+  border-radius: var(--radius);
+  font-size: 13px;
+  border: 1px solid var(--neutral-300);
+  background: #ffffff;
+  color: var(--neutral-900);
+  padding: 9px 12px;
+  font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+/* PrimeVue <Password> wrapper defaults to inline-flex which makes the field
+   shrink-to-fit. Force block + 100% so it matches InputText/Select widths. */
+.p-password {
+  display: block;
+  width: 100%;
+}
+.p-password > input,
+.p-password .p-password-input,
+.p-password .p-inputtext {
+  width: 100%;
+}
+
+/* Select / Dropdown / MultiSelect: the wrapper is a flex row with label + chevron */
+.p-dropdown,
+.p-select,
+.p-multiselect {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius);
+  font-size: 13px;
+  border: 1px solid var(--neutral-300);
+  background: #ffffff;
+  color: var(--neutral-900);
+  padding: 0 8px 0 12px;
+  min-height: 38px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+  position: relative;
+  gap: 6px;
+  font-family: inherit;
+}
+
+.p-inputtext:hover,
+.p-dropdown:hover,
+.p-select:hover,
+.p-multiselect:hover,
+.p-textarea:hover {
+  border-color: #9ca3af;
+}
+
+.p-inputtext:focus,
+.p-inputtext.p-focus,
+.p-dropdown.p-focus,
+.p-select.p-focus,
+.p-select.p-inputwrapper-focus,
+.p-select.p-select-open,
+.p-multiselect.p-focus,
+.p-textarea:focus {
+  border-color: #4F46E5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+  outline: none;
+}
+
+.p-inputtext.p-invalid,
+.p-dropdown.p-invalid,
+.p-select.p-invalid,
+.p-multiselect.p-invalid {
+  border-color: #DC2626;
+}
+
+/* Inner label — flexes to fill space between the placeholder text and the chevron */
+.p-select-label,
+.p-multiselect-label,
+.p-dropdown-label {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 0;
+  background: transparent;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #111827;
+}
+
+.p-select-label.p-placeholder,
+.p-multiselect-label.p-placeholder,
+.p-dropdown-label.p-placeholder {
+  color: #9CA3AF;
+}
+
+/* Chevron column on the right */
+.p-select-dropdown,
+.p-multiselect-trigger,
+.p-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  color: #6B7280;
+  flex-shrink: 0;
+}
+
+.p-select-dropdown-icon,
+.p-multiselect-trigger-icon,
+.p-dropdown-trigger-icon {
+  font-size: 11px;
+}
+
+/* Clear icon */
+.p-select-clear-icon,
+.p-dropdown-clear-icon {
+  position: static;
+  margin-right: 2px;
+  color: #9CA3AF;
+  cursor: pointer;
+}
+
+/* Disabled state */
+.p-inputtext:disabled,
+.p-dropdown.p-disabled,
+.p-select.p-disabled,
+.p-multiselect.p-disabled {
+  background: #F9FAFB;
+  color: #6B7280;
+  cursor: not-allowed;
+}
+
+/* Overlay (open dropdown panel) — keep it solid so options are readable */
+.p-select-overlay,
+.p-dropdown-panel,
+.p-multiselect-panel {
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  z-index: 1100;
+}
+
+.p-select-list,
+.p-dropdown-items,
+.p-multiselect-items {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.p-select-option,
+.p-dropdown-item,
+.p-multiselect-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #111827;
+  font-size: 13px;
+  transition: background-color 0.1s;
+}
+
+.p-select-option:hover,
+.p-dropdown-item:hover,
+.p-multiselect-item:hover,
+.p-select-option.p-focus,
+.p-dropdown-item.p-focus {
+  background: #F3F4F6;
+}
+
+.p-select-option.p-select-option-selected,
+.p-dropdown-item.p-highlight,
+.p-multiselect-item.p-highlight {
+  background: #EEF2FF;
+  color: #4F46E5;
+  font-weight: 500;
+}
+
+/* Dialog */
+.p-dialog {
+  background: #ffffff;
+  color: var(--neutral-900);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.p-dialog .p-dialog-header {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--neutral-200);
+  background: #ffffff;
+  color: var(--neutral-900);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.p-dialog .p-dialog-content {
+  padding: var(--space-5);
+  background: #ffffff;
+  color: var(--neutral-900);
+}
+
+.p-dialog .p-dialog-footer {
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--neutral-200);
+  background: #ffffff;
+  display: flex;
+  gap: var(--space-2);
+  justify-content: flex-end;
+}
+
+/* Backdrop behind any modal overlay (Dialog, ConfirmDialog, Drawer…) */
+.p-dialog-mask.p-overlay-mask,
+.p-overlay-mask {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(6px);
+}
+
+/* Tag — unified system with semantic backgrounds + light borders */
+.p-tag {
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border: 1px solid transparent;
+  letter-spacing: 0.02em;
+}
+.p-tag.p-tag-success { background: var(--success-50); color: var(--success-700); border-color: var(--success-300); }
+.p-tag.p-tag-danger  { background: var(--danger-50);  color: var(--danger-700);  border-color: var(--danger-300); }
+.p-tag.p-tag-warn,
+.p-tag.p-tag-warning { background: var(--warning-50); color: var(--warning-700); border-color: var(--warning-300); }
+.p-tag.p-tag-info    { background: var(--info-50);    color: var(--info-700);    border-color: var(--info-300); }
+.p-tag.p-tag-secondary { background: var(--neutral-100); color: var(--neutral-700); border-color: var(--neutral-200); }
+
+/* Breadcrumb */
+.p-breadcrumb {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+}
+
+/* Paginator */
+.p-paginator {
+  border: none;
+  padding: 12px 0 0;
+  font-size: 13px;
+}
+
+/*
+ * ToggleSwitch — DELIBERATELY UNSTYLED.
+ *
+ * The previous hand-rolled rules (38×22 track, 18px handle at 2px inset)
+ * fought with the Aura preset's own dimensions and produced a handle
+ * that overflowed the track — the user saw a "C" shape because the
+ * thumb's left edge was being clipped by the slider's border-radius.
+ *
+ * The Aura preset already configures `.p-toggleswitch-*` with internally
+ * consistent dimensions (~50×28 track, properly inset handle), uses our
+ * `primary` colour (blue.600 → blue.700) from `nuxt.config.ts`, and
+ * handles dark mode via the `darkModeSelector`. Trusting the preset
+ * here means the toggle "just works" and matches the rest of the v4
+ * Aura look (Buttons, Selects, etc.).
+ *
+ * If a specific page needs a smaller/bigger toggle, scope the override
+ * to that page rather than reintroducing global dimensions here.
+ */
+
+/* Card title */
+.p-card .p-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--neutral-700);
+  margin-bottom: var(--space-3);
+}
+
+.p-card .p-card-content {
+  padding: 0;
+}
+
+/* Chart */
+.p-chart {
+  width: 100%;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   PrimeVue 4 overlay components — teleported to <body>, need global
+   opaque surfaces and proper class names (v4 uses tiered "p-menu-item-*"
+   not v3's collapsed "p-menuitem-*"; DatePicker has a separate panel
+   class so the input wrapper isn't styled like the overlay).
+   ───────────────────────────────────────────────────────────────── */
+
+/* Menu / TieredMenu — only the overlay (popup) variant needs the surface */
+.p-menu-overlay,
+.p-tieredmenu-overlay {
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 4px;
+  min-width: 180px;
+  z-index: 1100;
+}
+
+.p-menu-list,
+.p-tieredmenu-root-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.p-menu-item-content,
+.p-tieredmenu .p-menu-item-content {
+  border-radius: 6px;
+  transition: background 0.12s;
+}
+
+.p-menu-item-link,
+.p-tieredmenu .p-menu-item-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  color: #111827;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.p-menu-item-icon,
+.p-tieredmenu .p-menu-item-icon {
+  font-size: 14px;
+  color: #6B7280;
+}
+
+.p-menu-item-content:hover,
+.p-tieredmenu .p-menu-item-content:hover {
+  background: #F3F4F6;
+}
+
+.p-menu-separator,
+.p-tieredmenu .p-menu-separator {
+  height: 1px;
+  background: #E5E7EB;
+  margin: 4px 0;
+  border: none;
+}
+
+/* DatePicker panel (popup) — `.p-datepicker` itself is the INPUT wrapper,
+   so never style that with shadow/border. The panel has its own class. */
+.p-datepicker-panel {
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 12px;
+  z-index: 1100;
+  font-size: 13px;
+  color: #111827;
+}
+
+.p-datepicker-panel .p-datepicker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 4px 10px;
+  border-bottom: 1px solid #F3F4F6;
+  margin-bottom: 8px;
+}
+
+.p-datepicker-panel .p-datepicker-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.p-datepicker-panel .p-datepicker-prev-button,
+.p-datepicker-panel .p-datepicker-next-button {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: #6B7280;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.p-datepicker-panel .p-datepicker-prev-button:hover,
+.p-datepicker-panel .p-datepicker-next-button:hover {
+  background: #F3F4F6;
+  color: #111827;
+}
+
+.p-datepicker-panel .p-datepicker-calendar {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 2px;
+  margin: 0;
+}
+
+.p-datepicker-panel .p-datepicker-weekday-cell {
+  padding: 6px 0;
+  text-align: center;
+}
+
+.p-datepicker-panel .p-datepicker-weekday {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.p-datepicker-panel .p-datepicker-day-cell {
+  padding: 0;
+  text-align: center;
+}
+
+.p-datepicker-panel .p-datepicker-day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #111827;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.p-datepicker-panel .p-datepicker-day:hover {
+  background: #F3F4F6;
+}
+
+.p-datepicker-panel .p-datepicker-other-month .p-datepicker-day {
+  color: #D1D5DB;
+}
+
+.p-datepicker-panel .p-datepicker-today .p-datepicker-day {
+  background: #EFF6FF;
+  color: #2563EB;
+  font-weight: 600;
+}
+
+.p-datepicker-panel .p-datepicker-day-selected,
+.p-datepicker-panel .p-datepicker-day-selected-range {
+  background: #2563EB;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.p-datepicker-panel .p-datepicker-buttonbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  margin-top: 8px;
+  border-top: 1px solid #F3F4F6;
+}
+
+.p-datepicker-panel .p-datepicker-today-button,
+.p-datepicker-panel .p-datepicker-clear-button {
+  background: transparent;
+  border: none;
+  color: #2563EB;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.p-datepicker-panel .p-datepicker-today-button:hover,
+.p-datepicker-panel .p-datepicker-clear-button:hover {
+  background: #EFF6FF;
+}
+
+/* DatePicker input wrapper — keep it flush like a regular InputText.
+   Just lay out icon + input on the same row, NO border/shadow on the
+   wrapper itself (the input has its own border). */
+.p-datepicker {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+}
+
+.p-datepicker .p-datepicker-input {
+  flex: 1;
+}
+
+.p-datepicker .p-datepicker-input-icon-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  color: #6B7280;
+  cursor: pointer;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* ─── Dark mode scrollbar ────────────────────────────── */
+.dark-mode ::-webkit-scrollbar-thumb {
+  background: #3A4257;
+}
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: #4B5363;
+}
+
+/* ─── Dark mode — global overrides for common patterns ──
+   Most pages use the same class names (card, filters-card, table-card,
+   section, etc.) with hardcoded colours in scoped styles. These global
+   overrides flip them to the dark palette without page-level edits. */
+
+/* Generic card surfaces used across the app */
+.dark-mode .filters-card,
+.dark-mode .table-card,
+.dark-mode .card,
+.dark-mode .stat-card,
+.dark-mode .section,
+.dark-mode .settings-container,
+.dark-mode .loading-container,
+.dark-mode .filters-card[class],
+.dark-mode .recent-transactions {
+  background: var(--ze-bg-card);
+  border-color: var(--ze-border);
+  color: var(--ze-text-body);
+}
+
+/* Generic page subtitles + section subtitles */
+.dark-mode .page-subtitle,
+.dark-mode .section-desc,
+.dark-mode .section-subtitle,
+.dark-mode .field-desc,
+.dark-mode .empty-state-hint,
+.dark-mode .text-muted {
+  color: var(--ze-text-muted);
+}
+
+/* Section/card titles */
+.dark-mode .section-title,
+.dark-mode .page-title,
+.dark-mode .gateway-title,
+.dark-mode .template-name,
+.dark-mode .customer-name,
+.dark-mode .info-value,
+.dark-mode .field-label,
+.dark-mode .toggle-label,
+.dark-mode .radio-label,
+.dark-mode .empty-state p {
+  color: var(--ze-text-strong);
+}
+
+.dark-mode .info-label,
+.dark-mode .toggle-desc,
+.dark-mode .radio-desc,
+.dark-mode .gateway-subtitle,
+.dark-mode .template-desc,
+.dark-mode .customer-email,
+.dark-mode .date-cell,
+.dark-mode .reference-cell,
+.dark-mode .client-cell,
+.dark-mode .method-cell {
+  color: var(--ze-text-muted);
+}
+
+/* Outlined / pilule secondary buttons */
+.dark-mode .outline-pill,
+.dark-mode .outline-btn,
+.dark-mode .outline-pilule,
+.dark-mode .book-call-btn {
+  background: transparent;
+  color: var(--ze-brand);
+  border-color: var(--ze-brand-border);
+}
+
+.dark-mode .outline-pill:hover,
+.dark-mode .outline-btn:hover,
+.dark-mode .outline-pilule:hover,
+.dark-mode .book-call-btn:hover {
+  background: var(--ze-brand-bg-soft);
+  border-color: var(--ze-brand);
+}
+
+/* Status pills — soft tinted backgrounds */
+.dark-mode .status-pill-success,
+.dark-mode .badge--success {
+  background: var(--ze-success-bg);
+  color: var(--ze-success-fg);
+  border-color: var(--ze-success-border);
+}
+
+.dark-mode .status-pill-failed,
+.dark-mode .status-pill-error,
+.dark-mode .badge--error {
+  background: var(--ze-danger-bg);
+  color: var(--ze-danger-fg);
+  border-color: var(--ze-danger-border);
+}
+
+.dark-mode .status-pill-pending,
+.dark-mode .badge--warning {
+  background: var(--ze-warning-bg);
+  color: var(--ze-warning-fg);
+  border-color: var(--ze-warning-border);
+}
+
+.dark-mode .status-pill-initiated,
+.dark-mode .badge--info {
+  background: var(--ze-brand-bg-soft);
+  color: var(--ze-brand);
+  border-color: var(--ze-brand-border);
+}
+
+/* Code / monospace blocks (ref-code, info-code, key-value, copy-value) */
+.dark-mode .ref-code,
+.dark-mode .info-code,
+.dark-mode .copy-value,
+.dark-mode .key-value,
+.dark-mode .url-display,
+.dark-mode .detail-url,
+.dark-mode .secret-value,
+.dark-mode .key-prefix,
+.dark-mode .key-block {
+  background: var(--ze-bg-subtle);
+  color: var(--ze-text-body);
+}
+
+.dark-mode .copy-row {
+  background: var(--ze-bg-subtle);
+  border-color: var(--ze-border-subtle);
+}
+
+/* PrimeVue DataTable surfaces (Aura handles its own dark via the
+   darkModeSelector but our :deep overrides hardcoded colours, so the
+   global `.dark-mode .p-datatable-*` overrides correct that). */
+.dark-mode .p-datatable {
+  background: var(--ze-bg-card);
+  color: var(--ze-text-body);
+}
+
+.dark-mode .p-datatable-thead > tr > th,
+.dark-mode .zayono-table .p-datatable-thead > tr > th,
+.dark-mode .transactions-table .p-datatable-thead > tr > th,
+.dark-mode .recent-table .p-datatable-thead > tr > th {
+  background: var(--ze-bg-subtle) !important;
+  color: var(--ze-text-muted) !important;
+  border-bottom-color: var(--ze-border) !important;
+}
+
+.dark-mode .p-datatable-tbody > tr > td,
+.dark-mode .zayono-table .p-datatable-tbody > tr > td,
+.dark-mode .transactions-table .p-datatable-tbody > tr > td,
+.dark-mode .recent-table .p-datatable-tbody > tr > td {
+  color: var(--ze-text-body) !important;
+  border-bottom-color: var(--ze-border-subtle) !important;
+}
+
+.dark-mode .amount-cell,
+.dark-mode .amount {
+  color: var(--ze-text-strong);
+}
+
+.dark-mode .amount-currency {
+  color: var(--ze-text-muted);
+}
+
+/* Inputs (InputText, search-input, etc.) */
+.dark-mode .p-inputtext,
+.dark-mode .search-input,
+.dark-mode .p-password input,
+.dark-mode .p-password-input,
+.dark-mode .p-inputnumber input,
+.dark-mode .p-datepicker-input {
+  background: var(--ze-bg-input);
+  border-color: var(--ze-border);
+  color: var(--ze-text-body);
+}
+
+.dark-mode .p-inputtext::placeholder,
+.dark-mode .search-input::placeholder {
+  color: var(--ze-text-disabled);
+}
+
+.dark-mode .p-inputtext:focus,
+.dark-mode .search-input:focus {
+  border-color: var(--ze-brand);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+/* Search wrapper icon */
+.dark-mode .search-icon {
+  color: var(--ze-text-disabled);
+}
+
+/* Empty-state pi icon */
+.dark-mode .empty-state .pi,
+.dark-mode .empty-state .pi-inbox {
+  color: var(--ze-text-disabled);
+}
+
+/* Detail buttons (small icon CTAs) */
+.dark-mode .detail-btn,
+.dark-mode .detail-link {
+  color: var(--ze-brand);
+}
+
+.dark-mode .detail-btn:hover,
+.dark-mode .detail-link:hover {
+  background: var(--ze-brand-bg-soft);
+}
+
+/* KPI card pastel tones (re-tinted for dark surface) */
+.dark-mode .kpi-card--blue    { background: var(--ze-kpi-blue); }
+.dark-mode .kpi-card--green   { background: var(--ze-kpi-green); }
+.dark-mode .kpi-card--yellow  { background: var(--ze-kpi-yellow); }
+.dark-mode .kpi-card--neutral { background: var(--ze-kpi-neutral); }
+.dark-mode .kpi-card { color: var(--ze-text-body); }
+.dark-mode .kpi-label { color: var(--ze-text-muted); }
+.dark-mode .kpi-value { color: var(--ze-text-strong); }
+.dark-mode .kpi-icon {
+  background: var(--ze-icon-circle-bg);
+  color: var(--ze-icon-circle-fg);
+}
+
+/* Sidebar */
+.dark-mode .sidebar {
+  background: var(--ze-sidebar-bg);
+  border-right-color: var(--ze-sidebar-border);
+}
+
+.dark-mode .logo-text {
+  color: var(--ze-text-strong);
+}
+
+.dark-mode .nav-item {
+  color: var(--ze-sidebar-text);
+}
+
+.dark-mode .nav-item:hover {
+  background: var(--ze-sidebar-bg-hover);
+  color: var(--ze-sidebar-text-hover);
+}
+
+.dark-mode .nav-item--active {
+  background: var(--ze-sidebar-bg-active);
+  color: var(--ze-sidebar-text-active);
+}
+
+.dark-mode .nav-item--active i {
+  color: var(--ze-sidebar-text-active);
+}
+
+.dark-mode .nav-subitem {
+  color: var(--ze-sidebar-text);
+}
+
+.dark-mode .nav-subitem:hover {
+  background: var(--ze-sidebar-bg-hover);
+  color: var(--ze-sidebar-text-hover);
+}
+
+.dark-mode .nav-subitem--active {
+  background: var(--ze-sidebar-bg-active);
+  color: var(--ze-sidebar-text-active);
+}
+
+.dark-mode .sidebar-footer {
+  border-top-color: var(--ze-border-subtle);
+}
+
+.dark-mode .footer-item {
+  color: var(--ze-sidebar-text);
+}
+
+.dark-mode .footer-item:hover {
+  background: var(--ze-sidebar-bg-hover);
+  color: var(--ze-sidebar-text-hover);
+}
+
+/* Header */
+.dark-mode .app-header {
+  background: var(--ze-bg-card);
+  border-bottom-color: var(--ze-border);
+}
+
+.dark-mode .page-title {
+  color: var(--ze-text-strong);
+}
+
+/* PrimeVue overlay surfaces — switch these too for dark mode */
+.dark-mode .p-menu-overlay,
+.dark-mode .p-tieredmenu-overlay {
+  background: var(--ze-bg-card);
+  border-color: var(--ze-border);
+  box-shadow: var(--ze-shadow-overlay);
+}
+
+.dark-mode .p-menu-item-link,
+.dark-mode .p-tieredmenu .p-menu-item-link {
+  color: var(--ze-text-body);
+}
+
+.dark-mode .p-menu-item-icon,
+.dark-mode .p-tieredmenu .p-menu-item-icon {
+  color: var(--ze-text-muted);
+}
+
+.dark-mode .p-menu-item-content:hover,
+.dark-mode .p-tieredmenu .p-menu-item-content:hover {
+  background: var(--ze-bg-hover);
+}
+
+.dark-mode .p-menu-separator,
+.dark-mode .p-tieredmenu .p-menu-separator {
+  background: var(--ze-border);
+}
+
+.dark-mode .p-datepicker-panel {
+  background: var(--ze-bg-card);
+  border-color: var(--ze-border);
+  color: var(--ze-text-body);
+  box-shadow: var(--ze-shadow-overlay);
+}
+
+.dark-mode .p-datepicker-panel .p-datepicker-day {
+  color: var(--ze-text-body);
+}
+
+.dark-mode .p-datepicker-panel .p-datepicker-day:hover {
+  background: var(--ze-bg-hover);
+}
+
+.dark-mode .p-datepicker-panel .p-datepicker-other-month .p-datepicker-day {
+  color: var(--ze-text-disabled);
+}
+
+.dark-mode .p-datepicker-panel .p-datepicker-today .p-datepicker-day {
+  background: var(--ze-brand-bg-soft);
+  color: var(--ze-brand);
+}
+
+.dark-mode .p-datepicker-panel .p-datepicker-weekday {
+  color: var(--ze-text-muted);
+}
+
+.dark-mode .p-datepicker-panel .p-datepicker-header {
+  border-bottom-color: var(--ze-border-subtle);
+}
+
+.dark-mode .p-datepicker-panel .p-datepicker-prev-button,
+.dark-mode .p-datepicker-panel .p-datepicker-next-button {
+  color: var(--ze-text-muted);
+}
+
+.dark-mode .p-datepicker-panel .p-datepicker-prev-button:hover,
+.dark-mode .p-datepicker-panel .p-datepicker-next-button:hover {
+  background: var(--ze-bg-hover);
+  color: var(--ze-text-strong);
+}
+
+.dark-mode .p-datepicker-panel .p-datepicker-buttonbar {
+  border-top-color: var(--ze-border-subtle);
+}
+
+/* Select / Dropdown overlay */
+.dark-mode .p-select-overlay,
+.dark-mode .p-dropdown-panel,
+.dark-mode .p-multiselect-panel {
+  background: var(--ze-bg-card);
+  border-color: var(--ze-border);
+  box-shadow: var(--ze-shadow-overlay);
+}
+
+.dark-mode .p-select-option,
+.dark-mode .p-dropdown-item {
+  color: var(--ze-text-body);
+}
+
+.dark-mode .p-select-option:hover,
+.dark-mode .p-dropdown-item:hover {
+  background: var(--ze-bg-hover);
+}
+
+/* Tabs (settings pages) */
+.dark-mode .settings-container :deep(.p-tabview-tablist) {
+  border-bottom-color: var(--ze-border);
+}
+
+.dark-mode .settings-container :deep(.p-tabview-tab-header) {
+  color: var(--ze-text-muted);
+}
+
+.dark-mode .settings-container :deep(.p-tabview-tab-header:hover) {
+  color: var(--ze-brand);
+}
+
+.dark-mode .settings-container :deep(.p-tabview-tablist-item-active .p-tabview-tab-header) {
+  color: var(--ze-brand);
+  border-bottom-color: var(--ze-brand);
+}
+
+/* Radio cards + template cards on settings pages */
+.dark-mode .radio-option {
+  background: var(--ze-bg-card);
+  border-color: var(--ze-border);
+}
+
+.dark-mode .radio-option:hover {
+  border-color: var(--ze-brand-border);
+}
+
+.dark-mode .radio-option.active,
+.dark-mode .template-card--active {
+  background: var(--ze-brand-bg-soft);
+  border-color: var(--ze-brand);
+}
+
+.dark-mode .template-card {
+  background: var(--ze-bg-card);
+  border-color: var(--ze-border);
+}
+
+.dark-mode .template-card:hover {
+  border-color: var(--ze-brand-border);
+}
+
+.dark-mode .template-preview { background: var(--ze-bg-subtle); }
+.dark-mode .tpl-mock { background: var(--ze-bg-card); }
+.dark-mode .tpl-mock-merchant,
+.dark-mode .tpl-mock-method { background: var(--ze-border); }
+
+/* Skeletons */
+.dark-mode .p-skeleton {
+  background: linear-gradient(90deg, #1F242F 0%, #2A3142 50%, #1F242F 100%) !important;
+}
+
+/* Webhook info banners + auto banners */
+.dark-mode .webhook-info {
+  background: var(--ze-brand-bg-soft);
+  border-color: var(--ze-brand-border);
+}
+
+.dark-mode .webhook-info-title,
+.dark-mode .webhook-info-body {
+  color: var(--ze-brand);
+}
+
+.dark-mode .auto-banner {
+  background: var(--ze-success-bg);
+  border-color: var(--ze-success-border);
+}
+
+.dark-mode .auto-banner-title,
+.dark-mode .auto-banner-body {
+  color: var(--ze-success-fg);
+}
+
+/* Danger section */
+.dark-mode .danger {
+  border-color: var(--ze-danger-border);
+}
+
+.dark-mode .danger-title {
+  color: var(--ze-danger-fg);
+}
+
+/* Beta badge */
+.dark-mode .beta-badge {
+  background: var(--ze-warning-bg);
+  color: var(--ze-warning-fg);
+}
+
+/* ─── PrimeVue Dialog (modals) ───────────────────────── */
+.p-dialog {
+  background: var(--ze-bg-card);
+  border: 1px solid var(--ze-border);
+  border-radius: 8px;
+  color: var(--ze-text-body);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+}
+
+.p-dialog-header {
+  background: transparent;
+  color: var(--ze-text-strong);
+  border-bottom: 1px solid var(--ze-border-subtle);
+  padding: 18px 22px;
+}
+
+.p-dialog-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.p-dialog-content {
+  background: transparent;
+  color: var(--ze-text-body);
+  padding: 22px;
+}
+
+.p-dialog-footer {
+  background: transparent;
+  border-top: 1px solid var(--ze-border-subtle);
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.p-dialog-close-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: var(--ze-text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.p-dialog-close-button:hover {
+  background: var(--ze-bg-hover);
+  color: var(--ze-text-strong);
+}
+
+.p-dialog-mask {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .p-dialog-mask {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+/* ─── Dark-mode hard overrides for PrimeVue surfaces ───
+   Aura's runtime stylesheet is injected after main.css and uses
+   `--p-*` tokens. When a token override doesn't take effect (cache,
+   preset reload weirdness…), these `!important` rules ensure the
+   Dialog, Select, DataTable, etc. flip dark regardless. */
+.dark-mode .p-dialog {
+  background: var(--ze-bg-card) !important;
+  color: var(--ze-text-body) !important;
+  border-color: var(--ze-border) !important;
+}
+
+.dark-mode .p-dialog-header,
+.dark-mode .p-dialog-content,
+.dark-mode .p-dialog-footer {
+  background: transparent !important;
+  color: var(--ze-text-body) !important;
+}
+
+.dark-mode .p-dialog-title {
+  color: var(--ze-text-strong) !important;
+}
+
+.dark-mode .p-dialog-header,
+.dark-mode .p-dialog-footer {
+  border-color: var(--ze-border-subtle) !important;
+}
+
+/* Select / Dropdown — both the trigger (input) and the overlay (popup). */
+.dark-mode .p-select,
+.dark-mode .p-multiselect,
+.dark-mode .p-treeselect,
+.dark-mode .p-cascadeselect {
+  background: var(--ze-bg-input) !important;
+  color: var(--ze-text-body) !important;
+  border-color: var(--ze-border) !important;
+}
+
+.dark-mode .p-select .p-select-label,
+.dark-mode .p-multiselect .p-multiselect-label,
+.dark-mode .p-treeselect-label {
+  color: var(--ze-text-body) !important;
+}
+
+.dark-mode .p-select .p-select-label.p-select-label-empty,
+.dark-mode .p-multiselect-label.p-multiselect-label-empty {
+  color: var(--ze-text-muted) !important;
+}
+
+.dark-mode .p-select-overlay,
+.dark-mode .p-multiselect-overlay,
+.dark-mode .p-treeselect-overlay,
+.dark-mode .p-cascadeselect-overlay,
+.dark-mode .p-autocomplete-overlay,
+.dark-mode .p-datepicker-panel,
+.dark-mode .p-popover {
+  background: var(--ze-bg-card) !important;
+  color: var(--ze-text-body) !important;
+  border-color: var(--ze-border) !important;
+}
+
+.dark-mode .p-select-option,
+.dark-mode .p-multiselect-option {
+  color: var(--ze-text-body) !important;
+}
+
+.dark-mode .p-select-option:hover,
+.dark-mode .p-multiselect-option:hover,
+.dark-mode .p-select-option.p-focus,
+.dark-mode .p-multiselect-option.p-focus {
+  background: var(--ze-bg-hover) !important;
+}
+
+.dark-mode .p-select-option.p-select-option-selected,
+.dark-mode .p-multiselect-option.p-multiselect-option-selected {
+  background: var(--ze-brand-bg-soft) !important;
+  color: var(--ze-brand) !important;
+}
+
+/* InputText, Password, Textarea, InputNumber, DatePicker input */
+.dark-mode .p-inputtext,
+.dark-mode .p-password-input,
+.dark-mode .p-textarea,
+.dark-mode .p-inputnumber-input,
+.dark-mode .p-datepicker-input {
+  background: var(--ze-bg-input) !important;
+  color: var(--ze-text-body) !important;
+  border-color: var(--ze-border) !important;
+}
+
+.dark-mode .p-inputtext::placeholder,
+.dark-mode .p-textarea::placeholder {
+  color: var(--ze-text-disabled) !important;
+}
+
+/* DataTable */
+.dark-mode .p-datatable,
+.dark-mode .p-datatable-table,
+.dark-mode .p-datatable-tbody > tr {
+  background: var(--ze-bg-card) !important;
+  color: var(--ze-text-body) !important;
+}
+
+.dark-mode .p-datatable-thead > tr > th {
+  background: var(--ze-bg-subtle) !important;
+  color: var(--ze-text-muted) !important;
+  border-bottom-color: var(--ze-border) !important;
+}
+
+.dark-mode .p-datatable-tbody > tr > td {
+  color: var(--ze-text-body) !important;
+  border-bottom-color: var(--ze-border-subtle) !important;
+}
+
+.dark-mode .p-datatable-tbody > tr:hover {
+  background: var(--ze-bg-hover) !important;
+}
+
+/* Paginator */
+.dark-mode .p-paginator {
+  background: transparent !important;
+  color: var(--ze-text-body) !important;
+}
+
+.dark-mode .p-paginator .p-paginator-page,
+.dark-mode .p-paginator .p-paginator-first,
+.dark-mode .p-paginator .p-paginator-prev,
+.dark-mode .p-paginator .p-paginator-next,
+.dark-mode .p-paginator .p-paginator-last {
+  color: var(--ze-text-muted) !important;
+  background: transparent !important;
+}
+
+.dark-mode .p-paginator .p-paginator-page.p-paginator-page-selected {
+  background: var(--ze-brand-bg-soft) !important;
+  color: var(--ze-brand) !important;
+}
+
+/* Tag */
+.dark-mode .p-tag {
+  background: var(--ze-bg-hover);
+  color: var(--ze-text-body);
+}
+
+.dark-mode .p-tag.p-tag-success {
+  background: var(--ze-success-bg) !important;
+  color: var(--ze-success-fg) !important;
+}
+
+.dark-mode .p-tag.p-tag-danger {
+  background: var(--ze-danger-bg) !important;
+  color: var(--ze-danger-fg) !important;
+}
+
+.dark-mode .p-tag.p-tag-warn,
+.dark-mode .p-tag.p-tag-warning {
+  background: var(--ze-warning-bg) !important;
+  color: var(--ze-warning-fg) !important;
+}
+
+.dark-mode .p-tag.p-tag-info {
+  background: var(--ze-brand-bg-soft) !important;
+  color: var(--ze-brand) !important;
+}
+
+/* Toast */
+.dark-mode .p-toast .p-toast-message {
+  background: var(--ze-bg-card) !important;
+  border-color: var(--ze-border) !important;
+  color: var(--ze-text-body) !important;
+}
+
+/* Skeleton */
+.dark-mode .p-skeleton {
+  background: linear-gradient(90deg, var(--ze-bg-subtle) 0%, var(--ze-bg-hover) 50%, var(--ze-bg-subtle) 100%) !important;
+}
+
+/* PrimeVue Button — make sure the default primary uses our blue
+   (Aura's tokens are wired to `--p-primary-*` which we re-pointed above). */
+.p-button {
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+/* Filter-date width — DatePicker with range mode tends to want more
+   room than the other Selects, which makes it wrap on its own row.
+   Cap it so it sits with the rest of the filter bar. */
+.filter-control.filter-date {
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  min-width: 220px;
+  max-width: 260px;
+  flex: 0 0 auto;
+}
+.filter-control.filter-date .p-datepicker-input,
+.filter-control.filter-date .p-inputtext {
+  width: 100%;
+}

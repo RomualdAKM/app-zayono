@@ -1,0 +1,1965 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "yes": "Yes",
+    "no": "No",
+    "loading": "Loading…",
+    "actions": "Actions",
+    "search": "Search",
+    "refresh": "Refresh",
+    "copy": "Copy",
+    "copied": "Copied",
+    "view": "View",
+    "details": "Details",
+    "create": "Create",
+    "update": "Update",
+    "active": "Active",
+    "inactive": "Inactive",
+    "all": "All",
+    "none": "None",
+    "and": "and",
+    "or": "or",
+    "of": "of",
+    "from": "From",
+    "to": "To",
+    "status": "Status",
+    "date": "Date",
+    "amount": "Amount",
+    "currency": "Currency",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "country": "Country",
+    "description": "Description",
+    "add": "Add",
+    "remove": "Remove",
+    "submit": "Submit",
+    "exportCsv": "Export CSV",
+    "exportImpossible": "Export failed",
+    "noData": "No data",
+    "operator": "Operator",
+    "aggregator": "Aggregator",
+    "environment": "Environment",
+    "type": "Type",
+    "live": "Live",
+    "sandbox": "Sandbox",
+    "merchant": "Merchant",
+    "company": "Company",
+    "registered": "Registered on",
+    "verified": "Verified",
+    "user": "User",
+    "system": "System",
+    "transactions": "Transactions",
+    "volume": "Volume",
+    "revenue": "Revenue",
+    "neverActivity": "Never",
+    "minAgo": "{n} min ago",
+    "hourAgo": "{n}h ago",
+    "dayAgo": "{n}d ago",
+    "configure": "Configure",
+    "manage": "Manage",
+    "saved": "Saved",
+    "yesAction": "Yes",
+    "noAction": "No",
+    "filter": "Filter",
+    "export": "Export",
+    "reload": "Reload",
+    "saveChanges": "Save changes",
+    "select": "Select",
+    "language": "Language"
+  },
+  "status": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information",
+    "pending": "Pending",
+    "processing": "Processing",
+    "completed": "Completed",
+    "failed": "Failed",
+    "cancelled": "Cancelled",
+    "refunded": "Refunded",
+    "initiated": "Initiated",
+    "suspended": "Suspended",
+    "active": "Active",
+    "operational": "Operational",
+    "degraded": "Degraded",
+    "down": "Down",
+    "unknown": "Unknown"
+  },
+  "txType": {
+    "payment": "Payment",
+    "payout": "Payout"
+  },
+  "auditAction": {
+    "created": "Created",
+    "updated": "Updated",
+    "deleted": "Deleted",
+    "login": "Login",
+    "login_failed": "Login failed",
+    "logout": "Logout",
+    "register": "Register",
+    "email_verified": "Email verified",
+    "password_reset_requested": "Password reset requested",
+    "password_reset": "Password reset",
+    "api_key_created": "API key created",
+    "api_key_revoked": "API key revoked"
+  },
+  "rateSource": {
+    "manual": "Manual",
+    "auto": "Automatic",
+    "automatic": "Automatic"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "payments": "Payments",
+    "transactions": "Transactions",
+    "gateways": "Gateways",
+    "methods": "Payment methods",
+    "routingHealth": "Routing health",
+    "settings": "Settings",
+    "payouts": "Payouts",
+    "customers": "Customers",
+    "statistics": "Statistics",
+    "global": "Global",
+    "integration": "Integration",
+    "apiKeys": "API keys",
+    "webhooks": "Webhooks",
+    "webhookDeliveries": "Webhook deliveries",
+    "apiLogs": "API logs",
+    "billing": "Billing",
+    "documentation": "Documentation",
+    "helpCenter": "Help center",
+    "application": "Application",
+    "allApplications": "All applications",
+    "profile": "Profile",
+    "logout": "Sign out"
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "finances": "Finances",
+      "platformBilling": "Platform billing",
+      "merchants": "Merchants",
+      "transactions": "Transactions",
+      "aggregators": "Aggregators",
+      "exchangeRates": "Exchange rates",
+      "superAdmins": "Super admins",
+      "auditLogs": "Audit logs"
+    },
+    "badge": "Super Admin",
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "subtitle": "Overview of the Zayono platform",
+      "kpi": {
+        "merchants": "Merchants",
+        "newToday": "+{n} today",
+        "txToday": "Transactions Today",
+        "weekTx": "{n} this week",
+        "volumeToday": "Volume Today",
+        "revenueZayono": "Zayono Revenue",
+        "perMonth": "{amount} / month"
+      },
+      "revenueChart": "Platform revenue — last 12 months",
+      "revenueChartSubtitle": "Zayono commission charged on successful transactions, aggregated monthly.",
+      "totalPeriod": "Period total",
+      "volumeProcessed": "Volume processed",
+      "recentTransactions": "Recent transactions",
+      "viewAll": "View all",
+      "aggregators": "Aggregators",
+      "successRate": "success",
+      "newMerchants": "New merchants",
+      "registeredOn": "Registered on",
+      "columns": {
+        "id": "ID",
+        "merchant": "Merchant",
+        "amount": "Amount",
+        "status": "Status",
+        "operator": "Operator",
+        "name": "Name",
+        "email": "Email",
+        "company": "Company"
+      }
+    },
+    "finances": {
+      "title": "Finances",
+      "subtitle": "Zayono commission charged on <strong>successful</strong> transactions across all merchants.",
+      "period": "Period",
+      "periodOptions": {
+        "days7": "7 days",
+        "days30": "30 days",
+        "days90": "90 days",
+        "all": "All"
+      },
+      "kpi": {
+        "platformRevenue": "Platform revenue",
+        "txVolume": "Transaction volume",
+        "successfulTx": "Successful transactions",
+        "effectiveRate": "Effective average rate"
+      },
+      "monthlyEvolution": "Monthly evolution — {months}",
+      "monthsCount": "{n} months",
+      "topMerchants": "Top 10 merchants",
+      "noTxPeriod": "No successful transactions for this period.",
+      "txCount": "tx",
+      "revenueLabel": "Revenue"
+    },
+    "aggregators": {
+      "title": "Aggregators",
+      "subtitle": "Health and performance of payment aggregators",
+      "transactions": "Transactions",
+      "successRate": "Success rate",
+      "totalVolume": "Total volume",
+      "lastActivity": "Last activity",
+      "successfulOf": "{success} / {total} successful"
+    },
+    "rates": {
+      "title": "Exchange rates",
+      "subtitle": "Manage conversion rates",
+      "addRate": "Add a rate",
+      "from": "From",
+      "to": "To",
+      "rate": "Rate",
+      "source": "Source",
+      "active": "Active",
+      "updatedAt": "Updated",
+      "fromCurrency": "Source currency",
+      "toCurrency": "Target currency",
+      "addAction": "Add",
+      "cancelAction": "Cancel",
+      "manual": "manual",
+      "automatic": "automatic"
+    },
+    "merchants": {
+      "title": "Merchants",
+      "subtitle": "Manage all merchants on the platform",
+      "searchPlaceholder": "Search by name, email...",
+      "allStatuses": "All statuses",
+      "active": "Active",
+      "suspended": "Suspended",
+      "columns": {
+        "name": "Name",
+        "email": "Email",
+        "company": "Company",
+        "status": "Status",
+        "feePercent": "Fee %",
+        "transactions": "Transactions",
+        "revenue": "Zayono Revenue",
+        "verified": "Verified",
+        "registeredOn": "Registered on"
+      }
+    },
+    "transactionsList": {
+      "title": "Transactions",
+      "subtitle": "All transactions on the platform",
+      "filters": {
+        "status": "Status",
+        "aggregator": "Aggregator",
+        "environment": "Environment"
+      },
+      "columns": {
+        "id": "ID",
+        "merchant": "Merchant",
+        "amount": "Amount",
+        "status": "Status",
+        "type": "Type",
+        "operator": "Operator",
+        "aggregator": "Aggregator",
+        "env": "Env",
+        "date": "Date"
+      }
+    },
+    "transactionDetail": {
+      "title": "Transaction {id}",
+      "details": "Details",
+      "id": "ID",
+      "merchant": "Merchant",
+      "amount": "Amount",
+      "type": "Type",
+      "operator": "Operator",
+      "aggregator": "Aggregator",
+      "environment": "Environment",
+      "date": "Date",
+      "fees": "Fees",
+      "feeZayonoPercent": "Zayono Fee %",
+      "feeZayonoAmount": "Zayono Fee amount",
+      "feeMerchantPercent": "Merchant Fee %",
+      "attempts": "Attempts",
+      "attemptsColumns": {
+        "aggregator": "Aggregator",
+        "status": "Status",
+        "time": "Time (ms)",
+        "date": "Date"
+      },
+      "noAttempts": "No attempt recorded",
+      "webhooks": "Webhooks",
+      "webhookColumns": {
+        "url": "URL",
+        "httpCode": "HTTP Code",
+        "response": "Response",
+        "date": "Date"
+      },
+      "ok": "OK",
+      "error": "Error",
+      "noWebhook": "No webhook sent",
+      "loadError": "Couldn't load the transaction"
+    },
+    "merchantDetail": {
+      "fallbackName": "Merchant",
+      "demote": "Remove Super Admin",
+      "promote": "Promote to Super Admin",
+      "suspend": "Suspend",
+      "activate": "Activate",
+      "information": "Information",
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "company": "Company",
+        "phone": "Phone",
+        "country": "Country",
+        "status": "Status",
+        "verified": "Verified"
+      },
+      "active": "Active",
+      "suspended": "Suspended",
+      "yes": "Yes",
+      "no": "No",
+      "settings": "Settings",
+      "zayonoFee": "Zayono Fee (%)",
+      "statusLabel": "Status",
+      "save": "Save",
+      "statistics": "Statistics",
+      "stats": {
+        "transactions": "Transactions",
+        "successRate": "Success rate",
+        "totalVolume": "Total volume",
+        "lastActivity": "Last activity"
+      },
+      "revenueTitle": "Zayono platform revenue",
+      "revenueSubtitle": "Cumulative commission ({percent}%) charged on this merchant's <strong>successful</strong> transactions. Failed, pending or cancelled transactions are never counted.",
+      "revenue": {
+        "allTime": "All time",
+        "last30d": "Last 30 days",
+        "activeCommission": "Active commission",
+        "applications": "Applications"
+      },
+      "demoteError": "Couldn't remove super admin role."
+    },
+    "audit": {
+      "title": "Audit Logs",
+      "subtitle": "Platform change log",
+      "filters": {
+        "action": "Action",
+        "model": "Model",
+        "appIdPlaceholder": "Application ID (UUID)"
+      },
+      "columns": {
+        "date": "Date",
+        "user": "User",
+        "application": "Application",
+        "action": "Action",
+        "model": "Model",
+        "ip": "IP"
+      },
+      "expansion": {
+        "oldValues": "Old values",
+        "newValues": "New values",
+        "noDetails": "No details available"
+      },
+      "actions": {
+        "created": "Created",
+        "updated": "Updated",
+        "deleted": "Deleted",
+        "login": "Login",
+        "loginFailed": "Login failed",
+        "logout": "Logout",
+        "register": "Register",
+        "emailVerified": "Email verified",
+        "passwordResetRequested": "Password reset requested",
+        "passwordReset": "Password reset",
+        "apiKeyCreated": "API key created",
+        "apiKeyRevoked": "API key revoked"
+      },
+      "system": "System"
+    },
+    "superAdmins": {
+      "title": "Super administrators",
+      "subtitle": "Accounts with admin dashboard access. Promotion happens from a merchant's profile.",
+      "alert": "You cannot remove your own role, and there must always remain at least one super administrator. Both rules are enforced server-side.",
+      "becameAdmin": "Became admin",
+      "removeRole": "Remove role",
+      "confirmRemove": "Remove super admin role from {name}?",
+      "removeError": "Could not remove role.",
+      "columns": {
+        "name": "Name",
+        "email": "Email",
+        "company": "Company",
+        "account": "Account",
+        "emailVerified": "Email verified"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you{'@'}example.com",
+      "passwordLabel": "Password",
+      "submitButton": "Sign in",
+      "noAccount": "Don't have an account yet?",
+      "signUp": "Sign up",
+      "invalidCredentials": "Invalid credentials"
+    },
+    "register": {
+      "title": "Create your account",
+      "nameLabel": "Site or application name",
+      "nameHint": "Displayed to your customers on the checkout and receipts",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "passwordHint": "8 characters minimum, at least one letter and one number.",
+      "passwordConfirmLabel": "Confirm password",
+      "submitButton": "Sign up",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "genericError": "Sign-up failed. Please try again in a moment."
+    },
+    "logout": "Sign out"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "kpi": {
+      "totalPayments": "Total payment transactions",
+      "totalPayouts": "Total payout transactions",
+      "totalRevenue": "Total revenue",
+      "totalCustomers": "Total customers"
+    },
+    "recentTransactions": "Recent transactions",
+    "recentTransactionsSubtitle": "Your most recent payments and payouts",
+    "tabPayments": "Payments",
+    "tabPayouts": "Payouts",
+    "viewAll": "View all",
+    "viewAllTransactions": "View all transactions",
+    "empty": "No recent transactions",
+    "columns": {
+      "amount": "Amount",
+      "status": "Status",
+      "method": "Method",
+      "customer": "Customer",
+      "reference": "Reference",
+      "date": "Date",
+      "details": "Details"
+    }
+  },
+  "billing": {
+    "title": "Billing",
+    "subtitle": "Zayono platform fees — deferred billing. For each successful live transaction, a small USD amount accrues. When the total reaches $1, an invoice is generated which you pay through your dashboard.",
+    "currentBalance": "Current balance",
+    "accumulatedTx": "Accumulated transactions",
+    "feePerTx": "Fee per transaction",
+    "unpaidInvoices": "Unpaid invoices",
+    "progressTitle": "Progress toward next invoice",
+    "progressSubtitle": "A $1.00 invoice is generated when the balance crosses the threshold.",
+    "invoiceHistory": "Invoice history",
+    "invoiceNumber": "Number",
+    "txCount": "Transactions",
+    "generated": "Generated",
+    "dueDate": "Due date",
+    "paidAt": "Paid {date}",
+    "pay": "Pay",
+    "suspended": {
+      "title": "Live mode suspended",
+      "body": "Your live transactions are blocked. Pay your unpaid invoices to restore service. Sandbox remains accessible."
+    },
+    "invoiceStatus": {
+      "paid": "Paid",
+      "pending": "Pending",
+      "late": "Late",
+      "cancelled": "Cancelled",
+      "writtenOff": "Written off",
+      "expired": "Expired"
+    },
+    "empty": "No invoices yet. Keep using Zayono — your first invoice will be generated after 200 successful live transactions."
+  },
+  "platformBilling": {
+    "title": "Platform billing",
+    "subtitle": "Zayono revenue — fees accrued on merchants' live transactions, invoiced at every $1.00 threshold.",
+    "kpi": {
+      "pendingBalance": "Pending (not invoiced)",
+      "unpaidInvoices": "Unpaid invoices",
+      "paidLast30d": "Paid last 30 days",
+      "paidAllTime": "Total all-time"
+    },
+    "alerts": {
+      "suspended": "{count} merchant(s) currently suspended for unpaid invoices.",
+      "pastDue": "{count} invoice(s) past due — follow up needed."
+    },
+    "tabs": {
+      "merchants": "Merchants",
+      "invoices": "Invoices"
+    },
+    "filters": {
+      "suspendedOnly": "Suspended only",
+      "withPending": "With pending balance",
+      "lateOnly": "Late only"
+    },
+    "table": {
+      "merchant": "Merchant",
+      "fee": "Fee",
+      "pendingBalance": "Pending balance",
+      "pendingTx": "Pending tx",
+      "invoices": "Invoices",
+      "platformBadge": "PLATFORM",
+      "manage": "Manage",
+      "markPaid": "Mark paid",
+      "cancel": "Cancel"
+    },
+    "modals": {
+      "merchantDetail": "Merchant detail",
+      "feeUnitLabel": "Unit fee (USD/tx)",
+      "updateFee": "Update",
+      "invoiceHistory": "Invoice history",
+      "createManual": "Create manual invoice",
+      "markPaid": {
+        "title": "Mark as paid (out-of-Zayono)",
+        "body": "Marks invoice {number} of ${amount} as paid. Use for payments received by bank transfer or in cash.",
+        "noteLabel": "Admin note (required)",
+        "notePlaceholder": "E.g.: Received bank transfer ref #12345 on 05/22/2026",
+        "confirm": "Confirm payment"
+      },
+      "cancel": {
+        "title": "Cancel the invoice",
+        "body": "Permanently cancels invoice {number}. The merchant will no longer be able to pay it.",
+        "reasonLabel": "Reason (required)",
+        "reasonPlaceholder": "E.g.: Data entry error / commercial request",
+        "confirm": "Confirm cancellation"
+      },
+      "manual": {
+        "title": "Create a manual invoice",
+        "amountLabel": "USD amount",
+        "dueLabel": "Due date (optional)",
+        "noteLabel": "Admin note (required)",
+        "notePlaceholder": "Why this invoice?",
+        "confirm": "Create invoice"
+      }
+    },
+    "toasts": {
+      "feeUpdated": "Fee updated",
+      "invoiceMarkedPaid": "Invoice marked as paid",
+      "invoiceCancelled": "Invoice cancelled",
+      "invoiceCreated": "Invoice created"
+    }
+  },
+  "paymentsPage": {
+    "subtitle": "Payment transactions list",
+    "searchPlaceholder": "Search a transaction...",
+    "filters": {
+      "status": "All",
+      "currency": "Currency",
+      "method": "Method",
+      "gateway": "Gateway",
+      "date": "Filter by date"
+    },
+    "statusOptions": {
+      "initiated": "Initiated",
+      "pending": "Pending",
+      "success": "Success",
+      "failed": "Failed",
+      "cancelled": "Cancelled"
+    },
+    "empty": "No payments yet",
+    "emptyHint": "Your customers' payments will appear here as soon as they pay through your checkout.",
+    "viewMethods": "View my payment methods",
+    "columns": {
+      "amount": "Amount",
+      "status": "Status",
+      "method": "Method",
+      "customer": "Customer",
+      "reference": "Reference",
+      "date": "Date",
+      "details": "Details"
+    },
+    "tooltips": {
+      "copy": "Copy",
+      "viewDetails": "View details"
+    },
+    "loadError": "Couldn't load payments",
+    "errorSummary": "Payments",
+    "detail": {
+      "back": "Back",
+      "transactionLabel": "Transaction",
+      "informations": "Information",
+      "transactionId": "Transaction ID",
+      "amount": "Amount",
+      "status": "Status",
+      "createdAt": "Created at",
+      "phone": "Phone",
+      "description": "Description",
+      "amountCharged": "Amount charged",
+      "context": "Context",
+      "ipAddress": "IP address",
+      "country": "Country",
+      "browser": "Browser",
+      "os": "OS",
+      "device": "Device",
+      "language": "Language",
+      "failureReason": "Failure reason",
+      "client": "Customer",
+      "noCustomer": "No customer linked",
+      "viewCustomer": "View customer",
+      "method": "Method",
+      "gateway": "Gateway",
+      "aggregator": "Aggregator",
+      "aggregatorId": "Aggregator ID",
+      "reconcile": "Reconcile",
+      "reconciling": "Checking…",
+      "reconcileTooltip": "Re-check status with the gateway",
+      "reconciledTitle": "Status refreshed",
+      "reconciledDetail": "Current status: {status}",
+      "reconcileSummary": "Reconciliation",
+      "refund": "Refund",
+      "refundsTitle": "Refunds",
+      "refunded": "Refunded",
+      "remaining": "Remaining",
+      "refundColumns": {
+        "amount": "Amount",
+        "status": "Status",
+        "reason": "Reason",
+        "reference": "Reference",
+        "date": "Date"
+      },
+      "attemptsTitle": "Payment attempts",
+      "attemptColumns": {
+        "number": "#",
+        "gateway": "Gateway",
+        "status": "Status",
+        "amount": "Amount",
+        "phone": "Phone",
+        "latency": "Latency",
+        "message": "Message",
+        "fallback": "Fallback",
+        "date": "Date"
+      },
+      "fallbackYes": "Yes",
+      "refundDialog": {
+        "title": "Refund this payment",
+        "intro1": "You are about to refund the customer up to a maximum of",
+        "intro2": "This action is",
+        "irreversible": "irreversible",
+        "amountLabel": "Amount to refund",
+        "amountHelp": "Leave the maximum for a full refund, or enter a lower amount for a partial refund.",
+        "reasonLabel": "Reason",
+        "optional": "(optional)",
+        "reasonPlaceholder": "Select a reason",
+        "reasons": {
+          "customer": "Requested by customer",
+          "duplicate": "Duplicate payment",
+          "fraud": "Fraud"
+        },
+        "cancel": "Cancel",
+        "submitting": "Processing…",
+        "confirm": "Confirm refund",
+        "successTitle": "Refund initiated",
+        "successDetail": "The refund was sent to the gateway.",
+        "genericError": "The refund failed."
+      },
+      "refundDisabled": {
+        "notPayment": "Only payments can be refunded.",
+        "notSuccess": "Only successful payments can be refunded.",
+        "noAggregatorId": "This transaction has no aggregator reference — refund not possible.",
+        "alreadyRefunded": "This payment has already been fully refunded.",
+        "ready": "Refund this payment"
+      },
+      "errors": {
+        "insufficientFunds": "Insufficient funds on the customer's account.",
+        "notAuthorized": "The customer didn't approve the payment in time.",
+        "timeout": "The gateway didn't respond in time.",
+        "invalidPhone": "Invalid phone number for this operator.",
+        "wrongOtp": "Incorrect validation code.",
+        "gatewayUnavailable": "The gateway is temporarily unavailable.",
+        "declined": "Payment declined by the gateway.",
+        "duplicate": "Transaction already processed.",
+        "unauthorized": "Invalid gateway credentials — please check the configuration."
+      },
+      "loadError": "Couldn't load the transaction",
+      "errorSummary": "Payment detail",
+      "refundsSummary": "Refunds"
+    }
+  },
+  "payoutsPage": {
+    "subtitle": "Payout transactions list",
+    "searchPlaceholder": "Search a transaction...",
+    "empty": "No payouts yet",
+    "emptyHint": "Your transfers to beneficiaries will appear here.",
+    "viewMethods": "View my payout methods",
+    "loadError": "Couldn't load payouts",
+    "errorSummary": "Payouts",
+    "columns": {
+      "amount": "Amount",
+      "status": "Status",
+      "method": "Method",
+      "beneficiary": "Beneficiary",
+      "reference": "Reference",
+      "date": "Date",
+      "details": "Details"
+    },
+    "filters": {
+      "status": "All",
+      "currency": "Currency",
+      "method": "Method",
+      "gateway": "Gateway",
+      "date": "Filter by date"
+    },
+    "statusOptions": {
+      "initiated": "Initiated",
+      "pending": "Pending",
+      "success": "Success",
+      "failed": "Failed",
+      "cancelled": "Cancelled"
+    },
+    "tooltips": {
+      "copy": "Copy",
+      "viewDetails": "View details"
+    },
+    "detail": {
+      "back": "Back",
+      "transferLabel": "Payout",
+      "informations": "Information",
+      "transactionId": "Transaction ID",
+      "amount": "Amount",
+      "status": "Status",
+      "createdAt": "Created at",
+      "phone": "Phone",
+      "description": "Description",
+      "amountCharged": "Amount charged",
+      "context": "Context",
+      "ipAddress": "IP address",
+      "country": "Country",
+      "browser": "Browser",
+      "device": "Device",
+      "language": "Language",
+      "failureReason": "Failure reason",
+      "beneficiary": "Beneficiary",
+      "noBeneficiary": "No beneficiary linked",
+      "viewCustomer": "View customer",
+      "method": "Method",
+      "gateway": "Gateway",
+      "aggregator": "Aggregator",
+      "aggregatorId": "Aggregator ID",
+      "attemptsTitle": "Payout attempts",
+      "loadError": "Couldn't load the transaction",
+      "errorSummary": "Payout detail",
+      "columns": {
+        "number": "#",
+        "aggregator": "Aggregator",
+        "status": "Status",
+        "message": "Message",
+        "fallback": "Fallback",
+        "date": "Date"
+      },
+      "fallbackYes": "Yes"
+    },
+    "list": {
+      "subtitleIndex": "Connected accounts used to send money to your beneficiaries.",
+      "emptyTitle": "No payout gateway",
+      "emptyDesc": "Connect a gateway that supports payouts to send payments to your beneficiaries.",
+      "catalogSubtitle": "Choose a gateway that supports payouts to Mobile Money."
+    }
+  },
+  "gatewaysPage": {
+    "title": "Gateways",
+    "subtitle": "Your configured payment gateways",
+    "subtitlePayout": "Your configured payout gateways",
+    "subtitleIndex": "Connect your accounts to start collecting Mobile Money payments.",
+    "addGateway": "Add a gateway",
+    "connectGateway": "Connect a gateway",
+    "browseCatalog": "Browse catalog",
+    "viewAvailable": "View available gateways",
+    "empty": "No gateway configured",
+    "emptyHint": "Connect your first aggregator to start accepting payments.",
+    "emptyHintFirst": "Connect your first payment gateway to start accepting Mobile Money transactions.",
+    "configured": "Configured",
+    "notConfigured": "Not configured",
+    "configure": "Configure",
+    "manage": "Manage",
+    "catalogTitle": "Gateway catalog",
+    "catalogSubtitle": "Choose from the available gateways",
+    "catalogIntro": "All integrated gateways — pick the ones that match your market.",
+    "supportedCountries": "Supported countries",
+    "supportedCurrencies": "Supported currencies",
+    "supportedMethods": "Methods",
+    "capabilities": "Capabilities",
+    "website": "Website",
+    "connect": "Connect",
+    "alreadyConnected": "Already connected",
+    "columns": {
+      "number": "#",
+      "gateway": "Gateway",
+      "addedOn": "Added on",
+      "actions": "Actions"
+    },
+    "filters": {
+      "searchPlaceholder": "Search a gateway…",
+      "country": "Filter by country",
+      "currency": "Filter by currency"
+    },
+    "noMatch": "No gateway matches",
+    "noMatchHint": "Try removing or changing a filter.",
+    "loadError": "Couldn't load gateways.",
+    "catalogLoadError": "Couldn't load catalog.",
+    "errorSummary": "Error",
+    "back": "Back"
+  },
+  "gatewayDetail": {
+    "back": "Back",
+    "updateInfo": "Update information",
+    "unknownGateway": "Unknown gateway.",
+    "loadError": "Couldn't load the gateway.",
+    "errorSummary": "Error",
+    "section": {
+      "info": "Information",
+      "webhook": "Webhook",
+      "danger": "Danger zone"
+    },
+    "info": {
+      "gateway": "Gateway",
+      "code": "Code",
+      "environment": "Environment",
+      "production": "Production",
+      "sandbox": "Sandbox",
+      "status": "Status",
+      "statusActive": "Active",
+      "statusInactive": "Inactive",
+      "configuredOn": "Configured on"
+    },
+    "webhook": {
+      "autoBannerTitle": "Webhook auto-configured at {name}",
+      "autoBannerBody": "Zayono has registered the URL below directly on your {name} account. <strong>No manual action is required.</strong> You can still copy and paste the URL further down if you prefer to configure a second endpoint yourself.",
+      "autoBannerBodyPayout": "Zayono has registered the URL below directly on your {name} account. <strong>No manual action is required.</strong> You can still copy the URL further down to configure an additional endpoint yourself.",
+      "desc": "URL and secret to paste in the <strong>{name}</strong> dashboard so notifications reach Zayono — then get relayed to your webhook endpoints.",
+      "descPayout": "URL and secret to paste in the <strong>{name}</strong> dashboard to receive transfer notifications.",
+      "urlLabel": "Webhook URL",
+      "secretLabel": "Webhook Secret",
+      "copyTooltip": "Copy",
+      "regenerateTooltip": "Regenerate",
+      "infoTitle": "What is this secret for?",
+      "infoBody": "It targets aggregators that accept a <strong>custom webhook signing key</strong> (e.g. Stripe, PayPal). For the current Mobile Money aggregators ({name} included if applicable), <strong>there is no \"secret\" field</strong> to fill on the aggregator side — they sign their webhooks with their own key, which you already provided in the credentials above. Keep it anyway for future integrations.",
+      "infoBodyPayout": "It targets aggregators that accept a <strong>custom webhook signing key</strong> (Stripe, PayPal…). For the current Mobile Money aggregators, <strong>there is no \"secret\" field</strong> to fill on the aggregator side — they sign with their own key. Keep it for future integrations.",
+      "help": "The secret is masked. Regenerate it if you lost it — the old one will be invalidated immediately.",
+      "helpShort": "The secret is masked. Regenerate it if you lost it."
+    },
+    "danger": {
+      "desc": "Disconnecting this gateway will deactivate all related methods (you can reactivate them by reconfiguring the gateway).",
+      "descPayout": "Disconnecting this gateway will deactivate all related transfer methods.",
+      "disconnect": "Disconnect gateway"
+    },
+    "editDialog": {
+      "title": "Edit credentials",
+      "help": "Enter your current credentials ({envLabel} mode). They will replace the currently encrypted credentials.",
+      "helpShort": "Enter your current credentials ({envLabel} mode).",
+      "envLive": "Live",
+      "envSandbox": "Test",
+      "cancel": "Cancel",
+      "save": "Save",
+      "updatedSummary": "Update completed",
+      "updateError": "Update failed."
+    },
+    "disconnectDialog": {
+      "title": "Confirm disconnection",
+      "body": "Are you sure you want to disconnect <strong>{name}</strong> in <strong>{envLabel}</strong> mode? All related methods will be removed.",
+      "bodyPayout": "Are you sure you want to disconnect <strong>{name}</strong>?",
+      "cancel": "Cancel",
+      "confirm": "Disconnect",
+      "successSummary": "Gateway disconnected",
+      "error": "Deletion failed."
+    },
+    "regenerateDialog": {
+      "title": "Regenerate webhook secret?",
+      "body": "The old secret will be invalidated. You will need to paste the new one in the <strong>{name}</strong> dashboard, otherwise webhooks signed with the old secret will be rejected.",
+      "bodyPayout": "The old secret will be invalidated. You will need to paste the new one in the <strong>{name}</strong> dashboard.",
+      "cancel": "Cancel",
+      "confirm": "Regenerate",
+      "error": "Regeneration failed."
+    },
+    "newSecretDialog": {
+      "title": "New webhook secret",
+      "warning": "Please keep this secret in a safe place.",
+      "warningStrong": "You will not be able to view it again.",
+      "infoTitle": "Should I paste it in {name}?",
+      "infoBody": "<strong>Not for Mobile Money aggregators</strong> (FedaPay, KKiaPay, PawaPay, PayDunya, iPay Money, FeexPay) — they don't offer any \"custom webhook secret\" field and sign with their own key. This secret is kept for aggregators that support custom signing (Stripe, PayPal…) — useful for your future integrations.",
+      "infoBodyPayout": "<strong>Not for current Mobile Money aggregators</strong> — they don't offer a \"custom secret\" field and sign with their own key. This secret is kept for aggregators supporting custom signing (Stripe, PayPal…).",
+      "saved": "I have saved this secret"
+    },
+    "connectSuccess": {
+      "summary": "Gateway connected",
+      "detail": "Related methods have been created (inactive by default)."
+    },
+    "connectError": "Connection failed.",
+    "copiedSummary": "Copied"
+  },
+  "connectGatewayForm": {
+    "connectTitle": "Connect {name}",
+    "subtitle": "Enter your credentials in {envLabel} mode to enable this gateway.",
+    "docBanner": "Where do I find my credentials at {name}?",
+    "docBannerCta": "See instructions",
+    "optionalToggle": "Advanced options ({count})",
+    "optional": "(optional)",
+    "envInfo": "Your credentials are encrypted (AES-256) on our servers. Active environment:",
+    "testOk": "Credentials validated by {name}. You can now connect.",
+    "testKo": "Credentials rejected.",
+    "verifyError": "Verification failed.",
+    "cancel": "Cancel",
+    "test": "Test",
+    "connect": "Connect {name}",
+    "optionalHelp": {
+      "default": "Optional field. Leaving it empty does not block configuration.",
+      "webhook_signing_secret": "Per-webhook secret revealed in the FedaPay dashboard (Workbench → Webhooks → Click to reveal). Without this field, Zayono accepts webhooks and re-verifies the status via the API.",
+      "webhook_secret_hash": "Secret hash configured on the iPay Money dashboard. Lets us verify the authenticity of notifications. Without this field, defense-in-depth via API re-check."
+    },
+    "envLive": "Live",
+    "envSandbox": "Sandbox"
+  },
+  "gatewayCard": {
+    "configured": "Configured",
+    "capPayment": "Payment",
+    "capPayout": "Payout",
+    "noDescription": "No description available.",
+    "countries": "{count} countries",
+    "allCurrencies": "All currencies",
+    "details": "Learn more",
+    "manage": "Manage",
+    "connectName": "Connect {name}"
+  },
+  "gatewayDetailsModal": {
+    "headerFallback": "Details",
+    "capabilities": "Capabilities",
+    "capPaymentIn": "Incoming payment",
+    "capPayoutOut": "Outgoing transfer",
+    "currencies": "Supported currencies",
+    "methods": "Supported methods",
+    "countries": "Supported countries ({count})",
+    "visitWebsite": "Visit website",
+    "connect": "Connect {name}",
+    "allCurrencies": "All currencies"
+  },
+  "methodAssignDialog": {
+    "titlePayment": "Update payment gateway",
+    "titlePayout": "Update payout gateway",
+    "primaryLabel": "Primary gateway",
+    "primaryPlaceholder": "Select a gateway",
+    "fallbackInfo": "If your primary gateway runs into issues, the backup gateway will take over automatically — you finalize more transactions without intervention.",
+    "fallbackLabel": "Backup gateway",
+    "fallbackPlaceholder": "(optional)",
+    "feeLabel": "Method fee (%)",
+    "feeHelpPayment": "Optional. If filled, this percentage will be <strong>added</strong> to the amount paid by the customer for every transaction using this method. For example, on a 1,000 XOF payment with a 2% fee, the customer pays 1,020 XOF. Leave empty or at 0 if the merchant absorbs the fee.",
+    "feeHelpPayout": "Optional. Percentage the aggregator charges on this transfer type. Enter the actual fee charged by the gateway for your accounting reports — it will be withheld on each payout via this method. Leave empty or at 0 if the aggregator charges nothing on this wallet.",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "methodsPage": {
+    "title": "Payment methods",
+    "subtitle": "Enable operators available through your configured gateways",
+    "subtitlePayout": "Enable operators available for your payouts",
+    "subtitleIndex": "Enable the Mobile Money services and cards that your customers can use at checkout.",
+    "subtitleCatalog": "Choose a payment method to enable for your checkout.",
+    "catalogTitle": "Payment methods catalog",
+    "addMethod": "Add a method",
+    "back": "Back",
+    "empty": "No payment method available",
+    "emptyHint": "Configure a gateway to enable the corresponding payment methods.",
+    "emptyActive": "No active payment method",
+    "emptyActiveHint": "First connect a payment gateway. The Mobile Money services it supports (MTN, Orange, Moov, Wave…) will appear here automatically.",
+    "noMatchFilters": "No payment method matches the filters",
+    "primary": "Primary",
+    "backup": "Backup",
+    "assign": "Assign",
+    "edit": "Edit",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "catalog": "Catalog",
+    "methodAssign": "Configure method",
+    "filters": {
+      "searchPlaceholder": "Search a payment method…",
+      "status": "Status",
+      "gateway": "Gateway",
+      "country": "Country",
+      "country2": "Filter by country",
+      "currency": "Filter by currency"
+    },
+    "statusOptions": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "columns": {
+      "number": "#",
+      "name": "Name",
+      "primaryGateway": "Primary gateway",
+      "fallbackGateway": "Fallback gateway",
+      "fee": "Fee",
+      "status": "Status"
+    },
+    "card": {
+      "availableAt": "Available at {count} gateway.",
+      "availableAtPlural": "Available at {count} gateways.",
+      "availableTag": "Available",
+      "manage": "Manage",
+      "connect": "Connect"
+    },
+    "allCurrencies": "All currencies",
+    "international": "International",
+    "loadError": "Couldn't load your payment methods. Please try again in a moment.",
+    "loadErrorSummary": "Load failed",
+    "toggleError": "Toggle failed.",
+    "updateError": "Update failed.",
+    "updateSuccess": "Changes saved",
+    "catalogLoadError": "Couldn't load catalog.",
+    "noGatewayDialog": {
+      "title": "Compatible gateway missing",
+      "body": "Your application has no payment gateway compatible with {name}. Please add a gateway first.",
+      "bodyPayout": "Your application has no payout gateway compatible with {name}. Please add a gateway first.",
+      "close": "Close",
+      "viewGateways": "View available gateways"
+    },
+    "errorSummary": "Error",
+    "updatedSummary": "Method updated",
+    "payout": {
+      "subtitleIndex": "Mobile Money services you can use to send money to your beneficiaries.",
+      "title": "Payout methods",
+      "addMethod": "Add a method",
+      "searchPlaceholder": "Search a payout method…",
+      "empty": "No active payout method",
+      "emptyHint": "First connect a gateway that supports payouts. The Mobile Money services available for sending will appear here.",
+      "viewGateways": "View gateways",
+      "noMatchFilters": "No payout method matches the filters",
+      "loadError": "Couldn't load methods.",
+      "catalogSubtitle": "Choose a payout method to enable.",
+      "catalogTitle": "Payout methods catalog",
+      "searchCatalog": "Search a payout method…",
+      "availableAt": "Available via {count} payout gateway.",
+      "availableAtPlural": "Available via {count} payout gateways."
+    }
+  },
+  "paymentSettings": {
+    "title": "Payment settings",
+    "subtitle": "Default behavior of your checkout and routing",
+    "tabs": {
+      "orchestration": "Routing",
+      "conversion": "Currency conversion",
+      "appearance": "Appearance"
+    },
+    "orchestration": {
+      "title": "How to pick the gateway for each payment",
+      "subtitle": "When several gateways can process a payment method, who decides?",
+      "customLabel": "Manual — I choose the gateway for each method",
+      "customDesc": "You define the primary gateway and the fallback gateway for each payment method.",
+      "autoLabel": "Automatic — Zayono optimizes",
+      "autoDesc": "Zayono picks in real time the most reliable and cheapest gateway for each payment.",
+      "save": "Save",
+      "saveSuccess": "Routing strategy updated",
+      "errorSummary": "Orchestration"
+    },
+    "conversion": {
+      "toggleLabel": "Automatic currency conversion",
+      "toggleDesc": "Accept payments in one currency and receive in another",
+      "rateLabel": "Correction rate",
+      "rateDesc": "Add a percentage to the exchange rate to cover fluctuations",
+      "save": "Update",
+      "saveSuccess": "Conversion settings updated",
+      "errorSummary": "Conversion"
+    },
+    "appearance": {
+      "title": "Payment page appearance",
+      "subtitleLong": "Choose the template applied to your default checkout page. Your integrations can still force a specific template by passing <code>template</code> at init.",
+      "subtitle": "Choose the visual template presented to your customers",
+      "selected": "Selected",
+      "templates": {
+        "default": "Default",
+        "abidjan": "Abidjan (mobile-first)",
+        "cotonou": "Cotonou (desktop-first)",
+        "standardName": "Standard",
+        "standardDesc": "Balanced layout, works as well on mobile as on desktop.",
+        "abidjanName": "Abidjan",
+        "abidjanDesc": "Mobile-first. Method selection highlighted, ideal for a phone journey.",
+        "cotonouName": "Cotonou",
+        "cotonouDesc": "Desktop-first. Cart summary on the left, selection on the right — payment card style."
+      },
+      "applied": "Applied",
+      "brand": {
+        "title": "Your brand colors",
+        "subtitle": "Primary color used for the checkout buttons and accents. Leave empty to revert to the Zayono blue.",
+        "primaryColor": "Primary color",
+        "reset": "Reset",
+        "hexError": "Expected format: #RRGGBB",
+        "contrastVeryLow": "Very low contrast with white text ({ratio}:1). Buttons will be hard to read.",
+        "contrastLow": "Borderline contrast with white text ({ratio}:1). Recommended: ≥ 4.5:1 for good readability.",
+        "previewLabel": "Button preview",
+        "previewButton": "Pay now"
+      },
+      "save": "Update",
+      "saveSuccess": "Appearance updated",
+      "errorSummary": "Appearance"
+    }
+  },
+  "routingHealth": {
+    "title": "Routing health",
+    "subtitle": "Real-time health of configured aggregators",
+    "pageSubtitle": "Real-time tracking of success rate and latency per (operator × gateway). Data comes from actual attempts — fallbacks included.",
+    "pageTitle": "Routing health · Zayono",
+    "filters": {
+      "window": "Window",
+      "allOperators": "All operators",
+      "refresh": "Refresh data"
+    },
+    "windowOptions": {
+      "hours24": "Last 24 h",
+      "days7": "Last 7 days",
+      "days30": "Last 30 days",
+      "days90": "Last 90 days"
+    },
+    "kpi": {
+      "attempts": "Attempts",
+      "successful": "Successful",
+      "fallbacks": "Fallbacks triggered",
+      "globalRate": "Global rate"
+    },
+    "pairs": {
+      "title": "Health per pair (operator × gateway)",
+      "subtitle": "Sorted by volume. The gateway badge exactly matches the logo shown on the checkout.",
+      "empty": "No attempts recorded in the last {days} days. Run a few test payments to see this table fill up."
+    },
+    "columns": {
+      "operator": "Operator",
+      "gateway": "Gateway",
+      "attempts": "Attempts",
+      "successRate": "Success rate",
+      "avgLatency": "Avg latency",
+      "p95Latency": "p95 latency",
+      "fallback": "Fallback",
+      "lastFailure": "Last failure"
+    },
+    "scoringHint": "Select an operator above to see the automatic ranking of gateways (success, latency, cost).",
+    "scoring": {
+      "title": "Automatic routing score",
+      "subtitle": "How the auto-router ranks available gateways for this operator.",
+      "weighting": "Weighting",
+      "success": "success",
+      "latency": "latency",
+      "cost": "cost",
+      "empty": "No gateway connected for this operator.",
+      "score": "Score",
+      "selection": "Selection",
+      "primary": "Primary",
+      "fallback": "Fallback"
+    },
+    "relative": {
+      "justNow": "just now",
+      "minAgo": "{n} min ago",
+      "hourAgo": "{n} h ago",
+      "dayAgo": "{n} d ago"
+    }
+  },
+  "statisticsPage": {
+    "subtitle": {
+      "payments": "Volume, success rate and breakdown of payments",
+      "payouts": "Volume, success rate and breakdown of your payouts",
+      "global": "Analyze your activity"
+    },
+    "kpi": {
+      "totalAmount": "Total amount",
+      "totalTransactions": "Total transactions",
+      "successRate": "Success rate",
+      "averageAmount": "Average amount",
+      "totalPayments": "Total payments",
+      "totalPayouts": "Total payouts",
+      "successful": "Successful",
+      "failed": "Failed",
+      "successPercent": "Success rate",
+      "totalRevenue": "Total revenue",
+      "todayRevenue": "Today's revenue",
+      "monthRevenue": "Month's revenue"
+    },
+    "byStatus": "Breakdown by status",
+    "byCurrency": "Breakdown by currency",
+    "byOperator": "Breakdown by operator",
+    "period": "Period",
+    "periodPlaceholder": "Period",
+    "filterBtn": "Filter",
+    "errorSummary": "Statistics",
+    "revenueByCurrency": "Revenue by currency",
+    "revenueByCurrencyHint": "Total payments collected, aggregated by currency.",
+    "volumeByCurrency": "Volume by currency",
+    "volumeByCurrencyHint": "Total payouts sent, aggregated by currency.",
+    "noRevenuePeriod": "No revenue for the selected period.",
+    "noPayoutPeriod": "No payout for the selected period.",
+    "noDataPeriod": "No data for this period.",
+    "noTransactionPeriod": "No transactions for this period.",
+    "columns": {
+      "currency": "Currency",
+      "totalAmount": "Total amount",
+      "transactions": "Transactions",
+      "successRate": "Success rate",
+      "method": "Method",
+      "gateway": "Gateway",
+      "amount": "Amount",
+      "date": "Date",
+      "status": "Status"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "revenue": "Revenue",
+      "methods": "Payment methods",
+      "gateways": "Gateways",
+      "transactions": "Transactions"
+    },
+    "overview": {
+      "totalTransactions": "Total transactions",
+      "successful": "Successful transactions",
+      "failed": "Failed transactions",
+      "successRate": "Success rate",
+      "statusDistribution": "Status distribution",
+      "statusDistributionHint": "Breakdown of transactions by final status.",
+      "chartComing": "Chart coming soon",
+      "revenueByCurrencyHint": "Amounts collected over the period, by currency."
+    },
+    "revenue": {
+      "title": "Revenue over the period",
+      "subtitle": "Daily evolution of collected amounts.",
+      "dataset": "Revenue"
+    },
+    "methodsTab": {
+      "title": "Payment methods",
+      "subtitle": "Performance per Mobile Money operator."
+    },
+    "gatewaysTab": {
+      "title": "Payment gateways",
+      "subtitle": "Performance per connected aggregator."
+    },
+    "transactionsTab": {
+      "title": "Transactions list",
+      "subtitle": "Detail of operations over the selected period."
+    },
+    "legend": {
+      "success": "Success",
+      "failed": "Failed",
+      "pending": "Pending",
+      "cancelled": "Cancelled"
+    },
+    "filters": {
+      "currency": "Currency",
+      "allCurrencies": "All",
+      "gateway": "Gateway",
+      "method": "Method"
+    },
+    "statusLabel": {
+      "success": "Success",
+      "failed": "Failed",
+      "pending": "Pending",
+      "initiated": "Initiated",
+      "cancelled": "Cancelled"
+    }
+  },
+  "customersPage": {
+    "title": "Customers",
+    "subtitle": "List of customers who paid via your checkout",
+    "searchPlaceholder": "Search a customer...",
+    "empty": "No customers yet",
+    "emptyHint": "Your customers will appear here as soon as they make a payment.",
+    "emptyTitle": "No customers found",
+    "emptyDescription": "Your customers will appear here once they have made a transaction.",
+    "loadError": "Couldn't load customers",
+    "errorSummary": "Customers",
+    "columns": {
+      "client": "Customer",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "country": "Country",
+      "transactions": "Transactions",
+      "totalSpent": "Total spent",
+      "addedOn": "Added on",
+      "firstSeen": "First seen",
+      "lastSeen": "Last seen"
+    },
+    "detail": {
+      "title": "Customer detail",
+      "transactions": "Customer transactions",
+      "totalAmount": "Total amount",
+      "successCount": "Successful transactions",
+      "failedCount": "Failed transactions",
+      "back": "Back to customers",
+      "totalSpent": "Total spent",
+      "transactionsKpi": "Transactions",
+      "lastActivity": "Last activity",
+      "tabs": {
+        "info": "Information",
+        "payments": "Payments",
+        "payouts": "Payouts"
+      },
+      "info": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "phone": "Phone",
+        "country": "Country",
+        "city": "City",
+        "createdAt": "Sign-up date",
+        "totalTransactions": "Total transactions"
+      },
+      "noPaymentTitle": "No payment",
+      "noPaymentDescription": "This customer hasn't made any payment yet.",
+      "noPayoutTitle": "No payout",
+      "noPayoutDescription": "This customer hasn't made any payout yet.",
+      "txColumns": {
+        "amount": "Amount",
+        "status": "Status",
+        "method": "Method",
+        "reference": "Reference",
+        "date": "Date"
+      },
+      "loadError": "Couldn't load the customer",
+      "errorSummary": "Customer",
+      "paymentsErrorSummary": "Customer payments",
+      "payoutsErrorSummary": "Customer payouts"
+    }
+  },
+  "developersPage": {
+    "apiKeys": {
+      "title": "API keys",
+      "subtitle": "Generate keys to integrate Zayono into your site or application.",
+      "create": "Create a key",
+      "createFirst": "Create my first key",
+      "createModal": "Create an API key",
+      "labelField": "Label",
+      "labelPlaceholder": "E.g.: Production server",
+      "environment": "Environment",
+      "secretShownOnce": "This secret key is shown only once. Copy it now.",
+      "copySecret": "Copy the key",
+      "doneButton": "I copied the key",
+      "revoke": "Revoke",
+      "confirmRevoke": "Revoke this key? The API will reject it.",
+      "lastUsed": "Last used",
+      "createdAt": "Created at",
+      "columns": {
+        "number": "#",
+        "name": "Name",
+        "type": "Type",
+        "status": "Status",
+        "label": "Label",
+        "prefix": "Prefix",
+        "environment": "Env",
+        "lastUsed": "Last used",
+        "createdAt": "Created at",
+        "actions": "Actions"
+      },
+      "empty": "No API keys yet",
+      "emptyHint": "Create a key to connect Zayono to your store. The public key goes in your frontend, the secret key stays on your server.",
+      "typePublic": "Public",
+      "typeSecret": "Secret (Private)",
+      "typeSelect": "Select a type",
+      "namePlaceholder": "e.g.: My Backend API",
+      "descriptionPlaceholder": "Describe this key and where it will be stored.",
+      "expiresAt": "Expiration date",
+      "expiresAtPlaceholder": "Expiration date",
+      "expiresAtNote": "If you don't set a date, the key will never expire.",
+      "newKeyTitle": "Your new API key",
+      "newKeyWarning": "Please keep this API key in a safe and accessible place. For security reasons,",
+      "newKeyWarningStrong": "you will not be able to view it again",
+      "newKeyWarningEnd": ". If you lose this secret key, you will need to generate a new one.",
+      "doneCopied": "Done",
+      "detailsTitle": "API key details",
+      "detail": {
+        "name": "Name",
+        "type": "Type",
+        "prefix": "Prefix",
+        "environment": "Environment",
+        "status": "Status",
+        "description": "Description",
+        "createdAt": "Created at",
+        "lastUsed": "Last used",
+        "expiresAt": "Expires at"
+      },
+      "envProduction": "Production",
+      "envSandbox": "Sandbox",
+      "confirmDeleteTitle": "Confirm deletion",
+      "confirmDeleteBodyBefore": "Are you sure you want to delete the key",
+      "confirmDeleteBodyAfter": "? This action is irreversible.",
+      "nameRequired": "Name is required",
+      "typeRequired": "Type is required",
+      "errorSummaryCreate": "API key creation",
+      "errorSummaryDelete": "API key deletion",
+      "copiedDetail": "Key copied to clipboard",
+      "deletedSuccess": "API key deleted successfully",
+      "deletedSummary": "Deleted",
+      "neverUsed": "Never"
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "subtitle": "Get an automatic notification on your server for every received, failed or cancelled payment.",
+      "add": "Add a webhook",
+      "addFirst": "Add my first webhook",
+      "addModal": "Add a new webhook",
+      "url": "URL",
+      "events": "Events",
+      "secret": "Secret",
+      "secretShownOnce": "This secret is shown only once.",
+      "active": "Active",
+      "test": "Test",
+      "rotate": "Rotate secret",
+      "confirmDelete": "Delete this webhook?",
+      "columns": {
+        "number": "#",
+        "url": "URL",
+        "events": "Events",
+        "environment": "Env",
+        "status": "Status",
+        "lastDelivery": "Last delivery",
+        "actions": "Actions"
+      },
+      "empty": "No webhook configured",
+      "emptyHint": "Zayono will send a notification to the URL of your choice as soon as a transaction changes status. Essential to automate your orders.",
+      "urlPlaceholder": "https://example.com/webhook",
+      "eventsPlaceholder": "Select events",
+      "secretAutoNote": "The signing secret will be generated automatically and displayed once after creation.",
+      "secretGeneratedTitle": "Your signing secret",
+      "secretGeneratedWarning": "Please keep this signing secret in a safe place. For security reasons,",
+      "secretGeneratedWarningStrong": "you will not be able to view it again",
+      "secretGeneratedWarningEnd": ". If you lose it, you will need to regenerate a new secret for this webhook.",
+      "secretSaved": "I have saved this secret",
+      "detailsTitle": "Webhook details",
+      "detail": {
+        "url": "URL",
+        "secret": "Secret",
+        "status": "Status",
+        "events": "Events",
+        "createdAt": "Created at"
+      },
+      "secretMaskedNote": "The secret is hidden for security reasons. Rotate it if you lost it.",
+      "confirmDeleteTitle": "Confirm deletion",
+      "confirmDeleteBody": "Are you sure you want to delete this webhook? This action is irreversible.",
+      "urlRequired": "URL is required",
+      "eventsRequired": "Select at least one event",
+      "errorSummaryCreate": "Webhook creation",
+      "errorSummaryDelete": "Webhook deletion",
+      "createdSuccess": "The webhook has been created successfully",
+      "createdSummary": "Webhook added",
+      "copiedDetail": "Secret copied to clipboard",
+      "deletedSuccess": "Webhook deleted successfully",
+      "deletedSummary": "Deleted"
+    },
+    "webhookLogs": {
+      "title": "Webhook deliveries",
+      "subtitle": "History of notifications sent to your webhook endpoints. Filter by status, inspect exact payloads, and replay on demand.",
+      "pageTitle": "Webhook deliveries · Zayono",
+      "replay": "Replay",
+      "replayingTriggered": "Replay triggered",
+      "replayQueued": "New delivery queued.",
+      "confirmReplay": "Replay delivery {id}?",
+      "filters": {
+        "webhook": "Webhook",
+        "status": "Status",
+        "statusPlaceholder": "All statuses",
+        "event": "Event",
+        "eventPlaceholder": "Event (e.g.: payment.successful)"
+      },
+      "columns": {
+        "time": "Time",
+        "event": "Event",
+        "url": "URL",
+        "attempts": "Attempts",
+        "status": "Status",
+        "responseCode": "Code",
+        "attempt": "Attempt",
+        "date": "Date"
+      },
+      "empty": "No webhook delivery yet. Notifications will appear here as soon as a transaction triggers an event.",
+      "deliveryStatus": {
+        "delivered": "Delivered",
+        "pending": "Pending",
+        "failed": "Failed"
+      },
+      "replayBadge": "Replay",
+      "page": "Page",
+      "detailTitle": "Delivery detail",
+      "replayOfPrefix": "This delivery is a",
+      "replayOfStrong": "replay",
+      "replayOfBy": "of",
+      "meta": {
+        "id": "ID",
+        "event": "Event",
+        "targetUrl": "Target URL",
+        "created": "Created",
+        "attempts": "Attempts",
+        "httpCode": "HTTP code",
+        "nextRetry": "Next retry"
+      },
+      "payloadSent": "Payload sent",
+      "responseReceived": "Response received",
+      "replaysTriggered": "Triggered replays ({count})",
+      "replayHint": "The replay will be signed with your current webhook secret. If you have rotated it since the original delivery, your handler will see a different signature.",
+      "replayNow": "Replay this delivery now",
+      "relativeNow": "just now",
+      "relativeMin": "{n} min ago",
+      "relativeHour": "{n} h ago"
+    },
+    "apiLogs": {
+      "title": "API logs",
+      "subtitle": "All your API requests. Filter by status, method or resource. Click a row to see the full body and copy the request as cURL.",
+      "pageTitle": "API logs · Zayono",
+      "filters": {
+        "method": "Method",
+        "methodPlaceholder": "Method",
+        "status": "HTTP code",
+        "statusPlaceholder": "Status",
+        "endpoint": "Endpoint",
+        "resourcePlaceholder": "Resource type",
+        "pathPlaceholder": "Path search (e.g.: payments)"
+      },
+      "columns": {
+        "time": "Time",
+        "method": "Meth.",
+        "path": "Path",
+        "status": "Status",
+        "duration": "Duration",
+        "resource": "Resource",
+        "endpoint": "Endpoint",
+        "date": "Date"
+      },
+      "empty": "No API request recorded. As soon as your application calls a Zayono endpoint (payment, payout, etc.), it will appear here.",
+      "statusClass": {
+        "success": "Success (2xx)",
+        "redirect": "Redirect (3xx)",
+        "clientError": "Client error (4xx)",
+        "serverError": "Server error (5xx)"
+      },
+      "resource": {
+        "payment": "Payments",
+        "payout": "Payouts",
+        "refund": "Refunds",
+        "checkoutSession": "Checkout sessions",
+        "webhook": "Webhooks",
+        "aggregatorConfig": "Aggregator configurations",
+        "routingRule": "Routing rules",
+        "customer": "Customers"
+      },
+      "page": "Page",
+      "entries": "entries",
+      "copyCurl": "Copy cURL",
+      "truncatedBody": "The request or response body was truncated at the max size (32KB / 64KB).",
+      "meta": {
+        "id": "ID",
+        "when": "When",
+        "environment": "Environment",
+        "apiKey": "API key",
+        "idempotencyKey": "Idempotency-Key",
+        "sourceIp": "Source IP",
+        "errorCode": "Error code"
+      },
+      "requestBody": "Request body",
+      "responseBody": "Response body",
+      "curl": {
+        "redactedNote": "# NOTE: The body below contains ***REDACTED*** fields (PII removed).",
+        "redactedNoteReplace": "# Replace them with real values before running this command.",
+        "copiedSummary": "Copied",
+        "copiedRedacted": "cURL command copied. Remember to replace ***REDACTED*** fields before running.",
+        "copiedOk": "cURL command in clipboard.",
+        "copyFailedSummary": "Failed",
+        "copyFailed": "Couldn't copy — clipboard permission denied."
+      },
+      "relativeNow": "just now",
+      "relativeMin": "{n} min ago",
+      "relativeHour": "{n} h ago"
+    }
+  },
+  "settingsPage": {
+    "title": "Settings",
+    "subtitle": "Configure your account and application",
+    "tabs": {
+      "profile": "Profile",
+      "application": "Application",
+      "security": "Security",
+      "notifications": "Notifications",
+      "informations": "Information",
+      "reglages": "Settings"
+    },
+    "profile": {
+      "name": "Name",
+      "email": "Email",
+      "company": "Company",
+      "phone": "Phone",
+      "language": "Language",
+      "save": "Save"
+    },
+    "application": {
+      "name": "Application name",
+      "icon": "Icon",
+      "uploadIcon": "Upload an icon",
+      "removeIcon": "Remove icon"
+    },
+    "security": {
+      "changePassword": "Change password",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "twoFa": "Two-factor authentication"
+    },
+    "informations": {
+      "appIdLabel": "App ID",
+      "iconLabel": "Application icon",
+      "updateIcon": "Update",
+      "nameLabel": "Application name",
+      "namePlaceholder": "e.g. LeekPay, Zeeddy…",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "What this application does (internal)",
+      "websiteLabel": "Website",
+      "websitePlaceholder": "https://your-site.com",
+      "submit": "Update information",
+      "saveSuccess": "Information updated",
+      "errorSummary": "Information"
+    },
+    "reglages": {
+      "transactionEmailsLabel": "Transaction emails",
+      "transactionEmailsDesc": "Receive an email for each transaction",
+      "clientReceiptLabel": "Customer receipt",
+      "clientReceiptDesc": "Send an email to the customer after each transaction",
+      "paymentEmailsLabel": "Payment emails",
+      "paymentEmailsDesc": "Receive an email for each successful payment",
+      "supportEmailLabel": "Support email",
+      "supportEmailPlaceholder": "support{'@'}your-site.com",
+      "supportPhoneLabel": "Support phone",
+      "supportPhonePlaceholder": "+229 XX XX XX XX",
+      "submit": "Update settings",
+      "saveSuccess": "Settings updated",
+      "errorSummary": "Settings"
+    },
+    "copy": {
+      "tooltip": "Copy",
+      "appIdSuccess": "App ID copied to clipboard",
+      "summary": "Copied"
+    },
+    "icon": {
+      "tooSheavyTitle": "Image too large",
+      "tooHeavyDetail": "Max 2 MB.",
+      "updatedSummary": "Icon updated",
+      "errorSummary": "Icon upload"
+    },
+    "successSummary": "Success"
+  },
+  "appsPage": {
+    "title": "My applications",
+    "subtitle": "Manage your account applications",
+    "create": "Create an application",
+    "createModal": "New application",
+    "nameLabel": "Application name",
+    "switchTo": "Switch",
+    "current": "Current",
+    "empty": "No applications",
+    "emptyHint": "Create an application to start accepting payments.",
+    "logout": "Sign out",
+    "greeting": "Hello {name}, welcome back to Zayono",
+    "fallbackMerchant": "dear merchant",
+    "subtitleLine": "Your dashboard is ready to use. Select your application to get started.",
+    "inactiveBadge": "Disabled",
+    "createNew": "Create a new application",
+    "formNameLabel": "Name",
+    "formNamePlaceholder": "Main store",
+    "formDescLabel": "Description",
+    "formDescPlaceholder": "Optional — internal use only",
+    "cancel": "Cancel",
+    "createBtn": "Create",
+    "createError": "Could not create application"
+  },
+  "teamPage": {
+    "title": "Team",
+    "subtitle": "Manage your team members and their access permissions.",
+    "inviteMember": "Invite a member",
+    "membersTitle": "Members",
+    "membersSubtitle": "People with access to this merchant account.",
+    "you": "You",
+    "owner": "Owner",
+    "comingSoonTooltip": "Coming soon",
+    "emptyTitle": "Team invitations coming soon",
+    "emptyText": "You'll soon be able to invite colleagues to collaborate on this account with dedicated roles (admin, accountant, developer)."
+  },
+  "statusPage": {
+    "pageTitle": "System status · Zayono",
+    "pageDescription": "Real-time status of payment gateways and Zayono incident history.",
+    "lastCheck": "Last check: {time}",
+    "aggregators": "Payment gateways",
+    "activeIncidents": "Active incidents",
+    "pastIncidents": "Resolved incidents (last 90 days)",
+    "started": "Started {time}",
+    "autoDetected": "Auto-detected",
+    "manualDeclared": "Manually declared",
+    "incidentStatus": "Status:",
+    "resolvedIn": "Resolved in {duration}",
+    "subscribeTitle": "Receive alerts",
+    "subscribeDesc": "Get notified by email whenever an incident is opened or resolved.",
+    "emailPlaceholder": "you{'@'}example.com",
+    "sending": "Sending…",
+    "subscribeBtn": "Subscribe",
+    "subscribeOk": "If the address is valid, a confirmation email is on its way.",
+    "subscribeError": "Couldn't submit your address. Try again in a moment.",
+    "overall": {
+      "outage": "Major outage detected",
+      "degraded": "Degraded performance",
+      "operational": "All systems operational"
+    },
+    "aggregatorStatus": {
+      "operational": "Operational",
+      "degraded": "Degraded",
+      "outage": "Major outage"
+    },
+    "success": "Success",
+    "latency": "Latency",
+    "successBucket": {
+      "excellent": "Excellent",
+      "good": "Good",
+      "fair": "Fair",
+      "poor": "Poor"
+    },
+    "latencyBucket": {
+      "fast": "Fast",
+      "moderate": "Moderate",
+      "slow": "Slow"
+    },
+    "severity": {
+      "minor": "Minor",
+      "major": "Major",
+      "critical": "Critical"
+    },
+    "incidentStateLabel": {
+      "investigating": "Investigating",
+      "identified": "Identified",
+      "monitoring": "Monitoring",
+      "resolved": "Resolved"
+    },
+    "relativeNow": "just now",
+    "relativeMin": "{n} min ago",
+    "relativeHour": "{n} h ago",
+    "relativeDay": "{n} d ago"
+  },
+  "sidebarLayout": {
+    "closeMenu": "Close menu",
+    "applicationLabel": "Application"
+  },
+  "envBadge": {
+    "modeTitle": "{label} mode. Click to switch.",
+    "dialogTitle": "Change mode",
+    "switching": "You are about to switch to",
+    "liveHelp": "processes real transactions on production gateways. Make sure you have configured your Live credentials and enabled your payment methods.",
+    "sandboxHelp": "is a sandbox: no money flows, ideal to verify your integration. Your Live data will remain intact.",
+    "switchTo": "Switch to {label}",
+    "live": "Live",
+    "sandbox": "Sandbox",
+    "modeLive": "The",
+    "modeSandbox": "The"
+  },
+  "adminLayout": {
+    "management": "Management",
+    "system": "System"
+  },
+  "toasts": {
+    "genericError": "Something went wrong",
+    "saveSuccess": "Saved successfully",
+    "copySuccess": "Copied to clipboard",
+    "copyError": "Couldn't copy — clipboard permission denied.",
+    "deleteConfirm": "Are you sure you want to delete?",
+    "unsavedChanges": "You have unsaved changes",
+    "loadError": "Couldn't load data",
+    "actionImpossible": "Action failed"
+  },
+  "language": {
+    "switcher": "Language",
+    "fr": "Français",
+    "en": "English",
+    "current": "Current language"
+  },
+  "header": {
+    "bookCall": "Book a call",
+    "lightMode": "Switch to light mode",
+    "darkMode": "Switch to dark mode",
+    "openMenu": "Open menu",
+    "userMenu": "User menu"
+  },
+  "authLayout": {
+    "subtitle": "Connect all your aggregators in one"
+  },
+  "statusLayout": {
+    "subtitle": "System status",
+    "footer": "© {year} Zayono · This page updates every minute."
+  },
+  "txStatusBadge": {
+    "success": "Successful",
+    "pending": "Pending",
+    "initiated": "Initiated",
+    "failed": "Failed",
+    "cancelled": "Cancelled",
+    "refunded": "Refunded"
+  },
+  "notification": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "empty": "No notifications",
+    "fallbackTitle": "Notification",
+    "justNow": "just now",
+    "minAgo": "{n} min ago",
+    "hourAgo": "{n} h ago",
+    "dayAgo": "{n} d ago"
+  },
+  "apiError": {
+    "genericMessage": "Something went wrong",
+    "accessDenied": "Access denied",
+    "tooManyRequests": "Too many requests",
+    "retryShortly": "Please try again in a moment.",
+    "validationError": "Validation error",
+    "errorSummary": "Error"
+  },
+  "palAfricaNotice": {
+    "title": "Required step before connecting",
+    "subtitle": "PAL Africa requires merchant-side IP whitelisting. Without this step, every request fails with a misleading 404.",
+    "step1Prefix": "Send an email to PAL Africa",
+    "step1Body": "(from the address tied to your PAL account) requesting whitelisting of the Zayono IP below for the environment",
+    "step3": "Wait for PAL's confirmation (usually a few hours) before coming back here to enter your keys.",
+    "copyTooltip": "Copy",
+    "copied": "Copied",
+    "templateSummary": "Email template to copy-paste",
+    "copyEmailTooltip": "Copy email",
+    "copyTemplate": "Copy template",
+    "envProduction": "Production",
+    "envSandbox": "Sandbox / Dev",
+    "emailTemplate": "Hello,\n\nI just created my PAL Africa account and I am using Zayono as my\npayment orchestrator to integrate your APIs.\n\nPlease whitelist the following IP on my account for the\n{envLabel} environment:\n\n  {outboundIp}\n\nBest regards."
+  },
+  "pageTitles": {
+    "dashboard": "Dashboard",
+    "paymentsTransactions": "Transactions",
+    "gateways": "Gateways",
+    "gatewayCatalog": "Gateway catalog",
+    "methods": "Payment methods",
+    "methodsCatalog": "Methods catalog",
+    "paymentSettings": "Payment settings",
+    "payoutsTransactions": "Payouts",
+    "payoutGateways": "Payout gateways",
+    "payoutMethods": "Payout methods",
+    "customers": "Customers",
+    "statsPayments": "Statistics — Payments",
+    "statsPayouts": "Statistics — Payouts",
+    "statsGlobal": "Global statistics",
+    "apiKeys": "API keys",
+    "webhooks": "Webhooks",
+    "webhookDeliveries": "Webhook deliveries",
+    "apiLogs": "API logs",
+    "routingHealth": "Routing health",
+    "billing": "Billing",
+    "team": "Team",
+    "settings": "Settings",
+    "paymentDetail": "Payment detail",
+    "payoutDetail": "Payout detail",
+    "gateway": "Gateway",
+    "customerDetail": "Customer detail"
+  },
+  "aggregators": {
+    "pawapay": {
+      "description": "Mobile money aggregator with pan-African coverage (11+ countries).",
+      "descriptionLong": "PawaPay aggregates 42+ Mobile Money operators across 11 sub-Saharan African countries. Ideal for merchants needing broad continental coverage through a single integration."
+    },
+    "fedapay": {
+      "description": "Accept Mobile Money and cards in West Africa (UEMOA).",
+      "descriptionLong": "FedaPay is a francophone payment gateway based in Benin, present in Benin, Togo, Senegal, Ivory Coast, Niger, Mali and Guinea. A good option for UEMOA merchants requiring local support."
+    },
+    "feexpay": {
+      "description": "Mobile Money & card gateway focused on Benin and francophone Africa.",
+      "descriptionLong": "FeexPay offers Mobile Money and card collection in Benin, Togo, Senegal, Congo, Burkina Faso and Ivory Coast, with built-in 2FA on sensitive operations."
+    },
+    "kkiapay": {
+      "description": "Simple payment solution for Benin, Ivory Coast, Togo and Senegal.",
+      "descriptionLong": "KKiaPay is a popular Mobile Money aggregator in Benin, Ivory Coast, Togo and Senegal. Client-side widget, programmable payouts, HMAC-signed webhooks."
+    },
+    "ipay_money": {
+      "description": "Mobile Money collection in Benin and Niger (payment only).",
+      "descriptionLong": "iPay Money is a Mobile Money acquirer in Benin and Niger. Note: iPay Money supports inbound payments (collection) only — no outbound transfers."
+    },
+    "paydunya": {
+      "description": "Mobile Money aggregator for francophone Africa (UEMOA + CEMAC).",
+      "descriptionLong": "PayDunya covers Benin, Ivory Coast, Senegal, Mali, Burkina Faso and Cameroon. Includes a two-step redistribution (payout) API for compliance."
+    },
+    "hub2_ci": {
+      "description": "Hub2 meta-aggregator — Ivory Coast account.",
+      "descriptionLong": "Hub2 aggregates operators (Orange CI, MTN CI, Moov CI, Wave CI) behind a unified API. Hub2 account registered separately for Ivory Coast; credentials are country-specific."
+    },
+    "hub2_sn": {
+      "description": "Hub2 meta-aggregator — Senegal account.",
+      "descriptionLong": "Hub2 aggregates operators (Orange SN, Free Money, Wave SN) behind a unified API. Hub2 account registered separately for Senegal; credentials are country-specific."
+    },
+    "hub2_bj": {
+      "description": "Hub2 meta-aggregator — Benin account.",
+      "descriptionLong": "Hub2 aggregates operators (MTN BJ, Moov BJ, Celtiis) behind a unified API. Hub2 account registered separately for Benin; credentials are country-specific."
+    },
+    "hub2_ml": {
+      "description": "Hub2 meta-aggregator — Mali account.",
+      "descriptionLong": "Hub2 aggregates operators (Orange ML, Moov ML) behind a unified API. Hub2 account registered separately for Mali; credentials are country-specific."
+    },
+    "hub2_cm": {
+      "description": "Hub2 meta-aggregator — Cameroon account.",
+      "descriptionLong": "Hub2 aggregates operators (MTN CM, Orange CM) behind a unified API. Hub2 account registered separately for Cameroon; credentials are country-specific. XAF currency (BEAC), distinct from XOF."
+    },
+    "hub2_tg": {
+      "description": "Hub2 meta-aggregator — Togo account.",
+      "descriptionLong": "Hub2 aggregates operators (MTN TG, Moov TG, T-Money) behind a unified API. Hub2 account registered separately for Togo; credentials are country-specific."
+    },
+    "hub2_bf": {
+      "description": "Hub2 meta-aggregator — Burkina Faso account.",
+      "descriptionLong": "Hub2 aggregates operators (Orange BF, Moov BF, MTN BF) behind a unified API. Hub2 account registered separately for Burkina Faso; credentials are country-specific."
+    },
+    "pal_africa": {
+      "description": "Pan-African meta-PSP (UEMOA + CEMAC + Nigeria + Ghana) — a single account for 8 countries.",
+      "descriptionLong": "PAL Africa (pals.africa) aggregates Mobile Money operators across 7 UEMOA/CEMAC countries (Benin, Ivory Coast, Senegal, Togo, Mali, Burkina Faso, Cameroon) under a single API key pair. Also includes mobile payouts to Ghana (MTN, Airtel) and bank transfers in Nigeria. Transaction status via polling (`/getcollection`, `/gettransfer`) or webhook (unsigned — verified on our side by re-fetching status; see integration doc)."
+    },
+    "paystack": {
+      "description": "Hosted-checkout gateway for 5 African countries — cards, MoMo, EFT, USSD.",
+      "descriptionLong": "Paystack (paystack.com) covers Nigeria (NGN), Ghana (GHS), South Africa (ZAR), Kenya (KES) and Ivory Coast (XOF), with announced beta rollouts in Egypt (EGP) and Rwanda (RWF). Methods: Visa/Mastercard cards, Mobile Money (MTN, Telecel, AirtelTigo, M-Pesa, Wave, Orange), Nigerian USSD, South African EFT, Nigerian bank transfers. Native refunds + payouts via API. HMAC-SHA512-signed webhooks with a documented IP allowlist (52.31.139.75, 52.49.173.169, 52.214.14.220). Native idempotency via the `reference` field. A Stripe subsidiary since 2020, but with a distinct API."
+    },
+    "paytech": {
+      "description": "Hosted-checkout MoMo + card gateway for 4 UEMOA countries (SN, CI, ML, BJ).",
+      "descriptionLong": "PayTech (paytech.sn) is a Senegalese gateway covering Senegal (Orange, Wave, Free, Wizall, E-Money), Ivory Coast (Orange, MTN, Moov, Wave), Mali (Orange, Moov), Benin (MTN, Moov) and Visa/Mastercard cards. Hosted checkout only (redirect to paytech.sn/payment/checkout/...) — no direct push-to-pay. Native MoMo payouts, native refunds. Doubly signed webhook (HMAC-SHA256 + SHA256 of credentials) — the driver accepts either method."
+    },
+    "payplus": {
+      "description": "Mobile Money + card gateway for 4 UEMOA countries (Benin, Togo, Burkina, Ivory Coast).",
+      "descriptionLong": "PayPlus (payplus.africa) is a Beninese gateway covering Benin (MTN, Moov), Togo (Moov), Burkina Faso (Orange, Onatel) and Ivory Coast (MTN). Also accepts Visa / Mastercard / Amex cards on its checkout page. Two flows: hosted checkout (redirect — available in sandbox + live) and direct push-to-pay (straight — live only). Unsigned webhooks — verified on our side by re-fetching status via /confirm. No payout API."
+    },
+    "cryptomus": {
+      "description": "Crypto payments and payouts (BTC, ETH, USDT, USDC, 100+) — fees from 0.4%.",
+      "descriptionLong": "Cryptomus is a crypto-currency payment and payout gateway covering 100+ assets (BTC, ETH, USDT TRC20/ERC20, USDC, SOL, TRX, LTC…). Hosted-checkout flow only (pay.cryptomus.com/pay/{uuid}) — the customer picks their crypto and network on the Cryptomus page. Worldwide coverage, no country restrictions. Native refunds via API. MD5-signed webhook embedded in the body (unique pattern), single source IP to allowlist (91.227.144.54)."
+    },
+    "qosic": {
+      "description": "Mobile Money + card gateway for Benin and Togo (MTN, Moov, Celtiis, Togocel).",
+      "descriptionLong": "QOSPAY (qosic.com) is a Benin-based payment gateway covering Benin (MTN, Moov, Celtiis) and Togo (Togocel/Yas, Moov Togo). Authentication via HTTP Basic. Quirk: 5 distinct payment endpoints depending on the operator (URL routing by operator in the driver), plus a distinct `clientid` per operator that the merchant must configure (Qosic issues one clientid per MoMo subscription). Native refunds via API. ⚠ Webhook is UNSIGNED — Qosic does not publish a signature algorithm; the driver systematically verifies via status re-fetch (`gettransactionstatus`) after each callback to prevent forgeries. Sandbox over HTTP `staging.qosic.net:9010` (production must be HTTPS via the URL provided on the merchant dashboard)."
+    },
+    "notchpay": {
+      "description": "Hosted-checkout MoMo + card gateway for 5 African countries (CM, NG, GH, KE, ZA) — native refunds.",
+      "descriptionLong": "Notch Pay (notchpay.co) is a Cameroonian payment gateway covering Cameroon (MTN, Orange Money + cards), Nigeria, Ghana (MTN, Telecel, AirtelTigo), Kenya (M-Pesa) and South Africa (cards). Hosted-checkout by default (the customer picks the operator on the Notch Pay page); a direct push-to-pay flow is also available in 2-step mode via /payments then /payments/{ref} with channel + phone. Native refunds (full or partial) via POST /refunds. Payouts via /beneficiaries (create) then /transfers (send). Dual-header auth (`Authorization: pk_*` + `X-Grant: sk_*` for sensitive ops). HMAC-SHA256-signed webhook over the raw body, header `X-Notch-Signature`, per-webhook secret separate from the API key."
+    },
+    "magma_onepay": {
+      "description": "Francophone MoMo gateway (UEMOA + CEMAC + Guinea) — 8 countries, Wave CI included.",
+      "descriptionLong": "Magma OnePay (magmaonepay.com) is a Mobile Money gateway built on magmasend.com, covering 8 francophone African countries: Benin, Ivory Coast, Senegal, Togo, Mali, Burkina Faso, Cameroon and Guinea. Channels: mobile_money (operator auto-detection via the payee prefix), Wave (Ivory Coast), credit_card (collection) and bank_account (payout). Native payin + payout APIs with multi-country balance and transfer history. Auth via two headers (`Authorization: Bearer` + `X-User-Secret`). HMAC-SHA256-signed webhook in the `X-SIGNATURE` header (the same private_key serves as both auth AND HMAC secret). No published IP allowlist — the signature is the sole line of defense. No documented refund API; refunds must be issued via the Magma dashboard."
+    },
+    "coinbase_commerce": {
+      "description": "Accept BTC, ETH, LTC, BCH and USDC — price shown in XAF/XOF/NGN/GHS/USD/EUR, settlement in crypto.",
+      "descriptionLong": "Coinbase Commerce (commerce.coinbase.com) is Coinbase's hosted crypto checkout for international merchants. Accepts payments in Bitcoin (BTC), Bitcoin Cash (BCH), Ethereum (ETH), Litecoin (LTC) and USD Coin (USDC). The merchant sets the price IN A LOCAL CURRENCY (XAF, XOF, NGN, GHS, USD, EUR) — Coinbase computes the crypto equivalent at the current rate. SETTLEMENT to the merchant happens IN CRYPTO (the merchant's Coinbase wallet receives BTC/ETH/etc.), or in USDC if the Auto-Convert option is enabled on the Coinbase dashboard. Final fiat conversion is the merchant's responsibility (Coinbase Business / external off-ramp). Worldwide coverage (30+ countries, including CEMAC + UEMOA + NG + GH + USA + EU). No payout API (capabilities = payment only). No refund API (crypto refunds are issued manually via the Coinbase dashboard). HMAC-SHA256-signed webhook over the raw body, header `X-CC-Webhook-Signature`. No published IP allowlist (Coinbase uses a CDN) — the HMAC signature is the sole line of defense. 1% fee on Coinbase's side, to pass on to the merchant."
+    },
+    "stripe": {
+      "description": "Visa / Mastercard / Amex cards, Apple Pay and Google Pay internationally.",
+      "descriptionLong": "Stripe is the reference aggregator for international card payments. 130+ currency coverage (USD, EUR, GBP, XOF…), with native wallets (Apple Pay, Google Pay, Link) auto-enabled. Typical use case: an African merchant who wants to charge an international customer base by card."
+    },
+    "flutterwave": {
+      "description": "Mobile Money in 11 countries + bank payouts in USD/EUR/GBP/NGN/GHS/INR — pan-African gateway.",
+      "descriptionLong": "Flutterwave (flutterwave.com) is one of the largest African payment aggregators, covering Mobile Money in 11 countries (BF, CM, CI, GH, KE, RW, SN, TZ, UG, ZM + Malawi/Ethiopia for payout only) and bank-payout in 11 currencies (USD, EUR, GBP, NGN, GHS, ZAR, INR, EGP, ETB, MWK, AUD). v4 API uses OAuth 2.0 client_credentials with a short-lived token (10 min) — the driver handles caching + refresh. Orchestrator flow (POST /orchestration/direct-charges) bundles customer + payment_method + charge into a single API call. HMAC-SHA256-signed webhook in the `flutterwave-signature` header using the merchant's « secret hash ». Native refunds via POST /refunds. ⚠ Cards not implemented on the Zayono side (Flutterwave v4 requires RSA-OAEP encryption of the PAN inside the driver — PCI-DSS exposure; deferred)."
+    }
+  }
+}
