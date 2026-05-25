@@ -1,6 +1,16 @@
 <script setup lang="ts">
 // Deploy: 2026-05-23 — session_status derive fix + auto-redirect on terminal states
 import { useFailureCopy } from '~/composables/useFailureCopy'
+// Explicit import: this component lives under `components/checkout/atoms/`
+// and Nuxt's default auto-import (`pathPrefix: true`) would expose it as
+// `<CheckoutAtomsCheckoutStateScreen>` — not the bare `<CheckoutStateScreen>`
+// the template uses. Without this import the production bundle silently
+// falls back to rendering the custom-element tag, so the entire post-form
+// state machine (validating / processing / success / failed / …) shows a
+// blank screen. Dev mode tolerated the loose name via a different lookup
+// pass, which is why this only surfaced in prod.
+import CheckoutStateScreen from '~/components/checkout/atoms/CheckoutStateScreen.vue'
+import CheckoutReceipt from '~/components/checkout/atoms/CheckoutReceipt.vue'
 
 definePageMeta({ layout: 'checkout' })
 
@@ -857,13 +867,6 @@ function runFailureCta(action: string) {
          use CheckoutStateScreen which has its own minimal layout. -->
 
     <main class="checkout-main">
-      <!-- DEBUG: always-visible state indicator. Remove once root cause
-           of the silent render crash is identified. Goes outside the
-           v-if/v-else-if chain so it renders on EVERY pageState. -->
-      <div style="position:fixed;top:8px;left:8px;background:#000;color:#0f0;padding:4px 8px;font:12px monospace;z-index:99999;">
-        debug: pageState={{ pageState }} | step={{ step }} | template={{ template }}
-      </div>
-
       <!-- Loading -->
       <CheckoutStateScreen
         v-if="pageState === 'loading'"
