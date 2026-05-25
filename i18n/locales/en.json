@@ -488,6 +488,18 @@
     },
     "empty": "No invoices yet. Keep using Zayono — your first invoice will be generated after 200 successful live transactions."
   },
+  "billingInvoiceStatus": {
+    "pageTitle": "Payment status",
+    "paidTitle": "Invoice paid — thank you!",
+    "paidTitleWithNumber": "Invoice {number} paid — thank you!",
+    "paidBody": "Your payment was received successfully. Live mode stays active and the billing counter has been reset.",
+    "cancelledTitle": "Payment cancelled",
+    "cancelledBody": "You cancelled this invoice payment. You can try again at any time from your dashboard.",
+    "failedTitle": "Payment failed",
+    "failedBody": "The payment did not go through. Check the details you entered and try again. If the issue persists, contact support.",
+    "backToBilling": "Back to billing",
+    "retry": "Retry payment"
+  },
   "platformBilling": {
     "title": "Platform billing",
     "subtitle": "Zayono revenue — fees accrued on merchants' live transactions, invoiced at every $1.00 threshold.",
@@ -581,6 +593,7 @@
       "amount": "Amount",
       "status": "Status",
       "method": "Method",
+      "gateway": "Gateway",
       "customer": "Customer",
       "reference": "Reference",
       "date": "Date",
@@ -705,6 +718,7 @@
       "amount": "Amount",
       "status": "Status",
       "method": "Method",
+      "gateway": "Gateway",
       "beneficiary": "Beneficiary",
       "reference": "Reference",
       "date": "Date",

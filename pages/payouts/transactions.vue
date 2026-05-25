@@ -70,6 +70,12 @@
               <span v-else class="text-muted">—</span>
             </template>
           </Column>
+          <Column field="aggregator_code" :header="$t('payoutsPage.columns.gateway')">
+            <template #body="{ data }">
+              <span v-if="data.aggregator_code" class="gateway-badge">{{ aggregatorName(data.aggregator_code) }}</span>
+              <span v-else class="text-muted">—</span>
+            </template>
+          </Column>
           <Column field="customer" :header="$t('payoutsPage.columns.beneficiary')">
             <template #body="{ data }">
               <div class="customer-cell" v-if="data.customer">
@@ -168,9 +174,16 @@ const operatorName = (code: string): string =>
 
 // Catalogue-driven filter (purpose=payout so we don't list payment-only
 // drivers like the future card-only Stripe variant).
-const { load: loadAggregatorCatalog, asSelectOptions } = useAggregatorCatalog()
+const { load: loadAggregatorCatalog, asSelectOptions, labelFor: aggregatorLabelFor } = useAggregatorCatalog()
 onMounted(() => loadAggregatorCatalog())
 const gatewayOptions = computed(() => asSelectOptions({ purpose: 'payout' }))
+
+/**
+ * Resolve an aggregator code (`fedapay`) to its human label via the
+ * shared catalogue. Falls back to the raw code so a historical row
+ * with an unknown code still renders something legible.
+ */
+const aggregatorName = (code: string): string => aggregatorLabelFor(code)
 
 const loadPayouts = async () => {
   loading.value = true
@@ -411,6 +424,21 @@ onMounted(async () => {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 180px;
+}
+
+/* Aggregator label pill — matches the brand-info treatment on the
+   detail page so a single transaction reads consistently across the
+   list and the drill-down. */
+.gateway-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: var(--ze-bg-subtle);
+  border: 1px solid var(--ze-border);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ze-text-label);
 }
 
 .customer-cell {

@@ -61,7 +61,7 @@
           </Column>
           <Column :header="$t('dashboard.columns.details')" class="col-detail">
             <template #body="{ data }">
-              <NuxtLink :to="`/payments/transactions/${data.id}`" class="detail-link">
+              <NuxtLink :to="`/payments/${data.id}`" class="detail-link">
                 <AppIcon name="search" />
               </NuxtLink>
             </template>
@@ -122,7 +122,7 @@
           </Column>
           <Column :header="$t('dashboard.columns.details')" class="col-detail">
             <template #body="{ data }">
-              <NuxtLink :to="`/payouts/transactions/${data.id}`" class="detail-link">
+              <NuxtLink :to="`/payouts/${data.id}`" class="detail-link">
                 <AppIcon name="search" />
               </NuxtLink>
             </template>

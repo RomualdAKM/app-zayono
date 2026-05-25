@@ -22,14 +22,20 @@
       <div class="kpi-card">
         <div class="kpi-icon"><AppIcon name="wallet" /></div>
         <div class="kpi-content">
-          <span class="kpi-value">{{ formatCurrency(stats?.total_revenue ?? 0) }}</span>
+          <!--
+            Platform revenue is denominated in USD — per the platform_billing
+            business model (flat per-tx accrual in USD, invoiced at $1
+            threshold). `formatCurrency` keeps XOF for tx volume below; only
+            this KPI + the monthly chart Y-axis use the USD helper.
+          -->
+          <span class="kpi-value">{{ formatRevenueUsd(stats?.total_revenue ?? 0) }}</span>
           <span class="kpi-label">{{ $t('admin.finances.kpi.platformRevenue') }}</span>
         </div>
       </div>
       <div class="kpi-card">
         <div class="kpi-icon"><AppIcon name="chart-line" /></div>
         <div class="kpi-content">
-          <span class="kpi-value">{{ formatCurrency(stats?.total_volume ?? 0) }}</span>
+          <span class="kpi-value">{{ formatVolumeXof(stats?.total_volume ?? 0) }}</span>
           <span class="kpi-label">{{ $t('admin.finances.kpi.txVolume') }}</span>
         </div>
       </div>
@@ -79,7 +85,7 @@
               <span class="merchant-name">{{ m.company_name || m.name }}</span>
               <span class="merchant-meta">{{ m.success_count }} {{ $t('admin.finances.txCount') }} · {{ m.zayono_fee_percent.toFixed(3) }}%</span>
             </div>
-            <span class="merchant-revenue">{{ formatCurrency(m.revenue) }}</span>
+            <span class="merchant-revenue">{{ formatRevenueUsd(m.revenue) }}</span>
           </li>
         </ul>
       </div>
@@ -175,7 +181,8 @@ const monthlyChartOptions = {
     legend: { display: false },
     tooltip: {
       callbacks: {
-        label: (ctx: any) => formatCurrency(ctx.parsed.y),
+        // Revenue chart is platform revenue (USD) — never XOF.
+        label: (ctx: any) => formatRevenueUsd(ctx.parsed.y),
       },
     },
   },
@@ -183,7 +190,7 @@ const monthlyChartOptions = {
     y: {
       beginAtZero: true,
       grid: { color: '#f3f4f6' },
-      ticks: { callback: (v: any) => formatCurrency(Number(v)) },
+      ticks: { callback: (v: any) => formatRevenueUsd(Number(v)) },
     },
     x: { grid: { display: false } },
   },
@@ -242,9 +249,28 @@ function openMerchant(id: string) {
   router.push(`/admin/merchants/${id}`)
 }
 
-function formatCurrency(amount: number) {
+// Two distinct money formatters live here because this page mixes
+// currencies: tx volume is in XOF (transaction native currency) but
+// platform revenue is in USD (platform_billing model — $0.005/tx).
+// Using a single XOF helper for both surfaces silent unit confusion
+// like "Revenu plateforme: 2 F CFA" instead of "$2.00".
+function formatRevenueUsd(amount: number) {
   const localeStr = locale.value === 'fr' ? 'fr-FR' : 'en-US'
-  return new Intl.NumberFormat(localeStr, { style: 'currency', currency: 'XOF', minimumFractionDigits: 0 }).format(amount || 0)
+  return new Intl.NumberFormat(localeStr, {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount || 0)
+}
+
+function formatVolumeXof(amount: number) {
+  const localeStr = locale.value === 'fr' ? 'fr-FR' : 'en-US'
+  return new Intl.NumberFormat(localeStr, {
+    style: 'currency',
+    currency: 'XOF',
+    minimumFractionDigits: 0,
+  }).format(amount || 0)
 }
 </script>
 

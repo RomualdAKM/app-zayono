@@ -157,7 +157,7 @@
             <h3 class="card-title">{{ $t('paymentsPage.detail.gateway') }}</h3>
             <div class="method-row" v-if="transaction.aggregator_code">
               <div class="brand-logo brand-logo--sm">
-                <img v-if="aggregatorLogo" :src="aggregatorLogo" :alt="aggregatorLabelText" />
+                <img v-if="aggregatorLogo && !aggregatorLogoFailed" :src="aggregatorLogo" :alt="aggregatorLabelText" @error="aggregatorLogoFailed = true" />
                 <span v-else>{{ aggregatorInitials }}</span>
               </div>
               <div class="brand-info">
@@ -404,9 +404,23 @@ const aggregatorLabelText = computed(() => {
   return aggregatorCatalog.value[code]?.name || code
 })
 
+/**
+ * The backend `available` endpoint returns just the file name in
+ * `logo` (e.g. `fedapay.png`). The asset itself lives under the
+ * Nuxt-served `/public/aggregator-logos/` directory, so we have to
+ * prepend the static path — using the raw filename as `src` produces
+ * a relative URL that resolves against the current route and 404s.
+ * `aggregatorLogoFailed` lets us swap to the initials fallback when
+ * the file is missing for a brand-new driver added before its PNG
+ * has been bundled.
+ */
+const aggregatorLogoFailed = ref(false)
+watch(() => transaction.value.aggregator_code, () => { aggregatorLogoFailed.value = false })
+
 const aggregatorLogo = computed(() => {
   const code = transaction.value.aggregator_code
-  return aggregatorCatalog.value[code]?.logo ?? null
+  const file = aggregatorCatalog.value[code]?.logo
+  return file ? `/aggregator-logos/${file}` : null
 })
 
 const aggregatorInitials = computed(() => {

@@ -132,12 +132,18 @@
           <!-- Passerelle -->
           <div class="detail-card">
             <h3 class="card-title">{{ $t('payoutsPage.detail.gateway') }}</h3>
-            <div class="info-list">
-              <div class="info-row">
-                <span class="info-label">{{ $t('payoutsPage.detail.aggregator') }}</span>
-                <span class="info-value">{{ transaction.aggregator_code || '—' }}</span>
+            <div class="method-row" v-if="transaction.aggregator_code">
+              <div class="brand-logo brand-logo--sm">
+                <img v-if="aggregatorLogo && !aggregatorLogoFailed" :src="aggregatorLogo" :alt="aggregatorLabelText" @error="aggregatorLogoFailed = true" />
+                <span v-else>{{ aggregatorInitials }}</span>
               </div>
-              <div class="info-row" v-if="transaction.aggregator_tx_id">
+              <div class="brand-info">
+                <span class="brand-name">{{ aggregatorLabelText }}</span>
+                <span class="brand-sub">{{ transaction.environment }}</span>
+              </div>
+            </div>
+            <div class="info-list" v-if="transaction.aggregator_tx_id">
+              <div class="info-row">
                 <span class="info-label">{{ $t('payoutsPage.detail.aggregatorId') }}</span>
                 <code class="ref-code">{{ transaction.aggregator_tx_id }}</code>
               </div>
@@ -197,6 +203,48 @@ const error = ref<string | null>(null)
 
 const context = computed(() => transaction.value.context || {})
 
+// ─── Aggregator catalogue (logo + label) ──────────────────────────
+// Same shape as on the payments detail page: the `/available` endpoint
+// returns `{ name, logo }` per driver, where `logo` is a bare file name
+// (e.g. `fedapay.png`). The asset itself lives under Nuxt's
+// `public/aggregator-logos/`, so the `src` MUST be prefixed with that
+// path — using the raw filename produces a relative URL that 404s.
+const aggregatorCatalog = ref<Record<string, { name: string; logo: string | null }>>({})
+const aggregatorLogoFailed = ref(false)
+watch(() => transaction.value.aggregator_code, () => { aggregatorLogoFailed.value = false })
+
+const aggregatorLabelText = computed(() => {
+  const code = transaction.value.aggregator_code
+  if (!code) return '—'
+  return aggregatorCatalog.value[code]?.name || code
+})
+
+const aggregatorLogo = computed(() => {
+  const code = transaction.value.aggregator_code
+  const file = aggregatorCatalog.value[code]?.logo
+  return file ? `/aggregator-logos/${file}` : null
+})
+
+const aggregatorInitials = computed(() => {
+  const label = aggregatorLabelText.value
+  return label.split(/\s+/).map((w: string) => w[0]).slice(0, 2).join('').toUpperCase()
+})
+
+const loadAggregatorCatalog = async () => {
+  // Best-effort: the page still renders without it, just with the raw
+  // aggregator code instead of a logo + pretty label.
+  try {
+    const res = await apiFetch<{ success: boolean; data: any[] }>('/merchant/aggregators/available')
+    const map: Record<string, { name: string; logo: string | null }> = {}
+    for (const a of res.data || []) {
+      map[a.code] = { name: a.name, logo: a.logo ?? null }
+    }
+    aggregatorCatalog.value = map
+  } catch {
+    // ignore — graceful degradation
+  }
+}
+
 const loadTransaction = async () => {
   loading.value = true
   error.value = null
@@ -237,6 +285,7 @@ const copyToClipboard = (text: string) => {
 
 onMounted(() => {
   loadTransaction()
+  loadAggregatorCatalog()
 })
 </script>
 
@@ -492,6 +541,64 @@ onMounted(() => {
   font-size: 12px;
   color: var(--ze-text-muted);
   font-variant-numeric: tabular-nums;
+}
+
+/* Aggregator + method "brand row" (logo on the left, name+subtitle).
+   Mirrors the payments detail page so a customer can spot the same
+   gateway in either flow without re-learning the visual. */
+.method-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--ze-bg-subtle);
+  border: 1px solid var(--ze-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ze-text-strong);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.brand-logo--sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.brand-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ze-text-strong);
+}
+
+.brand-sub {
+  font-size: 11px;
+  color: var(--ze-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 :deep(.attempts-table .p-datatable-thead > tr > th) {

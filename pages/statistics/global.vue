@@ -554,16 +554,29 @@ function statusLabel(status: string) {
   margin: 0;
 }
 
+/*
+ * Chart container — `position: relative` + `overflow: hidden` are
+ * mandatory. Chart.js sizes its canvas off the parent's content box on
+ * each render tick; without containment, the canvas briefly renders at
+ * its intrinsic device-pixel size and visibly overflows the card
+ * (covering the KPI strip above). The fixed `height` + `min-height: 0`
+ * pair guarantees the slot doesn't grow with the canvas either.
+ */
 .chart-container {
+  position: relative;
   height: 260px;
+  min-height: 0;
   width: 100%;
+  max-width: 100%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .chart-container :deep(canvas) {
-  max-width: 100%;
+  max-width: 100% !important;
+  max-height: 100% !important;
 }
 
 .chart-wide { height: 300px; }

@@ -25,17 +25,22 @@
       <div class="kpi-card">
         <div class="kpi-icon"><AppIcon name="wallet" /></div>
         <div class="kpi-content">
-          <span class="kpi-value">{{ formatCurrency(dashboard?.volume.today ?? 0) }}</span>
+          <span class="kpi-value">{{ formatVolumeXof(dashboard?.volume.today ?? 0) }}</span>
           <span class="kpi-label">{{ $t('admin.dashboard.kpi.volumeToday') }}</span>
         </div>
       </div>
       <div class="kpi-card">
         <div class="kpi-icon"><AppIcon name="chart-line" /></div>
         <div class="kpi-content">
-          <span class="kpi-value">{{ formatCurrency(dashboard?.revenue.today ?? 0) }}</span>
+          <!--
+            Zayono platform revenue is USD-denominated (platform_billing
+            business model — $0.005/tx flat accrual). Volume above stays
+            XOF (transaction native currency).
+          -->
+          <span class="kpi-value">{{ formatRevenueUsd(dashboard?.revenue.today ?? 0) }}</span>
           <span class="kpi-label">{{ $t('admin.dashboard.kpi.revenueZayono') }}</span>
         </div>
-        <Tag :value="t('admin.dashboard.kpi.perMonth', { amount: formatCurrency(dashboard?.revenue.month ?? 0) })" severity="success" />
+        <Tag :value="t('admin.dashboard.kpi.perMonth', { amount: formatRevenueUsd(dashboard?.revenue.month ?? 0) })" severity="success" />
       </div>
     </div>
 
@@ -50,11 +55,11 @@
         <div class="revenue-totals">
           <div class="revenue-total">
             <span class="revenue-total-label">{{ $t('admin.dashboard.totalPeriod') }}</span>
-            <span class="revenue-total-value">{{ formatCurrency(revenueMonthly?.total_revenue ?? 0) }}</span>
+            <span class="revenue-total-value">{{ formatRevenueUsd(revenueMonthly?.total_revenue ?? 0) }}</span>
           </div>
           <div class="revenue-total">
             <span class="revenue-total-label">{{ $t('admin.dashboard.volumeProcessed') }}</span>
-            <span class="revenue-total-value muted">{{ formatCurrency(revenueMonthly?.total_volume ?? 0) }}</span>
+            <span class="revenue-total-value muted">{{ formatVolumeXof(revenueMonthly?.total_volume ?? 0) }}</span>
           </div>
         </div>
       </div>
@@ -85,7 +90,7 @@
           </Column>
           <Column field="amount" :header="$t('admin.dashboard.columns.amount')">
             <template #body="{ data }">
-              {{ formatCurrency(parseFloat(data.amount)) }} {{ data.currency }}
+              {{ formatVolumeXof(parseFloat(data.amount)) }} {{ data.currency }}
             </template>
           </Column>
           <Column field="status" :header="$t('admin.dashboard.columns.status')">
@@ -201,7 +206,8 @@ const revenueChartOptions = {
     legend: { display: false },
     tooltip: {
       callbacks: {
-        label: (ctx: any) => `${formatCurrency(ctx.parsed.y)}`,
+        // Revenue chart is platform revenue → USD (not XOF).
+        label: (ctx: any) => `${formatRevenueUsd(ctx.parsed.y)}`,
       },
     },
   },
@@ -209,7 +215,7 @@ const revenueChartOptions = {
     y: {
       beginAtZero: true,
       grid: { color: '#f3f4f6' },
-      ticks: { callback: (value: any) => formatCurrency(Number(value)) },
+      ticks: { callback: (value: any) => formatRevenueUsd(Number(value)) },
     },
     x: { grid: { display: false } },
   },
@@ -218,9 +224,27 @@ const revenueChartOptions = {
 const dashboard = computed(() => adminStore.dashboard)
 const aggregators = computed(() => adminStore.aggregators)
 
-const formatCurrency = (amount: number) => {
+// Two formatters — one per currency. Platform revenue is USD
+// (platform_billing model), tx volume is XOF (native currency).
+// Mixing them under a single XOF helper was producing "Revenu Zayono:
+// 2 F CFA" instead of "$0.01".
+const formatRevenueUsd = (amount: number) => {
   const localeStr = locale.value === 'fr' ? 'fr-FR' : 'en-US'
-  return new Intl.NumberFormat(localeStr, { style: 'currency', currency: 'XOF', minimumFractionDigits: 0 }).format(amount)
+  return new Intl.NumberFormat(localeStr, {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount || 0)
+}
+
+const formatVolumeXof = (amount: number) => {
+  const localeStr = locale.value === 'fr' ? 'fr-FR' : 'en-US'
+  return new Intl.NumberFormat(localeStr, {
+    style: 'currency',
+    currency: 'XOF',
+    minimumFractionDigits: 0,
+  }).format(amount || 0)
 }
 
 const formatDate = (date: string) => {

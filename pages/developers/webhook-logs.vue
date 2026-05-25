@@ -368,32 +368,41 @@ function formatJson(obj: unknown): string {
 <style scoped>
 .page-subtitle {
   color: var(--ze-text-muted);
-  margin: 0 0 var(--ze-sp-4) 0;
+  margin: 0 0 var(--space-4) 0;
   font-size: 14px;
 }
 
 .filters-row {
   display: flex;
-  gap: var(--ze-sp-2);
-  margin-bottom: var(--ze-sp-4);
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
   align-items: center;
 }
 
 .status-select { width: 180px; }
 .event-input { flex: 1; max-width: 320px; }
 
-.loading { display: flex; flex-direction: column; gap: var(--ze-sp-2); }
+.loading { display: flex; flex-direction: column; gap: var(--space-2); }
 
 .empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--ze-sp-10) var(--ze-sp-4);
+  padding: var(--space-10) var(--space-4);
   text-align: center;
 }
 
-.empty-icon { width: 48px; height: 48px; color: var(--ze-text-muted); margin-bottom: var(--ze-sp-2); }
+.empty-icon { width: 48px; height: 48px; color: var(--ze-text-muted); margin-bottom: var(--space-2); }
 .empty-text { color: var(--ze-text-muted); margin: 0; max-width: 420px; }
+
+/* Table cell spacing — without explicit padding the status chip
+   "Livré · 200" pressed against the "Rejouer" button in the next
+   column. 12×16 + middle alignment lines everything up cleanly. */
+.zayono-table :deep(.p-datatable-tbody > tr > td),
+.zayono-table :deep(.p-datatable-thead > tr > th) {
+  padding: 12px 16px;
+  vertical-align: middle;
+}
 
 .tabular {
   font-variant-numeric: tabular-nums;
@@ -405,7 +414,7 @@ function formatJson(obj: unknown): string {
 .event-badge {
   display: inline-block;
   padding: 2px 8px;
-  background: var(--ze-surface-sunken);
+  background: var(--ze-bg-subtle);
   border: 1px solid var(--ze-border);
   border-radius: 3px;
   font-size: 11px;
@@ -443,14 +452,14 @@ function formatJson(obj: unknown): string {
 .pill--green { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
 .pill--red { background: #fef2f2; color: #dc2626; border: 1px solid #fca5a5; }
 .pill--yellow { background: #fefce8; color: #a16207; border: 1px solid #fde68a; }
-.pill--neutral { background: var(--ze-surface-sunken); color: var(--ze-text-muted); border: 1px solid var(--ze-border); }
+.pill--neutral { background: var(--ze-bg-subtle); color: var(--ze-text-muted); border: 1px solid var(--ze-border); }
 
 .pagination {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--ze-sp-3);
-  margin-top: var(--ze-sp-4);
+  gap: var(--space-3);
+  margin-top: var(--space-4);
 }
 
 .page-info {
@@ -467,7 +476,7 @@ function formatJson(obj: unknown): string {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  gap: var(--ze-sp-3);
+  gap: var(--space-3);
 }
 
 .drawer-title {
@@ -479,14 +488,14 @@ function formatJson(obj: unknown): string {
 .drawer-body {
   display: flex;
   flex-direction: column;
-  gap: var(--ze-sp-4);
+  gap: var(--space-4);
 }
 
 .warning-banner {
   display: flex;
   align-items: flex-start;
-  gap: var(--ze-sp-2);
-  padding: var(--ze-sp-3);
+  gap: var(--space-2);
+  padding: var(--space-3);
   background: #fef3c7;
   border: 1px solid #fde68a;
   border-radius: 4px;
@@ -499,7 +508,7 @@ function formatJson(obj: unknown): string {
 .meta-grid {
   display: grid;
   grid-template-columns: 130px 1fr;
-  gap: 6px var(--ze-sp-3);
+  gap: 6px var(--space-3);
   margin: 0;
   font-size: 13px;
 }
@@ -507,7 +516,7 @@ function formatJson(obj: unknown): string {
 .meta-grid dt { color: var(--ze-text-muted); font-weight: 500; }
 .meta-grid dd { margin: 0; color: var(--ze-text-strong); word-break: break-all; }
 
-.drawer-section { display: flex; flex-direction: column; gap: var(--ze-sp-2); }
+.drawer-section { display: flex; flex-direction: column; gap: var(--space-2); }
 
 .section-title {
   margin: 0;
@@ -520,8 +529,8 @@ function formatJson(obj: unknown): string {
 
 .json-block {
   margin: 0;
-  padding: var(--ze-sp-3);
-  background: var(--ze-surface-sunken);
+  padding: var(--space-3);
+  background: var(--ze-bg-subtle);
   border: 1px solid var(--ze-border);
   border-radius: 4px;
   font-family: ui-monospace, "JetBrains Mono", monospace;
@@ -540,14 +549,14 @@ function formatJson(obj: unknown): string {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--ze-sp-2);
+  gap: var(--space-2);
 }
 
 .replay-list li {
   display: flex;
   align-items: center;
-  gap: var(--ze-sp-3);
-  padding: var(--ze-sp-2);
+  gap: var(--space-3);
+  padding: var(--space-2);
   border: 1px solid var(--ze-border);
   border-radius: 3px;
 }
@@ -566,13 +575,13 @@ function formatJson(obj: unknown): string {
 .link-btn:hover { color: var(--ze-primary-hover, #1d4ed8); }
 
 .replay-cta {
-  padding: var(--ze-sp-3);
+  padding: var(--space-3);
   border: 1px dashed var(--ze-border);
   border-radius: 4px;
 }
 
 .hint-text {
-  margin: 0 0 var(--ze-sp-2) 0;
+  margin: 0 0 var(--space-2) 0;
   font-size: 12px;
   color: var(--ze-text-muted);
 }

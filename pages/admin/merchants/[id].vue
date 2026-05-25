@@ -77,7 +77,7 @@
             <span class="stat-label">{{ $t('admin.merchantDetail.stats.successRate') }}</span>
           </div>
           <div class="stat-item">
-            <span class="stat-value">{{ formatCurrency(stats.transaction_volume) }}</span>
+            <span class="stat-value">{{ formatVolumeXof(stats.transaction_volume) }}</span>
             <span class="stat-label">{{ $t('admin.merchantDetail.stats.totalVolume') }}</span>
           </div>
           <div class="stat-item">
@@ -92,11 +92,11 @@
         <p class="card-subtitle" v-html="$t('admin.merchantDetail.revenueSubtitle', { percent: (stats.zayono_fee_percent ?? 0).toFixed(3) })" />
         <div class="stat-grid">
           <div class="stat-item revenue-stat">
-            <span class="stat-value revenue-value">{{ formatCurrency(stats.zayono_revenue_all_time ?? 0) }}</span>
+            <span class="stat-value revenue-value">{{ formatRevenueUsd(stats.zayono_revenue_all_time ?? 0) }}</span>
             <span class="stat-label">{{ $t('admin.merchantDetail.revenue.allTime') }}</span>
           </div>
           <div class="stat-item revenue-stat">
-            <span class="stat-value revenue-value">{{ formatCurrency(stats.zayono_revenue_last_30d ?? 0) }}</span>
+            <span class="stat-value revenue-value">{{ formatRevenueUsd(stats.zayono_revenue_last_30d ?? 0) }}</span>
             <span class="stat-label">{{ $t('admin.merchantDetail.revenue.last30d') }}</span>
           </div>
           <div class="stat-item revenue-stat">
@@ -231,9 +231,25 @@ const handleDemote = async () => {
   }
 }
 
-const formatCurrency = (amount: number) => {
+// Tx volume is XOF, platform revenue (zayono_revenue_*) is USD —
+// two helpers to keep the units honest on the merchant detail page.
+const formatVolumeXof = (amount: number) => {
   const localeStr = locale.value === 'fr' ? 'fr-FR' : 'en-US'
-  return new Intl.NumberFormat(localeStr, { style: 'currency', currency: 'XOF', minimumFractionDigits: 0 }).format(amount)
+  return new Intl.NumberFormat(localeStr, {
+    style: 'currency',
+    currency: 'XOF',
+    minimumFractionDigits: 0,
+  }).format(amount || 0)
+}
+
+const formatRevenueUsd = (amount: number) => {
+  const localeStr = locale.value === 'fr' ? 'fr-FR' : 'en-US'
+  return new Intl.NumberFormat(localeStr, {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount || 0)
 }
 
 const formatDate = (date: string) => {

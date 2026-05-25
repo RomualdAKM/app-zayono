@@ -362,16 +362,24 @@ function formatRelative(iso: string): string {
 </script>
 
 <style scoped>
+/*
+ * NOTE — earlier versions of this file used `var(--ze-sp-*)` / `--ze-surface`
+ * / `--ze-r-md` tokens that don't exist in main.css. CSS variables fall
+ * back to `unset` (effectively 0) when missing, which collapsed every
+ * gap/padding on this page (KPI cards touched, filters touched, etc).
+ * Aligned to the real token names: `--space-*`, `--ze-bg-card`,
+ * `--radius`.
+ */
 .page-subtitle {
   color: var(--ze-text-muted);
-  margin: 0 0 var(--ze-sp-4) 0;
+  margin: 0 0 var(--space-4) 0;
   font-size: 14px;
 }
 
 .filters-row {
   display: flex;
-  gap: var(--ze-sp-2);
-  margin-bottom: var(--ze-sp-4);
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
   align-items: center;
 }
 
@@ -381,25 +389,25 @@ function formatRelative(iso: string): string {
 .loading {
   display: flex;
   flex-direction: column;
-  gap: var(--ze-sp-2);
+  gap: var(--space-2);
 }
 
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: var(--ze-sp-3);
-  margin-bottom: var(--ze-sp-6);
+  gap: 16px;
+  margin-bottom: var(--space-6);
 }
 
 .section {
-  background: var(--ze-surface);
+  background: var(--ze-bg-card);
   border: 1px solid var(--ze-border);
-  border-radius: var(--ze-r-md);
-  padding: var(--ze-sp-5);
-  margin-bottom: var(--ze-sp-6);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  margin-bottom: var(--space-6);
 }
 
-.section-head { margin-bottom: var(--ze-sp-3); }
+.section-head { margin-bottom: var(--space-3); }
 
 .section-title {
   margin: 0 0 4px 0;
@@ -434,7 +442,7 @@ function formatRelative(iso: string): string {
 .agg-badge {
   display: inline-block;
   padding: 3px 10px;
-  background: var(--ze-surface-sunken);
+  background: var(--ze-bg-subtle);
   border: 1px solid var(--ze-border);
   border-radius: 4px;
   font-size: 12px;
@@ -477,7 +485,7 @@ function formatRelative(iso: string): string {
 }
 
 .rate-pill--neutral {
-  background: var(--ze-surface-sunken);
+  background: var(--ze-bg-subtle);
   color: var(--ze-text-muted);
   border: 1px solid var(--ze-border);
 }
@@ -507,7 +515,7 @@ function formatRelative(iso: string): string {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: var(--ze-surface-sunken);
+  background: var(--ze-bg-subtle);
   font-size: 12px;
   font-weight: 600;
   color: var(--ze-text-body);
@@ -543,14 +551,14 @@ function formatRelative(iso: string): string {
 .scoring-hint {
   display: flex;
   align-items: center;
-  gap: var(--ze-sp-2);
-  padding: var(--ze-sp-3) var(--ze-sp-4);
-  background: var(--ze-info-soft, #eff6ff);
-  border: 1px solid var(--ze-info-border, #bfdbfe);
-  border-radius: var(--ze-r-md);
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--ze-brand-bg-soft);
+  border: 1px solid var(--ze-brand-border);
+  border-radius: var(--radius);
   font-size: 13px;
-  color: var(--ze-info, #1d4ed8);
-  margin-bottom: var(--ze-sp-6);
+  color: var(--ze-brand);
+  margin-bottom: var(--space-6);
 }
 
 .hint-icon {
@@ -563,7 +571,7 @@ function formatRelative(iso: string): string {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--ze-sp-8) var(--ze-sp-4);
+  padding: var(--space-8) var(--space-4);
   text-align: center;
 }
 
@@ -571,7 +579,7 @@ function formatRelative(iso: string): string {
   width: 40px;
   height: 40px;
   color: var(--ze-text-muted);
-  margin-bottom: var(--ze-sp-2);
+  margin-bottom: var(--space-2);
 }
 
 .empty-text {
@@ -581,6 +589,6 @@ function formatRelative(iso: string): string {
 }
 
 .loading-row {
-  border-radius: var(--ze-r-md);
+  border-radius: var(--radius);
 }
 </style>

@@ -488,6 +488,18 @@
     },
     "empty": "Aucune facture pour le moment. Continuez d'utiliser Zayono — votre première facture sera générée après 200 transactions live réussies."
   },
+  "billingInvoiceStatus": {
+    "pageTitle": "Statut du paiement",
+    "paidTitle": "Facture payée — merci !",
+    "paidTitleWithNumber": "Facture {number} payée — merci !",
+    "paidBody": "Votre paiement a bien été reçu. Le mode live reste actif et le compteur de facturation a été remis à zéro.",
+    "cancelledTitle": "Paiement annulé",
+    "cancelledBody": "Vous avez annulé le paiement de cette facture. Vous pouvez réessayer à tout moment depuis votre tableau de bord.",
+    "failedTitle": "Paiement échoué",
+    "failedBody": "Le paiement n'a pas abouti. Vérifiez les informations renseignées et réessayez. Si le problème persiste, contactez le support.",
+    "backToBilling": "Retour à la facturation",
+    "retry": "Réessayer le paiement"
+  },
   "platformBilling": {
     "title": "Facturation plateforme",
     "subtitle": "Revenu Zayono — frais accumulés sur les transactions live des marchands, facturés à chaque seuil de $1.00.",
@@ -581,6 +593,7 @@
       "amount": "Montant",
       "status": "Statut",
       "method": "Moyen",
+      "gateway": "Passerelle",
       "customer": "Client",
       "reference": "Référence",
       "date": "Date",
@@ -705,6 +718,7 @@
       "amount": "Montant",
       "status": "Statut",
       "method": "Moyen",
+      "gateway": "Passerelle",
       "beneficiary": "Bénéficiaire",
       "reference": "Référence",
       "date": "Date",

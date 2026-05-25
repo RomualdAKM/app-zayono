@@ -153,9 +153,24 @@ const getStatusSeverity = (status: string) => {
 .section-card { margin-bottom: 16px; }
 .card-title { font-size: 14px; font-weight: 600; color: #1a1a2e; margin: 0 0 16px 0; }
 .info-list { display: flex; flex-direction: column; gap: 10px; }
-.info-row { display: flex; justify-content: space-between; align-items: center; }
+.info-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .info-label { font-size: 13px; color: #6b7280; }
 .info-value { font-size: 13px; font-weight: 500; color: #1a1a2e; }
 .info-value.mono { font-family: monospace; font-size: 11px; }
-.empty-text { font-size: 13px; color: #9ca3af; text-align: center; padding: 20px 0; }
+/*
+ * Empty placeholder — previously just floated 13px text on a blank
+ * card with no min-height. Now centered in a 96px slot so the empty
+ * Webhooks / Attempts cards keep visual parity with the populated
+ * DataTable variant.
+ */
+.empty-text {
+  font-size: 13px;
+  color: #9ca3af;
+  text-align: center;
+  margin: 0;
+  min-height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>

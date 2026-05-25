@@ -70,6 +70,12 @@
               <span v-else class="text-muted">—</span>
             </template>
           </Column>
+          <Column field="aggregator_code" :header="$t('paymentsPage.columns.gateway')">
+            <template #body="{ data }">
+              <span v-if="data.aggregator_code" class="gateway-badge">{{ aggregatorName(data.aggregator_code) }}</span>
+              <span v-else class="text-muted">—</span>
+            </template>
+          </Column>
           <Column field="customer" :header="$t('paymentsPage.columns.customer')">
             <template #body="{ data }">
               <div class="customer-cell" v-if="data.customer">
@@ -169,9 +175,17 @@ const operatorName = (code: string): string =>
 
 // Catalogue-driven filter (purpose=payment so payout-only future drivers
 // don't pollute the dropdown).
-const { load: loadAggregatorCatalog, asSelectOptions } = useAggregatorCatalog()
+const { load: loadAggregatorCatalog, asSelectOptions, labelFor: aggregatorLabelFor } = useAggregatorCatalog()
 onMounted(() => loadAggregatorCatalog())
 const gatewayOptions = computed(() => asSelectOptions({ purpose: 'payment' }))
+
+/**
+ * Resolve an aggregator code (`fedapay`) to its human label
+ * (`FedaPay`) via the catalogue. Falls back to the raw code so a
+ * historical row with a code the catalogue no longer carries still
+ * renders something instead of `undefined`.
+ */
+const aggregatorName = (code: string): string => aggregatorLabelFor(code)
 
 const loadPayments = async () => {
   loading.value = true
@@ -411,6 +425,21 @@ onMounted(async () => {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 180px;
+}
+
+/* Aggregator label pill — matches the brand-info treatment on the
+   detail page so a single transaction reads consistently across the
+   list and the drill-down. */
+.gateway-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: var(--ze-bg-subtle);
+  border: 1px solid var(--ze-border);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ze-text-label);
 }
 
 .customer-cell {

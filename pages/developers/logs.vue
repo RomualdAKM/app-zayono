@@ -360,12 +360,21 @@ function formatJson(obj: unknown): string {
 </script>
 
 <style scoped>
-.page-subtitle { color: var(--ze-text-muted); margin: 0 0 var(--ze-sp-4) 0; font-size: 14px; }
+/*
+ * NOTE — `--ze-sp-*` and `--ze-surface-sunken` aren't real tokens in
+ * main.css (the actual names are `--space-*` and `--ze-bg-subtle`).
+ * Pages relying on the bogus names rendered with zero gap/padding,
+ * which is why status chips touched the next column. Realigned here.
+ *
+ * Also added explicit cell padding via :deep so the status pill no
+ * longer kisses the duration column.
+ */
+.page-subtitle { color: var(--ze-text-muted); margin: 0 0 var(--space-4) 0; font-size: 14px; }
 
 .filters-row {
   display: flex;
-  gap: var(--ze-sp-2);
-  margin-bottom: var(--ze-sp-4);
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
   align-items: center;
   flex-wrap: wrap;
 }
@@ -373,10 +382,23 @@ function formatJson(obj: unknown): string {
 .filter-select { width: 180px; }
 .path-input { flex: 1; min-width: 240px; max-width: 320px; }
 
-.loading { display: flex; flex-direction: column; gap: var(--ze-sp-2); }
-.empty-state { display: flex; flex-direction: column; align-items: center; padding: var(--ze-sp-10) var(--ze-sp-4); text-align: center; }
-.empty-icon { width: 48px; height: 48px; color: var(--ze-text-muted); margin-bottom: var(--ze-sp-2); }
+.loading { display: flex; flex-direction: column; gap: var(--space-2); }
+.empty-state { display: flex; flex-direction: column; align-items: center; padding: var(--space-10) var(--space-4); text-align: center; }
+.empty-icon { width: 48px; height: 48px; color: var(--ze-text-muted); margin-bottom: var(--space-2); }
 .empty-text { color: var(--ze-text-muted); margin: 0; max-width: 420px; }
+
+/* Table cell spacing — ensure status pill / duration / resource don't
+   collide. PrimeVue's default `compact` density drops cell padding
+   too low; pin a sane 12×16 box and add gap between same-cell items. */
+.zayono-table :deep(.p-datatable-tbody > tr > td),
+.zayono-table :deep(.p-datatable-thead > tr > th) {
+  padding: 12px 16px;
+  vertical-align: middle;
+}
+
+.zayono-table.compact :deep(.p-datatable-tbody > tr > td) {
+  padding: 10px 16px;
+}
 
 .tabular { font-variant-numeric: tabular-nums; font-family: ui-monospace, "JetBrains Mono", monospace; }
 .muted { color: var(--ze-text-muted); }
@@ -413,7 +435,7 @@ function formatJson(obj: unknown): string {
 .pill--green { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
 .pill--red { background: #fef2f2; color: #dc2626; border: 1px solid #fca5a5; }
 .pill--yellow { background: #fefce8; color: #a16207; border: 1px solid #fde68a; }
-.pill--neutral { background: var(--ze-surface-sunken); color: var(--ze-text-muted); border: 1px solid var(--ze-border); }
+.pill--neutral { background: var(--ze-bg-subtle); color: var(--ze-text-muted); border: 1px solid var(--ze-border); }
 
 .lat-good { color: #15803d; }
 .lat-meh { color: #a16207; }
@@ -432,20 +454,20 @@ function formatJson(obj: unknown): string {
 }
 
 .pagination {
-  display: flex; align-items: center; justify-content: center; gap: var(--ze-sp-3); margin-top: var(--ze-sp-4);
+  display: flex; align-items: center; justify-content: center; gap: var(--space-3); margin-top: var(--space-4);
 }
 .page-info { font-size: 13px; color: var(--ze-text-muted); }
 
 /* Drawer */
-.drawer-header { display: flex; align-items: flex-start; justify-content: space-between; width: 100%; gap: var(--ze-sp-3); }
-.drawer-eyebrow { display: flex; align-items: center; gap: var(--ze-sp-2); margin-bottom: 4px; }
+.drawer-header { display: flex; align-items: flex-start; justify-content: space-between; width: 100%; gap: var(--space-3); }
+.drawer-eyebrow { display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px; }
 .drawer-title { font-size: 14px; font-family: ui-monospace, monospace; color: var(--ze-text-strong); word-break: break-all; }
 
-.drawer-body { display: flex; flex-direction: column; gap: var(--ze-sp-4); }
+.drawer-body { display: flex; flex-direction: column; gap: var(--space-4); }
 
 .warning-banner {
-  display: flex; align-items: center; gap: var(--ze-sp-2);
-  padding: var(--ze-sp-3); background: #fefce8; border: 1px solid #fde68a;
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-3); background: #fefce8; border: 1px solid #fde68a;
   border-radius: 4px; color: #92400e; font-size: 13px;
 }
 .banner-icon { width: 18px; height: 18px; flex-shrink: 0; }
@@ -453,19 +475,19 @@ function formatJson(obj: unknown): string {
 .meta-grid {
   display: grid;
   grid-template-columns: 130px 1fr;
-  gap: 6px var(--ze-sp-3);
+  gap: 6px var(--space-3);
   margin: 0;
   font-size: 13px;
 }
 .meta-grid dt { color: var(--ze-text-muted); font-weight: 500; }
 .meta-grid dd { margin: 0; color: var(--ze-text-strong); word-break: break-all; }
 
-.drawer-section { display: flex; flex-direction: column; gap: var(--ze-sp-2); }
+.drawer-section { display: flex; flex-direction: column; gap: var(--space-2); }
 .section-title { margin: 0; font-size: 13px; font-weight: 600; color: var(--ze-text-strong); text-transform: uppercase; letter-spacing: 0.05em; }
 
 .json-block {
-  margin: 0; padding: var(--ze-sp-3);
-  background: var(--ze-surface-sunken);
+  margin: 0; padding: var(--space-3);
+  background: var(--ze-bg-subtle);
   border: 1px solid var(--ze-border);
   border-radius: 4px;
   font-family: ui-monospace, monospace;
