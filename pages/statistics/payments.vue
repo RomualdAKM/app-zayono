@@ -105,12 +105,27 @@ const load = async () => {
   loading.value = true
   try {
     const params = queryParams()
-    const [overviewRes, revenueRes] = await Promise.all([
-      apiFetch<{ data: any }>(`/merchant/statistics/overview${buildQuery(params)}`),
-      apiFetch<{ data: any }>(`/merchant/statistics/revenue${buildQuery(params)}`),
-    ])
-    overview.value = overviewRes.data || overview.value
-    revenue.value = revenueRes.data?.by_currency || revenueRes.data || []
+    // /overview carries BOTH the headline KPIs (total/success/failed/rate)
+    // AND the per-currency breakdown — no separate /revenue call needed
+    // for this page. `revenue.value` was previously empty because the
+    // legacy code looked for `by_currency` in /revenue (which only returns
+    // total + daily series, no currency grouping). Field rename: backend
+    // sends `rate`, normalise to `success_rate` for the template.
+    const res = await apiFetch<{ data: any }>(`/merchant/statistics/overview${buildQuery(params)}`)
+    const d = res.data || {}
+    overview.value = {
+      total: d.total ?? 0,
+      success: d.success ?? 0,
+      failed: d.failed ?? 0,
+      success_rate: d.rate ?? d.success_rate ?? 0,
+    }
+    // Backend returns rows with { currency, total_amount, count, success_rate }.
+    // Map to the { currency, total } shape the template binds, so the
+    // "Revenus par devise" table renders the SUM(amount) per currency.
+    revenue.value = (d.by_currency || []).map((row: any) => ({
+      currency: row.currency,
+      total: Number(row.total_amount ?? row.total ?? 0),
+    }))
   } catch (e: any) {
     handleError(e, t('statisticsPage.errorSummary'))
   } finally {

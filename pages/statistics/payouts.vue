@@ -104,12 +104,21 @@ const load = async () => {
   loading.value = true
   try {
     const params = queryParams()
-    const [overviewRes, revenueRes] = await Promise.all([
-      apiFetch<{ data: any }>(`/merchant/statistics/overview${buildQuery(params)}`),
-      apiFetch<{ data: any }>(`/merchant/statistics/revenue${buildQuery(params)}`),
-    ])
-    overview.value = overviewRes.data || overview.value
-    revenue.value = revenueRes.data?.by_currency || revenueRes.data || []
+    // Same shape normalisation as /statistics/payments — backend's
+    // /overview already returns by_currency; the separate /revenue call
+    // for it was dead. `rate` → `success_rate` rename for the template.
+    const res = await apiFetch<{ data: any }>(`/merchant/statistics/overview${buildQuery(params)}`)
+    const d = res.data || {}
+    overview.value = {
+      total: d.total ?? 0,
+      success: d.success ?? 0,
+      failed: d.failed ?? 0,
+      success_rate: d.rate ?? d.success_rate ?? 0,
+    }
+    revenue.value = (d.by_currency || []).map((row: any) => ({
+      currency: row.currency,
+      total: Number(row.total_amount ?? row.total ?? 0),
+    }))
   } catch (e: any) {
     handleError(e, t('statisticsPage.errorSummary'))
   } finally {
