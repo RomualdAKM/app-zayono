@@ -2,7 +2,7 @@
   <div class="auth-layout">
     <div class="auth-container">
       <div class="auth-header">
-        <h1 class="auth-logo">Zayono</h1>
+        <img src="/logo.gif" alt="Zayono" class="auth-logo" />
         <p class="auth-subtitle">{{ $t('authLayout.subtitle') }}</p>
       </div>
       <div class="auth-card">

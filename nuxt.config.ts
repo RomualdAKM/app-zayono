@@ -120,7 +120,7 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#2563EB' },
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'icon', type: 'image/gif', href: '/favicon.gif' },
       ],
     },
   },

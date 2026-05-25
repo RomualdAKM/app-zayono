@@ -3,7 +3,7 @@
     <aside class="sidebar">
       <div class="sidebar-header">
         <NuxtLink to="/admin" class="sidebar-logo">
-          <span class="logo-text">Zayono</span>
+          <img src="/logo.gif" alt="Zayono" class="logo-image" />
           <span class="logo-badge">Admin</span>
         </NuxtLink>
       </div>
@@ -149,11 +149,10 @@ const breadcrumbs = computed(() => {
   gap: 8px;
 }
 
-.logo-text {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1a1a2e;
-  letter-spacing: -0.5px;
+.logo-image {
+  height: 28px;
+  width: auto;
+  display: block;
 }
 
 .logo-badge {

@@ -11,7 +11,7 @@
     <!-- Logo -->
     <div class="sidebar-logo">
       <NuxtLink to="/dashboard" class="logo-link" @click="closeDrawer">
-        <span class="logo-text">Zayono</span>
+        <img src="/logo.gif" alt="Zayono" class="logo-image" />
         <span class="beta-badge">Beta</span>
       </NuxtLink>
       <button
@@ -421,11 +421,10 @@ const hasActiveChild = (item: NavItem) =>
   text-decoration: none;
 }
 
-.logo-text {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--ze-text-strong);
-  letter-spacing: -0.5px;
+.logo-image {
+  height: 28px;
+  width: auto;
+  display: block;
 }
 
 .beta-badge {

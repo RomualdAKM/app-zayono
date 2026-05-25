@@ -316,11 +316,10 @@ body {
 }
 
 .auth-logo {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--ze-text-strong);
-  margin: 0;
-  letter-spacing: -0.5px;
+  display: block;
+  height: 44px;
+  width: auto;
+  margin: 0 auto 12px;
 }
 
 .auth-subtitle {
