@@ -435,7 +435,6 @@ const formatAmount = props.formatAmount
   margin-left: 2px;
 }
 
-/* ─── Form fields ─── */
 .abj__field {
   display: flex;
   flex-direction: column;
