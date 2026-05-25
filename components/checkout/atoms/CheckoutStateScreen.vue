@@ -62,84 +62,98 @@ const props = defineProps<{
   reference?: string | null
 }>()
 
+// Icons sourced from Lucide (lucide.dev, ISC license — paths only, no
+// runtime dependency). The wrapper (`.ck-state__icon`) renders a soft
+// tinted circle so the glyph reads against a coloured surface; the
+// path-only SVG inherits `currentColor` from the wrapper's per-variant
+// rule. Sizes (32px) and stroke-width (2) match the wrapper geometry
+// — heavier than Lucide's default (1.5) so the icon still reads at a
+// glance from 50cm on a phone.
+
 const Spinner = {
   name: 'CkSpinner',
   setup() {
     return () => h('svg', {
-      width: 32,
-      height: 32,
-      viewBox: '0 0 24 24',
-      fill: 'none',
+      width: 32, height: 32, viewBox: '0 0 24 24', fill: 'none',
+      stroke: 'currentColor', 'stroke-width': 2,
+      'stroke-linecap': 'round', 'stroke-linejoin': 'round',
       class: 'ck-state__spin',
     }, [
-      h('circle', {
-        cx: 12, cy: 12, r: 9,
-        stroke: 'currentColor', 'stroke-width': 2, 'stroke-opacity': 0.25,
-      }),
-      h('path', {
-        d: 'M21 12a9 9 0 0 1-9 9',
-        stroke: 'currentColor', 'stroke-width': 2, 'stroke-linecap': 'round',
-      }),
+      // Lucide `loader-circle` — 8 short ticks fading out gives the
+      // rotation a smoother visual cadence than a single arc.
+      h('path', { d: 'M21 12a9 9 0 1 1-6.219-8.56' }),
     ])
   },
 }
 
 const Check = {
   setup: () => () => h('svg', {
-    width: 28, height: 28, viewBox: '0 0 24 24', fill: 'none',
-  }, h('path', {
-    d: 'M5 12l5 5 9-9',
-    stroke: 'currentColor', 'stroke-width': 2.5,
+    width: 32, height: 32, viewBox: '0 0 24 24', fill: 'none',
+    stroke: 'currentColor', 'stroke-width': 2,
     'stroke-linecap': 'round', 'stroke-linejoin': 'round',
-  })),
+  }, [
+    // Lucide `circle-check-big` — outline ring + check, more weight
+    // than a bare tick mark; reads as "confirmed" instantly.
+    h('path', { d: 'M21.801 10A10 10 0 1 1 17 3.335' }),
+    h('path', { d: 'm9 11 3 3L22 4' }),
+  ]),
 }
 
 const Cross = {
   setup: () => () => h('svg', {
-    width: 28, height: 28, viewBox: '0 0 24 24', fill: 'none',
-  }, h('path', {
-    d: 'M6 6l12 12M18 6L6 18',
-    stroke: 'currentColor', 'stroke-width': 2.5,
-    'stroke-linecap': 'round',
-  })),
+    width: 32, height: 32, viewBox: '0 0 24 24', fill: 'none',
+    stroke: 'currentColor', 'stroke-width': 2,
+    'stroke-linecap': 'round', 'stroke-linejoin': 'round',
+  }, [
+    // Lucide `circle-x` — outline ring + cross. Matches the success
+    // variant's "ring + glyph" geometry so the two reading-affordances
+    // feel like a designed pair.
+    h('circle', { cx: 12, cy: 12, r: 10 }),
+    h('path', { d: 'm15 9-6 6' }),
+    h('path', { d: 'm9 9 6 6' }),
+  ]),
 }
 
 const Clock = {
   setup: () => () => h('svg', {
-    width: 28, height: 28, viewBox: '0 0 24 24', fill: 'none',
+    width: 32, height: 32, viewBox: '0 0 24 24', fill: 'none',
+    stroke: 'currentColor', 'stroke-width': 2,
+    'stroke-linecap': 'round', 'stroke-linejoin': 'round',
   }, [
-    h('circle', { cx: 12, cy: 12, r: 9, stroke: 'currentColor', 'stroke-width': 2 }),
-    h('path', {
-      d: 'M12 7v5l3 2',
-      stroke: 'currentColor', 'stroke-width': 2,
-      'stroke-linecap': 'round', 'stroke-linejoin': 'round',
-    }),
+    // Lucide `clock` — classic clock face with hour + minute hand.
+    h('circle', { cx: 12, cy: 12, r: 10 }),
+    h('polyline', { points: '12 6 12 12 16 14' }),
   ]),
 }
 
 const Warning = {
   setup: () => () => h('svg', {
-    width: 28, height: 28, viewBox: '0 0 24 24', fill: 'none',
+    width: 32, height: 32, viewBox: '0 0 24 24', fill: 'none',
+    stroke: 'currentColor', 'stroke-width': 2,
+    'stroke-linecap': 'round', 'stroke-linejoin': 'round',
   }, [
-    h('path', {
-      d: 'M12 3 2 21h20L12 3Z',
-      stroke: 'currentColor', 'stroke-width': 2,
-      'stroke-linecap': 'round', 'stroke-linejoin': 'round',
-    }),
-    h('path', { d: 'M12 10v5', stroke: 'currentColor', 'stroke-width': 2, 'stroke-linecap': 'round' }),
-    h('circle', { cx: 12, cy: 18, r: 0.5, stroke: 'currentColor', 'stroke-width': 2 }),
+    // Lucide `triangle-alert` — rounded triangle, no sharp corners,
+    // and a dot for the bottom (drawn as a tiny line so it inherits
+    // the stroke style without an extra <circle>).
+    h('path', { d: 'm21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z' }),
+    h('path', { d: 'M12 9v4' }),
+    h('path', { d: 'M12 17h.01' }),
   ]),
 }
 
 const Phone = {
   setup: () => () => h('svg', {
-    width: 28, height: 28, viewBox: '0 0 24 24', fill: 'none',
+    width: 32, height: 32, viewBox: '0 0 24 24', fill: 'none',
+    stroke: 'currentColor', 'stroke-width': 2,
+    'stroke-linecap': 'round', 'stroke-linejoin': 'round',
   }, [
-    h('rect', {
-      x: 7, y: 3, width: 10, height: 18, rx: 2,
-      stroke: 'currentColor', 'stroke-width': 2,
-    }),
-    h('path', { d: 'M11 18h2', stroke: 'currentColor', 'stroke-width': 2, 'stroke-linecap': 'round' }),
+    // Lucide `vibrate` — phone centered with motion lines on both
+    // sides. Says "your phone is doing something NOW" — works for
+    // push-to-pay processing, USSD wait, AND OTP wait (the three
+    // variants that share this icon).
+    h('path', { d: 'm2 8 2 2-2 2 2 2-2 2' }),
+    h('path', { d: 'm22 8-2 2 2 2-2 2 2 2' }),
+    h('rect', { width: 8, height: 14, x: 8, y: 5, rx: 1 }),
   ]),
 }
 
