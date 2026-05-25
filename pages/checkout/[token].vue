@@ -857,6 +857,13 @@ function runFailureCta(action: string) {
          use CheckoutStateScreen which has its own minimal layout. -->
 
     <main class="checkout-main">
+      <!-- DEBUG: always-visible state indicator. Remove once root cause
+           of the silent render crash is identified. Goes outside the
+           v-if/v-else-if chain so it renders on EVERY pageState. -->
+      <div style="position:fixed;top:8px;left:8px;background:#000;color:#0f0;padding:4px 8px;font:12px monospace;z-index:99999;">
+        debug: pageState={{ pageState }} | step={{ step }} | template={{ template }}
+      </div>
+
       <!-- Loading -->
       <CheckoutStateScreen
         v-if="pageState === 'loading'"
