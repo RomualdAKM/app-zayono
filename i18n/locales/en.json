@@ -1106,8 +1106,8 @@
       },
       "applied": "Applied",
       "brand": {
-        "title": "Your brand colors",
-        "subtitle": "Primary color used for the checkout buttons and accents. Leave empty to revert to the Zayono blue.",
+        "title": "Visual customisation",
+        "subtitle": "Adapt the checkout to your brand. Every field is optional — leave empty to keep Zayono defaults.",
         "primaryColor": "Primary color",
         "reset": "Reset",
         "hexError": "Expected format: #RRGGBB",
@@ -1115,6 +1115,42 @@
         "contrastLow": "Borderline contrast with white text ({ratio}:1). Recommended: ≥ 4.5:1 for good readability.",
         "previewLabel": "Button preview",
         "previewButton": "Pay now"
+      },
+      "radius": {
+        "label": "Corner radius",
+        "hint": "Corner style applied to buttons, inputs and cards.",
+        "default": "Default",
+        "sharp": "Sharp",
+        "soft": "Soft",
+        "rounded": "Rounded",
+        "pill": "Pill"
+      },
+      "font": {
+        "label": "Font family",
+        "hint": "Pick from our curated set of readable typefaces.",
+        "default": "Default",
+        "system": "System",
+        "serif": "Serif"
+      },
+      "buttonStyle": {
+        "label": "Button style",
+        "hint": "Visual style of the primary pay button.",
+        "default": "Default",
+        "filled": "Filled",
+        "outline": "Outline",
+        "pill": "Pill"
+      },
+      "cta": {
+        "label": "Pay button label",
+        "hint": "Overrides the default button label (max 30 chars). Leave empty to show \"Pay X XOF\" automatically.",
+        "placeholder": "Complete payment"
+      },
+      "preview": {
+        "label": "Live preview",
+        "merchantSample": "Your store",
+        "amount": "Amount",
+        "defaultCta": "Pay 5,000 XOF",
+        "footnote": "Secured by Zayono"
       },
       "save": "Update",
       "saveSuccess": "Appearance updated",

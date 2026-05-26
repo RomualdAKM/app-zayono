@@ -156,7 +156,7 @@
       <p v-if="formError && !phoneError" class="abj__form-error" role="alert">{{ formError }}</p>
 
       <CheckoutCTA
-        :label="`Payer ${formatAmount(displayChargeAmount, displayChargeCurrency)}`"
+        :label="session?.merchant?.branding?.cta_label || `Payer ${formatAmount(displayChargeAmount, displayChargeCurrency)}`"
         :loading="submitting"
         :disabled="!canSubmit"
         @click="$emit('submit')"

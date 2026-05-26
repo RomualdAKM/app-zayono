@@ -792,20 +792,96 @@ function pickOnPrimary(hex: string): string {
   // Dark (#111, L≈0.011) needs (L + 0.05) / 0.061 >= 4.5 → L >= 0.225.
   return l > 0.179 ? '#111827' : '#ffffff'
 }
+// Whitelist mapping for the radius preset. The backend stores an enum
+// key (sharp|soft|rounded|pill) and we materialise it into pixel
+// values here — keeping the mapping client-side means a future tweak
+// to the scale doesn't require a backend migration.
+const RADIUS_MAP: Record<string, string> = {
+  sharp: '2px',
+  soft: '8px',
+  rounded: '12px',
+  pill: '24px',
+}
+
+// Whitelist mapping for the font preset → real font-family stack. Same
+// pattern as RADIUS_MAP. Each stack falls through to a system font so
+// the page still renders if a webfont fails to load on a flaky
+// connection (common on the African Mobile Money customer base).
+const FONT_MAP: Record<string, string> = {
+  system: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  inter: '"Inter", system-ui, -apple-system, sans-serif',
+  sora: '"Sora", system-ui, -apple-system, sans-serif',
+  'ibm-plex': '"IBM Plex Sans", system-ui, -apple-system, sans-serif',
+  serif: 'Georgia, "Times New Roman", serif',
+}
+
 const brandingStyle = computed(() => {
-  const primary = session.value?.merchant?.branding?.primary_color
+  const style: Record<string, string> = {}
+  const branding = session.value?.merchant?.branding
+
+  // ─── Primary color (existing logic) ─────────────────────────
+  const primary = branding?.primary_color
   // R2 audit HIGH: tightened regex to accept ONLY 3-char or 6-char
   // hex. The previous `{3,8}` accepted 4/5/7/8-char forms which
   // either drop through `relativeLuminance` to L=0 (returns white
   // text, which on a light brand color is unreadable — the very V8
   // failure the helper was meant to fix) or break the inline CSS
   // value silently.
-  if (!primary || !/^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(primary)) return {}
-  return {
-    '--ck-primary': primary,
-    '--ck-text-on-primary': pickOnPrimary(primary),
-    '--ck-focus-ring': primary + '66',
+  if (primary && /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(primary)) {
+    style['--ck-primary'] = primary
+    style['--ck-text-on-primary'] = pickOnPrimary(primary)
+    style['--ck-focus-ring'] = primary + '66'
+    // R1 audit H2: when the merchant picks the OUTLINE button style, the
+    // primary color becomes TEXT on a white background — the opposite
+    // contrast direction of the filled case. A light primary (#FFD400)
+    // would yield ~1.4:1, unreadable. If the primary's luminance is too
+    // high to meet 4.5:1 against white, fall through to the locked text
+    // color so the label stays legible. Border keeps the brand hue for
+    // visual identity; only the label swaps.
+    const lum = relativeLuminance(primary)
+    style['--ck-text-on-primary-outline'] = lum > 0.4 ? '#111827' : primary
   }
+
+  // ─── Radius preset ──────────────────────────────────────────
+  // Backend validated the enum so the lookup can't miss in normal
+  // operation. Belt-and-suspenders: skip the override if the value
+  // isn't in our whitelist (handles future BE additions without
+  // breaking the page).
+  if (branding?.radius && RADIUS_MAP[branding.radius]) {
+    style['--ck-r-md'] = RADIUS_MAP[branding.radius]
+    // Smaller radii cascade — a "sharp" theme should also reduce
+    // --ck-r-sm so chips/badges visually agree.
+    style['--ck-r-sm'] = branding.radius === 'sharp' ? '0px' : '4px'
+    style['--ck-r-lg'] = branding.radius === 'pill' ? '32px' : '12px'
+  }
+
+  // ─── Font preset ────────────────────────────────────────────
+  if (branding?.font && FONT_MAP[branding.font]) {
+    // Surface as a custom property so atoms can opt in via
+    // `font-family: var(--ck-font-family, inherit)`. The page-level
+    // .checkout-page already inherits to children.
+    style['--ck-font-family'] = FONT_MAP[branding.font]
+  }
+
+  return style
+})
+
+// Button-style class applied on .checkout-page so the CTA atom (and
+// any other primary-action button in atoms/) can branch on it via
+// scoped CSS — no inline JS needed in each atom.
+const buttonStyleClass = computed(() => {
+  const bs = session.value?.merchant?.branding?.button_style
+  if (bs && ['filled', 'outline', 'pill'].includes(bs)) return `bs-${bs}`
+  return 'bs-filled'
+})
+
+// Custom CTA label (merchant override). Empty / null → atoms use
+// their default computed label ("Payer 5 000 XOF" etc.). Plain text
+// only — atoms render via {{ }}, never v-html. Bounded length on the
+// backend (max:30) so we don't have to clamp here.
+const ctaLabelOverride = computed<string | null>(() => {
+  const v = session.value?.merchant?.branding?.cta_label
+  return typeof v === 'string' && v.trim().length > 0 ? v : null
 })
 
 const operatorLabel = computed(() => {
@@ -839,7 +915,7 @@ function runFailureCta(action: string) {
 </script>
 
 <template>
-  <div class="checkout-page" :class="`tpl-${template}`" :style="brandingStyle">
+  <div class="checkout-page" :class="[`tpl-${template}`, buttonStyleClass]" :style="brandingStyle">
     <!-- R1 audit A11y V11 — visually-hidden top-level heading so
          screen-reader users get a clear page-purpose anchor before
          the visual hierarchy starts. The visible card headings stay
@@ -1232,6 +1308,35 @@ function runFailureCta(action: string) {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  /* When the merchant picks a custom font, brandingStyle sets
+     --ck-font-family on this element and the whole subtree inherits.
+     Atoms don't need their own font-family rule; the default cascade
+     handles them. Fallback to the document's inherited stack when no
+     merchant override is set. */
+  font-family: var(--ck-font-family, inherit);
+}
+
+/* ── Merchant-themable button style ────────────────────────────────
+   Three presets, applied at the page level so atoms with .ck-cta
+   pick them up without touching their own code. */
+
+.bs-outline :deep(.ck-cta) {
+  background: transparent;
+  border: 1.5px solid var(--ck-primary);
+  /* R1 audit H2: text falls back to a locked dark when the merchant's
+     primary is too light to read against white (e.g. yellow). Computed
+     server-side in `brandingStyle` and exposed as
+     `--ck-text-on-primary-outline`. Default falls back to the primary
+     so merchants with dark brands still see their hue as label. */
+  color: var(--ck-text-on-primary-outline, var(--ck-primary));
+}
+
+.bs-outline :deep(.ck-cta:hover:not(:disabled)) {
+  background: var(--ck-primary-soft);
+}
+
+.bs-pill :deep(.ck-cta) {
+  border-radius: 9999px;
 }
 
 /* Center the card within the page main area. The layout's `<main>`
