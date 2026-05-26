@@ -129,6 +129,16 @@
             </div>
           </div>
         </TabPanel>
+
+        <TabPanel value="security" :header="$t('settingsPage.tabs.security')">
+          <div class="tab-content">
+            <!-- 2FA section. The status sub-component reads from
+                 /auth/2fa/status and renders one of three states:
+                 disabled (CTA to enable), setup in progress (continue
+                 button), enabled (recovery + disable controls). -->
+            <SettingsTwoFactor />
+          </div>
+        </TabPanel>
       </TabView>
     </div>
   </div>

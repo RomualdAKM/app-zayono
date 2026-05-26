@@ -44,7 +44,14 @@ export const useAuthStore = defineStore('auth', {
       this.loading = true
       try {
         const config = useRuntimeConfig()
-        const data = await $fetch<{ token: string; merchant: Merchant; applications: Application[] }>(
+        const data = await $fetch<
+          // Two possible response shapes from /auth/login: either the
+          // standard success (token + merchant + apps) OR a 2FA challenge
+          // payload (requires_2fa + signed token). The frontend branches
+          // on `requires_2fa` to decide where to navigate.
+          | { token: string; merchant: Merchant; applications: Application[] }
+          | { requires_2fa: true; two_factor_token: string; partial_merchant: { name: string } }
+        >(
           '/auth/login',
           {
             baseURL: config.public.apiBase,
@@ -52,20 +59,72 @@ export const useAuthStore = defineStore('auth', {
             body: { email, password },
           },
         )
+
+        if ('requires_2fa' in data && data.requires_2fa) {
+          // Stash the challenge token in sessionStorage (cleared on tab
+          // close; safer than localStorage for a 5-min single-use token).
+          // The challenge page reads it and POSTs to /auth/2fa/challenge.
+          if (typeof window !== 'undefined') {
+            sessionStorage.setItem('two_factor_token', data.two_factor_token)
+            sessionStorage.setItem('two_factor_name', data.partial_merchant?.name || '')
+          }
+          // Keep `isAuthenticated` false — the merchant doesn't have a
+          // token yet. The login page handles navigation to /auth/two-factor.
+          this.isAuthenticated = false
+          return data
+        }
+
+        // Standard path — token issued, finalize the session.
         this.token = data.token
         this.merchant = data.merchant
         this.isAuthenticated = true
         if (typeof window !== 'undefined') {
           localStorage.setItem('auth_token', data.token)
         }
-        // Hand the applications list to the application store so the
-        // post-login redirect logic can use it without an extra fetch.
         const appStore = useApplicationStore()
         appStore.setList(data.applications || [])
         return data
       } catch (error: any) {
         this.isAuthenticated = false
         throw error
+      } finally {
+        this.loading = false
+      }
+    },
+
+    /**
+     * Second step when 2FA is enabled. Called from /auth/two-factor.
+     * Exchanges (challenge token + code) for a real Sanctum token using
+     * the same response shape as a normal login.
+     */
+    async verifyTwoFactor(code: string) {
+      this.loading = true
+      try {
+        const config = useRuntimeConfig()
+        const token =
+          typeof window !== 'undefined' ? sessionStorage.getItem('two_factor_token') : null
+        if (!token) {
+          throw new Error('Missing challenge token. Please log in again.')
+        }
+        const data = await $fetch<{ token: string; merchant: Merchant; applications: Application[] }>(
+          '/auth/2fa/challenge',
+          {
+            baseURL: config.public.apiBase,
+            method: 'POST',
+            body: { two_factor_token: token, code },
+          },
+        )
+        this.token = data.token
+        this.merchant = data.merchant
+        this.isAuthenticated = true
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('auth_token', data.token)
+          sessionStorage.removeItem('two_factor_token')
+          sessionStorage.removeItem('two_factor_name')
+        }
+        const appStore = useApplicationStore()
+        appStore.setList(data.applications || [])
+        return data
       } finally {
         this.loading = false
       }

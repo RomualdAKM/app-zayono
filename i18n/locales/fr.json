@@ -431,7 +431,57 @@
       "signIn": "Se connecter",
       "genericError": "Inscription impossible. Réessayez dans un instant."
     },
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "twoFactor": {
+      "title": "Vérification en deux étapes",
+      "welcomeGeneric": "Saisissez le code à 6 chiffres généré par votre application d'authentification.",
+      "welcomeNamed": "Bon retour {name}. Saisissez le code à 6 chiffres généré par votre application d'authentification.",
+      "codeLabel": "Code d'authentification",
+      "recoveryLabel": "Code de récupération",
+      "submitButton": "Vérifier",
+      "invalidCode": "Code invalide.",
+      "useRecovery": "Utiliser un code de récupération",
+      "useTotp": "Utiliser un code à 6 chiffres",
+      "backToLogin": "Retour à la connexion"
+    }
+  },
+  "security": {
+    "twoFactor": {
+      "title": "Authentification à deux facteurs (2FA)",
+      "subtitle": "Ajoutez une couche de sécurité en exigeant un code à usage unique généré par une application (Google Authenticator, Authy, 1Password).",
+      "statusDisabled": "Désactivée",
+      "statusDisabledDesc": "Activez le 2FA pour protéger votre compte contre les accès non autorisés.",
+      "statusEnabled": "Activée",
+      "statusEnabledDesc": "{count} codes de récupération disponibles. Régénérez-les si vous en avez utilisé plusieurs.",
+      "enable": "Activer le 2FA",
+      "setupStep1": "Ouvrez votre application d'authentification (Google Authenticator, Authy, 1Password…).",
+      "setupStep2": "Scannez le QR code à droite — ou saisissez la clé manuellement.",
+      "setupStep3": "Entrez le code à 6 chiffres affiché par l'application pour confirmer.",
+      "manualEntry": "Clé secrète (saisie manuelle)",
+      "confirmCodeLabel": "Code à 6 chiffres",
+      "confirm": "Confirmer",
+      "cancel": "Annuler",
+      "invalidCode": "Code invalide.",
+      "codesShownTitle": "2FA activée — sauvegardez vos codes de récupération",
+      "codesShownDesc": "Ces codes vous permettent de récupérer l'accès à votre compte si vous perdez votre appareil. Chaque code n'est utilisable qu'une seule fois. Vous ne pourrez plus les afficher après cette page — copiez-les maintenant.",
+      "copyAll": "Copier tous les codes",
+      "codesAcknowledged": "J'ai sauvegardé mes codes",
+      "copied": "Codes copiés dans le presse-papiers",
+      "copySecret": "Copier la clé",
+      "secretCopied": "Clé copiée",
+      "copyFailed": "Impossible de copier — copiez manuellement",
+      "qrAriaLabel": "Code QR à scanner avec votre application d'authentification",
+      "regenerateCodes": "Régénérer les codes de récupération",
+      "regenerateTitle": "Régénérer les codes",
+      "regenerateDesc": "Vos codes actuels deviendront inutilisables. Confirmez avec un code à 6 chiffres de votre application.",
+      "regenerateCodeLabel": "Code à 6 chiffres",
+      "disable": "Désactiver le 2FA",
+      "disableTitle": "Désactiver le 2FA",
+      "disableDesc": "Pour des raisons de sécurité, confirmez avec votre mot de passe et un code à 6 chiffres de votre application.",
+      "disablePasswordLabel": "Mot de passe",
+      "disableCodeLabel": "Code à 6 chiffres",
+      "disableSuccess": "2FA désactivée"
+    }
   },
   "dashboard": {
     "title": "Tableau de bord",

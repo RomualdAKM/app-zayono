@@ -8,14 +8,14 @@
       <div class="form-field">
         <label for="email">{{ $t('auth.login.emailLabel') }}</label>
         <InputText id="email" v-model="email" type="email" :placeholder="$t('auth.login.emailPlaceholder')" class="w-full" :class="{ 'p-invalid': fieldErrors.email }" />
-        <small v-if="fieldErrors.email" class="field-error">{{ fieldErrors.email }}</small>
+        <small v-if="fieldErrors.email" class="field-error" role="alert">{{ fieldErrors.email }}</small>
       </div>
       <div class="form-field">
         <label for="password">{{ $t('auth.login.passwordLabel') }}</label>
         <Password id="password" v-model="password" :feedback="false" toggle-mask placeholder="••••••••" class="w-full auth-password" input-class="w-full" :class="{ 'p-invalid': fieldErrors.password }" />
-        <small v-if="fieldErrors.password" class="field-error">{{ fieldErrors.password }}</small>
+        <small v-if="fieldErrors.password" class="field-error" role="alert">{{ fieldErrors.password }}</small>
       </div>
-      <div v-if="globalError" class="form-error">{{ globalError }}</div>
+      <div v-if="globalError" class="form-error" role="alert">{{ globalError }}</div>
       <Button type="submit" :label="$t('auth.login.submitButton')" :loading="loading" class="w-full" />
     </form>
     <p class="auth-footer">
@@ -42,7 +42,15 @@ const clearErrors = () => {
 const handleLogin = async () => {
   clearErrors()
   try {
-    await login(email.value, password.value)
+    const result = await login(email.value, password.value)
+    // The auth store returns the raw response. If the server sent back a
+    // 2FA challenge instead of a token, route to the challenge screen
+    // and let the user enter their code there. The challenge token is
+    // already stashed in sessionStorage by the store.
+    if ((result as any)?.requires_2fa) {
+      navigateTo('/auth/two-factor')
+      return
+    }
     // Decide where to send the user based on how many apps they own.
     // - 0 apps  → /apps (forces "create your first app" CTA)
     // - 1 app   → auto-select happened in the auth store → /dashboard
