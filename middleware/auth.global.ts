@@ -8,8 +8,12 @@ export default defineNuxtRouteMiddleware(async (to) => {
   // Public routes — no auth required
   const publicPrefixes = ['/auth', '/checkout', '/status', '/billing/invoices/']
   if (publicPrefixes.some(prefix => to.path.startsWith(prefix))) {
-    // If already authenticated, redirect away from auth pages
-    if (auth.isAuthenticated && to.path.startsWith('/auth')) {
+    // If already authenticated, redirect away from auth pages — EXCEPT the
+    // verify-email page, which an authenticated-but-unverified merchant must
+    // be able to reach (it's where the verification gate sends them, and
+    // where the email link lands). Bouncing them to /dashboard would loop
+    // against the email-verification gate below.
+    if (auth.isAuthenticated && to.path.startsWith('/auth') && to.path !== '/auth/verify-email') {
       return navigateTo('/dashboard')
     }
     return
@@ -32,6 +36,17 @@ export default defineNuxtRouteMiddleware(async (to) => {
     if (!auth.isAuthenticated) {
       return navigateTo('/auth/login')
     }
+  }
+
+  // Email-verification gate — a merchant must verify their email before
+  // reaching ANY protected route. `email_verified` comes from /auth/me
+  // (hydrated by init() just above) and from the login/register payloads.
+  // We gate on an explicit `=== false` so a payload that somehow omits the
+  // field fails open (the API still independently gates live mode), never
+  // locking a user out on a missing flag. The verify-email page itself is
+  // under /auth (handled above), so there's no redirect loop.
+  if (auth.merchant && auth.merchant.email_verified === false) {
+    return navigateTo('/auth/verify-email')
   }
 
   // Application-scoped routes — must have an active app selected.

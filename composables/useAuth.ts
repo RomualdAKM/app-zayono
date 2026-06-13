@@ -43,8 +43,22 @@ export const useAuth = () => {
       body: payload,
     })
 
+  // Resend the email-verification link. Requires an authenticated session
+  // (a freshly-registered merchant has a token), so we send the bearer.
+  const resendVerification = () =>
+    $fetch('/auth/email/resend', {
+      baseURL: apiBase(),
+      method: 'POST',
+      headers: store.token ? { Authorization: `Bearer ${store.token}` } : undefined,
+    })
+
+  // Re-fetch the profile from /auth/me — used after a successful email
+  // verification so `email_verified` flips true and the gate opens.
+  const refreshUser = () => store.fetchProfile()
+
   const isAuthenticated = computed(() => store.isAuthenticated)
   const merchant = computed(() => store.merchant)
+  const emailVerified = computed(() => store.merchant?.email_verified === true)
   const loading = computed(() => store.loading)
 
   return {
@@ -53,8 +67,11 @@ export const useAuth = () => {
     logout,
     forgotPassword,
     resetPassword,
+    resendVerification,
+    refreshUser,
     isAuthenticated,
     merchant,
+    emailVerified,
     loading,
   }
 }

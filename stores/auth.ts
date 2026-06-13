@@ -10,6 +10,10 @@ interface Merchant {
   country: string | null
   is_active: boolean
   zayono_fee_percent: string
+  // Whether the merchant has verified their email. Present on the
+  // login / register / /auth/me payloads. The route middleware gates the
+  // dashboard on this (unverified → /auth/verify-email).
+  email_verified?: boolean
 }
 
 interface AuthState {

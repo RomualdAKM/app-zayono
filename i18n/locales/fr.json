@@ -483,7 +483,12 @@
       "goToDashboard": "Accéder au tableau de bord",
       "goToLogin": "Se connecter",
       "checkInboxTitle": "Vérifiez votre boîte mail",
-      "checkInboxMessage": "Nous vous avons envoyé un lien de vérification. Cliquez dessus pour confirmer votre adresse email."
+      "checkInboxMessage": "Nous vous avons envoyé un lien de vérification. Cliquez dessus pour confirmer votre adresse email.",
+      "resendButton": "Renvoyer le lien",
+      "resending": "Envoi en cours...",
+      "resendSent": "Lien renvoyé. Vérifiez votre boîte mail (et les indésirables).",
+      "resendError": "Impossible de renvoyer le lien. Réessayez dans un instant.",
+      "signOut": "Se déconnecter"
     }
   },
   "security": {

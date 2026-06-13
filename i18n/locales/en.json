@@ -483,7 +483,12 @@
       "goToDashboard": "Go to dashboard",
       "goToLogin": "Sign in",
       "checkInboxTitle": "Check your inbox",
-      "checkInboxMessage": "We sent you a verification link. Click it to confirm your email address."
+      "checkInboxMessage": "We sent you a verification link. Click it to confirm your email address.",
+      "resendButton": "Resend the link",
+      "resending": "Sending...",
+      "resendSent": "Link resent. Check your inbox (and spam folder).",
+      "resendError": "Couldn't resend the link. Try again in a moment.",
+      "signOut": "Sign out"
     }
   },
   "security": {
