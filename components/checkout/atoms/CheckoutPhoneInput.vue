@@ -10,7 +10,7 @@
         ref="inputEl"
         :value="displayValue"
         :placeholder="placeholder"
-        :aria-label="ariaLabel || `Numéro de téléphone${phoneFormat?.dial_code ? `, indicatif +${phoneFormat.dial_code}` : ''}`"
+        :aria-label="ariaLabel || (phoneFormat?.dial_code ? t('checkout.phoneInput.ariaLabelWithCode', { dialCode: phoneFormat.dial_code }) : t('checkout.phoneInput.ariaLabel'))"
         :aria-invalid="hasError ? 'true' : 'false'"
         :aria-describedby="hasError ? errorId : hintId"
         :aria-required="required ? 'true' : undefined"
@@ -79,6 +79,7 @@ const emit = defineEmits<{
   blur: []
 }>()
 
+const { t } = useI18n()
 const inputEl = ref<HTMLInputElement | null>(null)
 // Stable, namespaced ids derived from useId() so two instances of the
 // component on the same page never collide. The `inputId` defaults to

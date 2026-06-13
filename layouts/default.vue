@@ -7,6 +7,11 @@
         <slot />
       </main>
     </div>
+    <!-- Single global toast outlet for the whole merchant dashboard.
+         Without it, toast.add() / handleError() calls on pages that don't
+         mount their own <Toast> emit into the void (success + 4xx/5xx
+         notifications were silently lost on ~15 pages). -->
+    <Toast position="top-right" />
   </div>
 </template>
 

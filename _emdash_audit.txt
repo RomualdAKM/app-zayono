@@ -1,0 +1,225 @@
+TOTAL keys with em-dash (union FR/EN): 56
+
+[admin.dashboard.revenueChart]  (FR dashes=1, EN dashes=1)
+  FR: Revenu plateforme — 12 derniers mois
+  EN: Platform revenue — last 12 months
+
+[admin.finances.monthlyEvolution]  (FR dashes=1, EN dashes=1)
+  FR: Évolution mensuelle — {months}
+  EN: Monthly evolution — {months}
+
+[aggregators.coinbase_commerce.description]  (FR dashes=1, EN dashes=1)
+  FR: Acceptez BTC, ETH, LTC, BCH et USDC — prix affiché en XAF/XOF/NGN/GHS/USD/EUR, règlement en crypto.
+  EN: Accept BTC, ETH, LTC, BCH and USDC — price shown in XAF/XOF/NGN/GHS/USD/EUR, settlement in crypto.
+
+[aggregators.coinbase_commerce.descriptionLong]  (FR dashes=2, EN dashes=2)
+  FR: Coinbase Commerce (commerce.coinbase.com) est le hosted-checkout crypto de Coinbase pour marchands internationaux. Accepte les paiements en Bitcoin (BTC), Bitcoin Cash (BCH), Ethereum (ETH), Litecoin (LTC) et USD Coin (USDC). Le marchand fixe le prix DANS UNE DEVISE LOCALE (XAF, XOF, NGN, GHS, USD, EUR) — Coinbase calcule l'équivalent en crypto au taux du moment. Le RÈGLEMENT au marchand se fait EN CRYPTO (le wallet Coinbase du marchand reçoit BTC/ETH/etc.), ou en USDC si l'option Auto-Convert est activée côté dashboard Coinbase. La conversion fiat finale reste à la charge du marchand (Coinbase Business / off-ramp externe). Couverture mondiale (30+ pays, dont CEMAC + UEMOA + NG + GH + USA + UE). Pas de payout API (capabilities = payment seul). Pas de refund API (les remboursements crypto se font manuellement via dashboard Coinbase). Webhook signé HMAC-SHA256 sur le body brut, header `X-CC-Webhook-Signature`. Pas d'IP allowlist publiée (Coinbase utilise un CDN) — la signature HMAC est l'unique ligne de défense. Frais 1 % côté Coinbase, à répercuter au marchand.
+  EN: Coinbase Commerce (commerce.coinbase.com) is Coinbase's hosted crypto checkout for international merchants. Accepts payments in Bitcoin (BTC), Bitcoin Cash (BCH), Ethereum (ETH), Litecoin (LTC) and USD Coin (USDC). The merchant sets the price IN A LOCAL CURRENCY (XAF, XOF, NGN, GHS, USD, EUR) — Coinbase computes the crypto equivalent at the current rate. SETTLEMENT to the merchant happens IN CRYPTO (the merchant's Coinbase wallet receives BTC/ETH/etc.), or in USDC if the Auto-Convert option is enabled on the Coinbase dashboard. Final fiat conversion is the merchant's responsibility (Coinbase Business / external off-ramp). Worldwide coverage (30+ countries, including CEMAC + UEMOA + NG + GH + USA + EU). No payout API (capabilities = payment only). No refund API (crypto refunds are issued manually via the Coinbase dashboard). HMAC-SHA256-signed webhook over the raw body, header `X-CC-Webhook-Signature`. No published IP allowlist (Coinbase uses a CDN) — the HMAC signature is the sole line of defense. 1% fee on Coinbase's side, to pass on to the merchant.
+
+[aggregators.cryptomus.description]  (FR dashes=1, EN dashes=1)
+  FR: Paiements et payouts en crypto (BTC, ETH, USDT, USDC, 100+) — frais dès 0,4%.
+  EN: Crypto payments and payouts (BTC, ETH, USDT, USDC, 100+) — fees from 0.4%.
+
+[aggregators.cryptomus.descriptionLong]  (FR dashes=1, EN dashes=1)
+  FR: Cryptomus est une passerelle de paiement et de payout en crypto-monnaies, couvrant 100+ actifs (BTC, ETH, USDT TRC20/ERC20, USDC, SOL, TRX, LTC…). Flux exclusivement hosted checkout (pay.cryptomus.com/pay/{uuid}) — le client choisit sa crypto et son réseau sur la page Cryptomus. Couverture mondiale, pas de restriction pays. Refunds natifs via API. Webhook signé MD5 dans le body (pattern unique), IP source unique à autoriser (91.227.144.54).
+  EN: Cryptomus is a crypto-currency payment and payout gateway covering 100+ assets (BTC, ETH, USDT TRC20/ERC20, USDC, SOL, TRX, LTC…). Hosted-checkout flow only (pay.cryptomus.com/pay/{uuid}) — the customer picks their crypto and network on the Cryptomus page. Worldwide coverage, no country restrictions. Native refunds via API. MD5-signed webhook embedded in the body (unique pattern), single source IP to allowlist (91.227.144.54).
+
+[aggregators.flutterwave.description]  (FR dashes=1, EN dashes=1)
+  FR: Mobile Money 11 pays + bank payouts USD/EUR/GBP/NGN/GHS/INR — passerelle pan-africaine.
+  EN: Mobile Money in 11 countries + bank payouts in USD/EUR/GBP/NGN/GHS/INR — pan-African gateway.
+
+[aggregators.flutterwave.descriptionLong]  (FR dashes=2, EN dashes=2)
+  FR: Flutterwave (flutterwave.com) est l'un des plus grands agrégateurs de paiement africains, couvrant Mobile Money sur 11 pays (BF, CM, CI, GH, KE, RW, SN, TZ, UG, ZM + Malawi/Ethiopia en payout uniquement) et bank-payout 11 devises (USD, EUR, GBP, NGN, GHS, ZAR, INR, EGP, ETB, MWK, AUD). API v4 OAuth 2.0 client_credentials avec token court (10 min) — le driver gère le cache + refresh. Flow Orchestrator (POST /orchestration/direct-charges) qui bundle customer + payment_method + charge en un seul appel API. Webhook signé HMAC-SHA256 dans le header `flutterwave-signature` avec le « secret hash » merchant. Refunds natifs via POST /refunds. ⚠ Cards non implémentés côté Zayono (Flutterwave v4 exige le chiffrement RSA-OAEP des PAN côté driver — PCI-DSS exposure ; déféré).
+  EN: Flutterwave (flutterwave.com) is one of the largest African payment aggregators, covering Mobile Money in 11 countries (BF, CM, CI, GH, KE, RW, SN, TZ, UG, ZM + Malawi/Ethiopia for payout only) and bank-payout in 11 currencies (USD, EUR, GBP, NGN, GHS, ZAR, INR, EGP, ETB, MWK, AUD). v4 API uses OAuth 2.0 client_credentials with a short-lived token (10 min) — the driver handles caching + refresh. Orchestrator flow (POST /orchestration/direct-charges) bundles customer + payment_method + charge into a single API call. HMAC-SHA256-signed webhook in the `flutterwave-signature` header using the merchant's « secret hash ». Native refunds via POST /refunds. ⚠ Cards not implemented on the Zayono side (Flutterwave v4 requires RSA-OAEP encryption of the PAN inside the driver — PCI-DSS exposure; deferred).
+
+[aggregators.hub2_bf.description]  (FR dashes=1, EN dashes=1)
+  FR: Méta-agrégateur Hub2 — compte Burkina Faso.
+  EN: Hub2 meta-aggregator — Burkina Faso account.
+
+[aggregators.hub2_bj.description]  (FR dashes=1, EN dashes=1)
+  FR: Méta-agrégateur Hub2 — compte Bénin.
+  EN: Hub2 meta-aggregator — Benin account.
+
+[aggregators.hub2_ci.description]  (FR dashes=1, EN dashes=1)
+  FR: Méta-agrégateur Hub2 — compte Côte d'Ivoire.
+  EN: Hub2 meta-aggregator — Ivory Coast account.
+
+[aggregators.hub2_cm.description]  (FR dashes=1, EN dashes=1)
+  FR: Méta-agrégateur Hub2 — compte Cameroun.
+  EN: Hub2 meta-aggregator — Cameroon account.
+
+[aggregators.hub2_ml.description]  (FR dashes=1, EN dashes=1)
+  FR: Méta-agrégateur Hub2 — compte Mali.
+  EN: Hub2 meta-aggregator — Mali account.
+
+[aggregators.hub2_sn.description]  (FR dashes=1, EN dashes=1)
+  FR: Méta-agrégateur Hub2 — compte Sénégal.
+  EN: Hub2 meta-aggregator — Senegal account.
+
+[aggregators.hub2_tg.description]  (FR dashes=1, EN dashes=1)
+  FR: Méta-agrégateur Hub2 — compte Togo.
+  EN: Hub2 meta-aggregator — Togo account.
+
+[aggregators.ipay_money.descriptionLong]  (FR dashes=0, EN dashes=1)
+  FR: iPay Money est un acquéreur Mobile Money au Bénin et au Niger. Note : iPay Money supporte uniquement les paiements entrants (collecte), pas les transferts sortants.
+  EN: iPay Money is a Mobile Money acquirer in Benin and Niger. Note: iPay Money supports inbound payments (collection) only — no outbound transfers.
+
+[aggregators.magma_onepay.description]  (FR dashes=1, EN dashes=1)
+  FR: Passerelle MoMo francophone (UEMOA + CEMAC + Guinée) — 8 pays, Wave CI inclus.
+  EN: Francophone MoMo gateway (UEMOA + CEMAC + Guinea) — 8 countries, Wave CI included.
+
+[aggregators.magma_onepay.descriptionLong]  (FR dashes=1, EN dashes=1)
+  FR: Magma OnePay (magmaonepay.com) est une passerelle Mobile Money basée sur magmasend.com couvrant 8 pays d'Afrique francophone : Bénin, Côte d'Ivoire, Sénégal, Togo, Mali, Burkina Faso, Cameroun et Guinée. Channels : mobile_money (auto-détection de l'opérateur via le préfixe du payee), Wave (Côte d'Ivoire), credit_card (collecte) et bank_account (payout). Payin + payout natifs API avec balance multi-pays et historique de transferts. Auth via deux headers (`Authorization: Bearer` + `X-User-Secret`). Webhook signé HMAC-SHA256 dans le header `X-SIGNATURE` (la même private_key sert d'auth ET de secret HMAC). Pas d'IP allowlist publiée — la signature est l'unique ligne de défense. Pas de refund API documenté ; remboursements à effectuer via le dashboard Magma.
+  EN: Magma OnePay (magmaonepay.com) is a Mobile Money gateway built on magmasend.com, covering 8 francophone African countries: Benin, Ivory Coast, Senegal, Togo, Mali, Burkina Faso, Cameroon and Guinea. Channels: mobile_money (operator auto-detection via the payee prefix), Wave (Ivory Coast), credit_card (collection) and bank_account (payout). Native payin + payout APIs with multi-country balance and transfer history. Auth via two headers (`Authorization: Bearer` + `X-User-Secret`). HMAC-SHA256-signed webhook in the `X-SIGNATURE` header (the same private_key serves as both auth AND HMAC secret). No published IP allowlist — the signature is the sole line of defense. No documented refund API; refunds must be issued via the Magma dashboard.
+
+[aggregators.notchpay.description]  (FR dashes=1, EN dashes=1)
+  FR: Passerelle hosted-checkout MoMo + cartes pour 5 pays africains (CM, NG, GH, KE, ZA) — refunds natifs.
+  EN: Hosted-checkout MoMo + card gateway for 5 African countries (CM, NG, GH, KE, ZA) — native refunds.
+
+[aggregators.pal_africa.description]  (FR dashes=1, EN dashes=1)
+  FR: Méta-PSP pan-africain (UEMOA + CEMAC + Nigeria + Ghana) — un seul compte pour 8 pays.
+  EN: Pan-African meta-PSP (UEMOA + CEMAC + Nigeria + Ghana) — a single account for 8 countries.
+
+[aggregators.pal_africa.descriptionLong]  (FR dashes=1, EN dashes=1)
+  FR: PAL Africa (pals.africa) agrège les opérateurs Mobile Money de 7 pays UEMOA/CEMAC (Bénin, Côte d'Ivoire, Sénégal, Togo, Mali, Burkina Faso, Cameroun) sous une seule paire de clés API. Inclut aussi les payouts mobile vers le Ghana (MTN, Airtel) et les virements bancaires au Nigeria. Statut transactionnel via polling (`/getcollection`, `/gettransfer`) ou webhook (non signé — vérification côté nous par re-fetch du statut, voir doc d'intégration).
+  EN: PAL Africa (pals.africa) aggregates Mobile Money operators across 7 UEMOA/CEMAC countries (Benin, Ivory Coast, Senegal, Togo, Mali, Burkina Faso, Cameroon) under a single API key pair. Also includes mobile payouts to Ghana (MTN, Airtel) and bank transfers in Nigeria. Transaction status via polling (`/getcollection`, `/gettransfer`) or webhook (unsigned — verified on our side by re-fetching status; see integration doc).
+
+[aggregators.payplus.descriptionLong]  (FR dashes=3, EN dashes=3)
+  FR: PayPlus (payplus.africa) est une passerelle béninoise couvrant le Bénin (MTN, Moov), Togo (Moov), Burkina Faso (Orange, Onatel) et Côte d'Ivoire (MTN). Accepte également les cartes Visa / Mastercard / Amex sur sa page de checkout. Deux flux : hosted checkout (redirect — disponible en sandbox + live) et push-to-pay direct (straight — live uniquement). Webhooks non signés — vérification côté nous par re-fetch du statut via /confirm. Pas de payout API.
+  EN: PayPlus (payplus.africa) is a Beninese gateway covering Benin (MTN, Moov), Togo (Moov), Burkina Faso (Orange, Onatel) and Ivory Coast (MTN). Also accepts Visa / Mastercard / Amex cards on its checkout page. Two flows: hosted checkout (redirect — available in sandbox + live) and direct push-to-pay (straight — live only). Unsigned webhooks — verified on our side by re-fetching status via /confirm. No payout API.
+
+[aggregators.paystack.description]  (FR dashes=1, EN dashes=1)
+  FR: Passerelle hosted-checkout pour 5 pays africains — cartes, MoMo, EFT, USSD.
+  EN: Hosted-checkout gateway for 5 African countries — cards, MoMo, EFT, USSD.
+
+[aggregators.paytech.descriptionLong]  (FR dashes=2, EN dashes=2)
+  FR: PayTech (paytech.sn) est une passerelle sénégalaise couvrant le Sénégal (Orange, Wave, Free, Wizall, E-Money), la Côte d'Ivoire (Orange, MTN, Moov, Wave), le Mali (Orange, Moov), le Bénin (MTN, Moov) et les cartes Visa/Mastercard. Flux hosted checkout uniquement (redirect vers paytech.sn/payment/checkout/...) — pas de push-to-pay direct. Payouts MoMo natifs, refunds natifs. Webhook signé deux fois (HMAC-SHA256 + SHA256 des credentials) — le driver accepte n'importe laquelle des deux méthodes.
+  EN: PayTech (paytech.sn) is a Senegalese gateway covering Senegal (Orange, Wave, Free, Wizall, E-Money), Ivory Coast (Orange, MTN, Moov, Wave), Mali (Orange, Moov), Benin (MTN, Moov) and Visa/Mastercard cards. Hosted checkout only (redirect to paytech.sn/payment/checkout/...) — no direct push-to-pay. Native MoMo payouts, native refunds. Doubly signed webhook (HMAC-SHA256 + SHA256 of credentials) — the driver accepts either method.
+
+[aggregators.qosic.descriptionLong]  (FR dashes=1, EN dashes=1)
+  FR: QOSPAY (qosic.com) est une passerelle de paiement basée au Bénin couvrant le Bénin (MTN, Moov, Celtiis) et le Togo (Togocel/Yas, Moov Togo). Authentification par HTTP Basic. Particularité : 5 endpoints distincts pour le paiement selon l'opérateur (URL routing par operator côté driver), et un `clientid` distinct par opérateur que le marchand doit configurer (Qosic émet un clientid par souscription MoMo). Refunds natifs via API. ⚠ Webhook NON signé — Qosic ne publie pas d'algorithme de signature ; le driver vérifie systématiquement via re-fetch du statut (`gettransactionstatus`) après chaque callback pour éviter les forgeries. Sandbox sur HTTP `staging.qosic.net:9010` (production obligatoirement HTTPS via l'URL fournie par le dashboard merchant).
+  EN: QOSPAY (qosic.com) is a Benin-based payment gateway covering Benin (MTN, Moov, Celtiis) and Togo (Togocel/Yas, Moov Togo). Authentication via HTTP Basic. Quirk: 5 distinct payment endpoints depending on the operator (URL routing by operator in the driver), plus a distinct `clientid` per operator that the merchant must configure (Qosic issues one clientid per MoMo subscription). Native refunds via API. ⚠ Webhook is UNSIGNED — Qosic does not publish a signature algorithm; the driver systematically verifies via status re-fetch (`gettransactionstatus`) after each callback to prevent forgeries. Sandbox over HTTP `staging.qosic.net:9010` (production must be HTTPS via the URL provided on the merchant dashboard).
+
+[appsPage.formDescPlaceholder]  (FR dashes=1, EN dashes=1)
+  FR: Optionnel — usage interne uniquement
+  EN: Optional — internal use only
+
+[billing.empty]  (FR dashes=1, EN dashes=1)
+  FR: Aucune facture pour le moment. Continuez d'utiliser Zayono — votre première facture sera générée après 200 transactions live réussies.
+  EN: No invoices yet. Keep using Zayono — your first invoice will be generated after 200 successful live transactions.
+
+[billing.subtitle]  (FR dashes=1, EN dashes=1)
+  FR: Frais de plateforme Zayono — facturation différée. Pour chaque transaction live réussie, un petit montant en USD est accumulé. Quand le total atteint $1, une facture est générée que vous payez via votre dashboard.
+  EN: Zayono platform fees — deferred billing. For each successful live transaction, a small USD amount accrues. When the total reaches $1, an invoice is generated which you pay through your dashboard.
+
+[billingInvoiceStatus.paidTitle]  (FR dashes=1, EN dashes=1)
+  FR: Facture payée — merci !
+  EN: Invoice paid — thank you!
+
+[billingInvoiceStatus.paidTitleWithNumber]  (FR dashes=1, EN dashes=1)
+  FR: Facture {number} payée — merci !
+  EN: Invoice {number} paid — thank you!
+
+[developersPage.apiLogs.curl.copyFailed]  (FR dashes=1, EN dashes=1)
+  FR: Impossible de copier — droits clipboard refusés.
+  EN: Couldn't copy — clipboard permission denied.
+
+[gatewayDetail.newSecretDialog.infoBody]  (FR dashes=2, EN dashes=2)
+  FR: <strong>Pas pour les agrégateurs Mobile Money</strong> (FedaPay, KKiaPay, PawaPay, PayDunya, iPay Money, FeexPay) — ils ne proposent aucun champ "secret webhook personnalisé" et signent avec leur propre clé. Ce secret est conservé pour les agrégateurs qui supportent la signature custom (Stripe, PayPal…) — utile pour vos intégrations futures.
+  EN: <strong>Not for Mobile Money aggregators</strong> (FedaPay, KKiaPay, PawaPay, PayDunya, iPay Money, FeexPay) — they don't offer any "custom webhook secret" field and sign with their own key. This secret is kept for aggregators that support custom signing (Stripe, PayPal…) — useful for your future integrations.
+
+[gatewayDetail.newSecretDialog.infoBodyPayout]  (FR dashes=1, EN dashes=1)
+  FR: <strong>Non pour les agrégateurs Mobile Money actuels</strong> — ils ne proposent pas de champ "secret personnalisé" et signent avec leur propre clé. Ce secret est conservé pour les agrégateurs supportant la signature custom (Stripe, PayPal…).
+  EN: <strong>Not for current Mobile Money aggregators</strong> — they don't offer a "custom secret" field and sign with their own key. This secret is kept for aggregators supporting custom signing (Stripe, PayPal…).
+
+[gatewayDetail.webhook.desc]  (FR dashes=1, EN dashes=1)
+  FR: URL et secret à coller dans le tableau de bord <strong>{name}</strong> pour que les notifications arrivent jusqu'à Zayono — puis sont relayées à vos endpoints webhook.
+  EN: URL and secret to paste in the <strong>{name}</strong> dashboard so notifications reach Zayono — then get relayed to your webhook endpoints.
+
+[gatewayDetail.webhook.help]  (FR dashes=1, EN dashes=1)
+  FR: Le secret est masqué. Régénérez-le si vous l'avez perdu — l'ancien sera invalidé immédiatement.
+  EN: The secret is masked. Regenerate it if you lost it — the old one will be invalidated immediately.
+
+[gatewayDetail.webhook.infoBody]  (FR dashes=1, EN dashes=1)
+  FR: Il est destiné aux agrégateurs qui acceptent une <strong>clé de signature webhook personnalisée</strong> (ex : Stripe, PayPal). Pour les agrégateurs Mobile Money actuels ({name} inclus si applicable), <strong>il n'y a aucun champ "secret"</strong> à remplir côté agrégateur — ils signent leurs webhooks avec leur propre clé que vous avez déjà fournie dans les identifiants ci-dessus. Conservez-le quand même pour les intégrations futures.
+  EN: It targets aggregators that accept a <strong>custom webhook signing key</strong> (e.g. Stripe, PayPal). For the current Mobile Money aggregators ({name} included if applicable), <strong>there is no "secret" field</strong> to fill on the aggregator side — they sign their webhooks with their own key, which you already provided in the credentials above. Keep it anyway for future integrations.
+
+[gatewayDetail.webhook.infoBodyPayout]  (FR dashes=1, EN dashes=1)
+  FR: Il est destiné aux agrégateurs qui acceptent une <strong>clé de signature webhook personnalisée</strong> (Stripe, PayPal…). Pour les agrégateurs Mobile Money actuels, <strong>il n'y a aucun champ "secret"</strong> à remplir côté agrégateur — ils signent avec leur propre clé. Conservez-le pour les intégrations futures.
+  EN: It targets aggregators that accept a <strong>custom webhook signing key</strong> (Stripe, PayPal…). For the current Mobile Money aggregators, <strong>there is no "secret" field</strong> to fill on the aggregator side — they sign with their own key. Keep it for future integrations.
+
+[gatewaysPage.catalogIntro]  (FR dashes=1, EN dashes=1)
+  FR: Toutes les passerelles intégrées — choisissez celles qui correspondent à votre marché.
+  EN: All integrated gateways — pick the ones that match your market.
+
+[methodAssignDialog.fallbackInfo]  (FR dashes=1, EN dashes=1)
+  FR: Si votre passerelle principale rencontre des difficultés, la passerelle de secours prendra automatiquement le relais — vous finalisez plus de transactions sans intervention.
+  EN: If your primary gateway runs into issues, the backup gateway will take over automatically — you finalize more transactions without intervention.
+
+[methodAssignDialog.feeHelpPayout]  (FR dashes=1, EN dashes=1)
+  FR: Optionnel. Pourcentage que l'agrégateur prélève sur ce type de transfert. Indiquez ici le frais réel facturé par la passerelle pour vos rapports comptables — il sera retenu sur chaque payout via cette méthode. Laissez vide ou à 0 si l'agrégateur ne facture rien sur ce wallet.
+  EN: Optional. Percentage the aggregator charges on this transfer type. Enter the actual fee charged by the gateway for your accounting reports — it will be withheld on each payout via this method. Leave empty or at 0 if the aggregator charges nothing on this wallet.
+
+[pageTitles.statsPayments]  (FR dashes=1, EN dashes=1)
+  FR: Statistiques — Paiements
+  EN: Statistics — Payments
+
+[pageTitles.statsPayouts]  (FR dashes=1, EN dashes=1)
+  FR: Statistiques — Transferts
+  EN: Statistics — Payouts
+
+[paymentSettings.appearance.brand.subtitle]  (FR dashes=1, EN dashes=1)
+  FR: Adaptez l'aspect du checkout à votre marque. Tous les champs sont optionnels — laissez vide pour utiliser les valeurs Zayono.
+  EN: Adapt the checkout to your brand. Every field is optional — leave empty to keep Zayono defaults.
+
+[paymentSettings.appearance.templates.cotonouDesc]  (FR dashes=1, EN dashes=1)
+  FR: Desktop-first. Récapitulatif du panier à gauche, sélection à droite — style carte de paiement.
+  EN: Desktop-first. Cart summary on the left, selection on the right — payment card style.
+
+[paymentSettings.orchestration.autoLabel]  (FR dashes=1, EN dashes=1)
+  FR: Automatique — Zayono optimise
+  EN: Automatic — Zayono optimizes
+
+[paymentSettings.orchestration.customLabel]  (FR dashes=1, EN dashes=1)
+  FR: Manuel — je choisis la passerelle de chaque moyen
+  EN: Manual — I choose the gateway for each method
+
+[paymentsPage.detail.errors.unauthorized]  (FR dashes=1, EN dashes=1)
+  FR: Identifiants de la passerelle invalides — vérifiez la configuration.
+  EN: Invalid gateway credentials — please check the configuration.
+
+[paymentsPage.detail.refundDisabled.noAggregatorId]  (FR dashes=1, EN dashes=1)
+  FR: Cette transaction n'a pas de référence agrégateur — impossible de rembourser.
+  EN: This transaction has no aggregator reference — refund not possible.
+
+[platformBilling.alerts.pastDue]  (FR dashes=0, EN dashes=1)
+  FR: {count} facture(s) en retard à relancer.
+  EN: {count} invoice(s) past due — follow up needed.
+
+[platformBilling.subtitle]  (FR dashes=1, EN dashes=1)
+  FR: Revenu Zayono — frais accumulés sur les transactions live des marchands, facturés à chaque seuil de $1.00.
+  EN: Zayono revenue — fees accrued on merchants' live transactions, invoiced at every $1.00 threshold.
+
+[routingHealth.pageSubtitle]  (FR dashes=1, EN dashes=1)
+  FR: Suivi en temps réel du taux de réussite et de la latence par (opérateur × passerelle). Les données viennent des tentatives réelles — fallbacks compris.
+  EN: Real-time tracking of success rate and latency per (operator × gateway). Data comes from actual attempts — fallbacks included.
+
+[security.twoFactor.codesShownDesc]  (FR dashes=1, EN dashes=1)
+  FR: Ces codes vous permettent de récupérer l'accès à votre compte si vous perdez votre appareil. Chaque code n'est utilisable qu'une seule fois. Vous ne pourrez plus les afficher après cette page — copiez-les maintenant.
+  EN: These codes let you regain access to your account if you lose your device. Each code works only once. You won't be able to see them again after this page — copy them now.
+
+[security.twoFactor.codesShownTitle]  (FR dashes=1, EN dashes=1)
+  FR: 2FA activée — sauvegardez vos codes de récupération
+  EN: 2FA enabled — save your recovery codes
+
+[security.twoFactor.copyFailed]  (FR dashes=1, EN dashes=1)
+  FR: Impossible de copier — copiez manuellement
+  EN: Couldn't copy — copy manually
+
+[security.twoFactor.setupStep2]  (FR dashes=1, EN dashes=1)
+  FR: Scannez le QR code à droite — ou saisissez la clé manuellement.
+  EN: Scan the QR code on the right — or enter the key manually.
+
+[toasts.copyError]  (FR dashes=1, EN dashes=1)
+  FR: Impossible de copier — droits clipboard refusés.
+  EN: Couldn't copy — clipboard permission denied.

@@ -11,7 +11,7 @@
     <button
       type="button"
       class="ck-country__button"
-      :aria-label="`Pays sélectionné : ${selectedCountry?.name}`"
+      :aria-label="t('checkout.countrySelector.ariaSelectedCountry', { country: selectedCountry?.name })"
       :aria-expanded="open"
       @click="open = !open"
     >
@@ -77,6 +77,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{ 'update:modelValue': [code: string] }>()
 
+const { t } = useI18n()
 const open = ref(false)
 
 const selectedCountry = computed(() =>

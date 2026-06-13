@@ -74,15 +74,19 @@ export const useAuthStore = defineStore('auth', {
           return data
         }
 
-        // Standard path — token issued, finalize the session.
-        this.token = data.token
-        this.merchant = data.merchant
-        this.isAuthenticated = true
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('auth_token', data.token)
+        // Standard path — token issued, finalize the session. The `'token'
+        // in data` guard narrows the login-response union to the
+        // non-2FA branch for these property accesses.
+        if ('token' in data) {
+          this.token = data.token
+          this.merchant = data.merchant
+          this.isAuthenticated = true
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('auth_token', data.token)
+          }
+          const appStore = useApplicationStore()
+          appStore.setList(data.applications || [])
         }
-        const appStore = useApplicationStore()
-        appStore.setList(data.applications || [])
         return data
       } catch (error: any) {
         this.isAuthenticated = false
@@ -138,6 +142,7 @@ export const useAuthStore = defineStore('auth', {
       company_name?: string
       phone?: string
       country?: string
+      terms_accepted: boolean
     }) {
       this.loading = true
       try {

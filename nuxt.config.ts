@@ -141,6 +141,15 @@ export default defineNuxtConfig({
       { code: 'en', name: 'English', file: 'en.json' },
     ],
     langDir: 'locales',
+    // NOTE on lazy-loading: `lazy: true` (splitting the fr/en JSON out of the
+    // initial payload, ~100 KB saving) compiles cleanly. It is kept OFF as a
+    // deliberate, conservative choice: the only locale page rendered on the
+    // server is the public /status route (everything else is `ssr: false`),
+    // and lazy + SSR adds a server-side locale-load step whose hydration we
+    // can't browser-verify in this environment. The initial-payload saving is
+    // marginal next to the image optimisation already shipped (public assets
+    // cut 8.1 MB -> 1.4 MB), so both locales bundle eagerly for now. Revisit
+    // with a runtime /status hydration test if the payload saving is wanted.
     // Auto-detect on first visit. After that, the cookie wins until
     // the user explicitly switches.
     detectBrowserLanguage: {

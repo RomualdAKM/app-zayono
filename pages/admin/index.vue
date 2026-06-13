@@ -167,7 +167,9 @@ const revenueMonthly = ref<{
   total_transactions: number
 } | null>(null)
 
-onMounted(() => {
+onMounted(async () => {
+  // Chart font ready before the revenue chart's data resolves.
+  await useChartDefaults()
   adminStore.fetchDashboard()
   adminStore.fetchAggregators()
   loadRevenueMonthly()

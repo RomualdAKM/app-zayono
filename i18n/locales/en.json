@@ -168,7 +168,7 @@
         "revenueZayono": "Zayono Revenue",
         "perMonth": "{amount} / month"
       },
-      "revenueChart": "Platform revenue — last 12 months",
+      "revenueChart": "Platform revenue: last 12 months",
       "revenueChartSubtitle": "Zayono commission charged on successful transactions, aggregated monthly.",
       "totalPeriod": "Period total",
       "volumeProcessed": "Volume processed",
@@ -205,7 +205,7 @@
         "successfulTx": "Successful transactions",
         "effectiveRate": "Effective average rate"
       },
-      "monthlyEvolution": "Monthly evolution — {months}",
+      "monthlyEvolution": "Monthly evolution: {months}",
       "monthsCount": "{n} months",
       "topMerchants": "Top 10 merchants",
       "noTxPeriod": "No successful transactions for this period.",
@@ -416,7 +416,8 @@
       "submitButton": "Sign in",
       "noAccount": "Don't have an account yet?",
       "signUp": "Sign up",
-      "invalidCredentials": "Invalid credentials"
+      "invalidCredentials": "Invalid credentials",
+      "forgotPassword": "Forgot password?"
     },
     "register": {
       "title": "Create your account",
@@ -429,7 +430,12 @@
       "submitButton": "Sign up",
       "hasAccount": "Already have an account?",
       "signIn": "Sign in",
-      "genericError": "Sign-up failed. Please try again in a moment."
+      "genericError": "Sign-up failed. Please try again in a moment.",
+      "termsPrefix": "I accept the",
+      "termsLink": "Terms of Service",
+      "termsAnd": "and the",
+      "privacyLink": "Privacy Policy",
+      "termsRequired": "You must accept the terms to continue."
     },
     "logout": "Sign out",
     "twoFactor": {
@@ -443,6 +449,36 @@
       "useRecovery": "Use a recovery code",
       "useTotp": "Use a 6-digit code",
       "backToLogin": "Back to sign-in"
+    },
+    "forgotPassword": {
+      "title": "Forgot password",
+      "subtitle": "Enter your email. If an account exists, we'll send you a reset link.",
+      "emailLabel": "Email address",
+      "submit": "Send reset link",
+      "sent": "If an account exists for this email, a reset link has just been sent. Check your inbox.",
+      "backToLogin": "Back to sign in"
+    },
+    "resetPassword": {
+      "title": "New password",
+      "subtitle": "Choose a new password for your account.",
+      "passwordLabel": "New password",
+      "passwordHint": "At least 8 characters, with a letter and a number.",
+      "confirmLabel": "Confirm password",
+      "submit": "Reset password",
+      "success": "Password reset. You can now sign in.",
+      "invalidLink": "This reset link is invalid or has expired.",
+      "backToLogin": "Go to sign in"
+    },
+    "verifyEmail": {
+      "verifying": "Verifying your email...",
+      "successTitle": "Email verified",
+      "successMessage": "Your email address has been confirmed. Your account is secured.",
+      "errorTitle": "Invalid link",
+      "errorMessage": "This verification link is invalid or has expired.",
+      "goToDashboard": "Go to dashboard",
+      "goToLogin": "Sign in",
+      "checkInboxTitle": "Check your inbox",
+      "checkInboxMessage": "We sent you a verification link. Click it to confirm your email address."
     }
   },
   "security": {
@@ -455,21 +491,21 @@
       "statusEnabledDesc": "{count} recovery codes available. Regenerate them if you have used several.",
       "enable": "Enable 2FA",
       "setupStep1": "Open your authenticator app (Google Authenticator, Authy, 1Password…).",
-      "setupStep2": "Scan the QR code on the right — or enter the key manually.",
+      "setupStep2": "Scan the QR code on the right, or enter the key manually.",
       "setupStep3": "Enter the 6-digit code shown by the app to confirm.",
       "manualEntry": "Secret key (manual entry)",
       "confirmCodeLabel": "6-digit code",
       "confirm": "Confirm",
       "cancel": "Cancel",
       "invalidCode": "Invalid code.",
-      "codesShownTitle": "2FA enabled — save your recovery codes",
-      "codesShownDesc": "These codes let you regain access to your account if you lose your device. Each code works only once. You won't be able to see them again after this page — copy them now.",
+      "codesShownTitle": "2FA enabled: save your recovery codes",
+      "codesShownDesc": "These codes let you regain access to your account if you lose your device. Each code works only once. You won't be able to see them again after this page, copy them now.",
       "copyAll": "Copy all codes",
       "codesAcknowledged": "I have saved my codes",
       "copied": "Codes copied to clipboard",
       "copySecret": "Copy key",
       "secretCopied": "Key copied",
-      "copyFailed": "Couldn't copy — copy manually",
+      "copyFailed": "Couldn't copy, copy manually",
       "qrAriaLabel": "QR code to scan with your authenticator app",
       "regenerateCodes": "Regenerate recovery codes",
       "regenerateTitle": "Regenerate codes",
@@ -510,7 +546,7 @@
   },
   "billing": {
     "title": "Billing",
-    "subtitle": "Zayono platform fees — deferred billing. For each successful live transaction, a small USD amount accrues. When the total reaches $1, an invoice is generated which you pay through your dashboard.",
+    "subtitle": "Zayono platform fees: deferred billing. For each successful live transaction, a small USD amount accrues. When the total reaches $1, an invoice is generated which you pay through your dashboard.",
     "currentBalance": "Current balance",
     "accumulatedTx": "Accumulated transactions",
     "feePerTx": "Fee per transaction",
@@ -536,12 +572,12 @@
       "writtenOff": "Written off",
       "expired": "Expired"
     },
-    "empty": "No invoices yet. Keep using Zayono — your first invoice will be generated after 200 successful live transactions."
+    "empty": "No invoices yet. Keep using Zayono, your first invoice will be generated after 200 successful live transactions."
   },
   "billingInvoiceStatus": {
     "pageTitle": "Payment status",
-    "paidTitle": "Invoice paid — thank you!",
-    "paidTitleWithNumber": "Invoice {number} paid — thank you!",
+    "paidTitle": "Invoice paid, thank you!",
+    "paidTitleWithNumber": "Invoice {number} paid, thank you!",
     "paidBody": "Your payment was received successfully. Live mode stays active and the billing counter has been reset.",
     "cancelledTitle": "Payment cancelled",
     "cancelledBody": "You cancelled this invoice payment. You can try again at any time from your dashboard.",
@@ -552,7 +588,7 @@
   },
   "platformBilling": {
     "title": "Platform billing",
-    "subtitle": "Zayono revenue — fees accrued on merchants' live transactions, invoiced at every $1.00 threshold.",
+    "subtitle": "Zayono revenue: fees accrued on merchants' live transactions, invoiced at every $1.00 threshold.",
     "kpi": {
       "pendingBalance": "Pending (not invoiced)",
       "unpaidInvoices": "Unpaid invoices",
@@ -561,7 +597,7 @@
     },
     "alerts": {
       "suspended": "{count} merchant(s) currently suspended for unpaid invoices.",
-      "pastDue": "{count} invoice(s) past due — follow up needed."
+      "pastDue": "{count} invoice(s) past due, follow up needed."
     },
     "tabs": {
       "merchants": "Merchants",
@@ -736,7 +772,7 @@
       "refundDisabled": {
         "notPayment": "Only payments can be refunded.",
         "notSuccess": "Only successful payments can be refunded.",
-        "noAggregatorId": "This transaction has no aggregator reference — refund not possible.",
+        "noAggregatorId": "This transaction has no aggregator reference, refund not possible.",
         "alreadyRefunded": "This payment has already been fully refunded.",
         "ready": "Refund this payment"
       },
@@ -749,7 +785,7 @@
         "gatewayUnavailable": "The gateway is temporarily unavailable.",
         "declined": "Payment declined by the gateway.",
         "duplicate": "Transaction already processed.",
-        "unauthorized": "Invalid gateway credentials — please check the configuration."
+        "unauthorized": "Invalid gateway credentials, please check the configuration."
       },
       "loadError": "Couldn't load the transaction",
       "errorSummary": "Payment detail",
@@ -855,7 +891,7 @@
     "manage": "Manage",
     "catalogTitle": "Gateway catalog",
     "catalogSubtitle": "Choose from the available gateways",
-    "catalogIntro": "All integrated gateways — pick the ones that match your market.",
+    "catalogIntro": "All integrated gateways, pick the ones that match your market.",
     "supportedCountries": "Supported countries",
     "supportedCurrencies": "Supported currencies",
     "supportedMethods": "Methods",
@@ -907,16 +943,16 @@
       "autoBannerTitle": "Webhook auto-configured at {name}",
       "autoBannerBody": "Zayono has registered the URL below directly on your {name} account. <strong>No manual action is required.</strong> You can still copy and paste the URL further down if you prefer to configure a second endpoint yourself.",
       "autoBannerBodyPayout": "Zayono has registered the URL below directly on your {name} account. <strong>No manual action is required.</strong> You can still copy the URL further down to configure an additional endpoint yourself.",
-      "desc": "URL and secret to paste in the <strong>{name}</strong> dashboard so notifications reach Zayono — then get relayed to your webhook endpoints.",
+      "desc": "URL and secret to paste in the <strong>{name}</strong> dashboard so notifications reach Zayono, then get relayed to your webhook endpoints.",
       "descPayout": "URL and secret to paste in the <strong>{name}</strong> dashboard to receive transfer notifications.",
       "urlLabel": "Webhook URL",
       "secretLabel": "Webhook Secret",
       "copyTooltip": "Copy",
       "regenerateTooltip": "Regenerate",
       "infoTitle": "What is this secret for?",
-      "infoBody": "It targets aggregators that accept a <strong>custom webhook signing key</strong> (e.g. Stripe, PayPal). For the current Mobile Money aggregators ({name} included if applicable), <strong>there is no \"secret\" field</strong> to fill on the aggregator side — they sign their webhooks with their own key, which you already provided in the credentials above. Keep it anyway for future integrations.",
-      "infoBodyPayout": "It targets aggregators that accept a <strong>custom webhook signing key</strong> (Stripe, PayPal…). For the current Mobile Money aggregators, <strong>there is no \"secret\" field</strong> to fill on the aggregator side — they sign with their own key. Keep it for future integrations.",
-      "help": "The secret is masked. Regenerate it if you lost it — the old one will be invalidated immediately.",
+      "infoBody": "It targets aggregators that accept a <strong>custom webhook signing key</strong> (e.g. Stripe, PayPal). For the current Mobile Money aggregators ({name} included if applicable), <strong>there is no \"secret\" field</strong> to fill on the aggregator side, they sign their webhooks with their own key, which you already provided in the credentials above. Keep it anyway for future integrations.",
+      "infoBodyPayout": "It targets aggregators that accept a <strong>custom webhook signing key</strong> (Stripe, PayPal…). For the current Mobile Money aggregators, <strong>there is no \"secret\" field</strong> to fill on the aggregator side, they sign with their own key. Keep it for future integrations.",
+      "help": "The secret is masked. Regenerate it if you lost it, the old one will be invalidated immediately.",
       "helpShort": "The secret is masked. Regenerate it if you lost it."
     },
     "danger": {
@@ -957,8 +993,8 @@
       "warning": "Please keep this secret in a safe place.",
       "warningStrong": "You will not be able to view it again.",
       "infoTitle": "Should I paste it in {name}?",
-      "infoBody": "<strong>Not for Mobile Money aggregators</strong> (FedaPay, KKiaPay, PawaPay, PayDunya, iPay Money, FeexPay) — they don't offer any \"custom webhook secret\" field and sign with their own key. This secret is kept for aggregators that support custom signing (Stripe, PayPal…) — useful for your future integrations.",
-      "infoBodyPayout": "<strong>Not for current Mobile Money aggregators</strong> — they don't offer a \"custom secret\" field and sign with their own key. This secret is kept for aggregators supporting custom signing (Stripe, PayPal…).",
+      "infoBody": "<strong>Not for Mobile Money aggregators</strong> (FedaPay, KKiaPay, PawaPay, PayDunya, iPay Money, FeexPay), they don't offer any \"custom webhook secret\" field and sign with their own key. This secret is kept for aggregators that support custom signing (Stripe, PayPal…), useful for your future integrations.",
+      "infoBodyPayout": "<strong>Not for current Mobile Money aggregators</strong>, they don't offer a \"custom secret\" field and sign with their own key. This secret is kept for aggregators supporting custom signing (Stripe, PayPal…).",
       "saved": "I have saved this secret"
     },
     "connectSuccess": {
@@ -1018,12 +1054,12 @@
     "titlePayout": "Update payout gateway",
     "primaryLabel": "Primary gateway",
     "primaryPlaceholder": "Select a gateway",
-    "fallbackInfo": "If your primary gateway runs into issues, the backup gateway will take over automatically — you finalize more transactions without intervention.",
+    "fallbackInfo": "If your primary gateway runs into issues, the backup gateway will take over automatically, you finalize more transactions without intervention.",
     "fallbackLabel": "Backup gateway",
     "fallbackPlaceholder": "(optional)",
     "feeLabel": "Method fee (%)",
     "feeHelpPayment": "Optional. If filled, this percentage will be <strong>added</strong> to the amount paid by the customer for every transaction using this method. For example, on a 1,000 XOF payment with a 2% fee, the customer pays 1,020 XOF. Leave empty or at 0 if the merchant absorbs the fee.",
-    "feeHelpPayout": "Optional. Percentage the aggregator charges on this transfer type. Enter the actual fee charged by the gateway for your accounting reports — it will be withheld on each payout via this method. Leave empty or at 0 if the aggregator charges nothing on this wallet.",
+    "feeHelpPayout": "Optional. Percentage the aggregator charges on this transfer type. Enter the actual fee charged by the gateway for your accounting reports, it will be withheld on each payout via this method. Leave empty or at 0 if the aggregator charges nothing on this wallet.",
     "cancel": "Cancel",
     "save": "Save"
   },
@@ -1121,9 +1157,9 @@
     "orchestration": {
       "title": "How to pick the gateway for each payment",
       "subtitle": "When several gateways can process a payment method, who decides?",
-      "customLabel": "Manual — I choose the gateway for each method",
+      "customLabel": "Manual: I choose the gateway for each method",
       "customDesc": "You define the primary gateway and the fallback gateway for each payment method.",
-      "autoLabel": "Automatic — Zayono optimizes",
+      "autoLabel": "Automatic: Zayono optimizes",
       "autoDesc": "Zayono picks in real time the most reliable and cheapest gateway for each payment.",
       "save": "Save",
       "saveSuccess": "Routing strategy updated",
@@ -1152,12 +1188,12 @@
         "abidjanName": "Abidjan",
         "abidjanDesc": "Mobile-first. Method selection highlighted, ideal for a phone journey.",
         "cotonouName": "Cotonou",
-        "cotonouDesc": "Desktop-first. Cart summary on the left, selection on the right — payment card style."
+        "cotonouDesc": "Desktop-first. Cart summary on the left, selection on the right, payment card style."
       },
       "applied": "Applied",
       "brand": {
         "title": "Visual customisation",
-        "subtitle": "Adapt the checkout to your brand. Every field is optional — leave empty to keep Zayono defaults.",
+        "subtitle": "Adapt the checkout to your brand. Every field is optional, leave empty to keep Zayono defaults.",
         "primaryColor": "Primary color",
         "reset": "Reset",
         "hexError": "Expected format: #RRGGBB",
@@ -1210,7 +1246,7 @@
   "routingHealth": {
     "title": "Routing health",
     "subtitle": "Real-time health of configured aggregators",
-    "pageSubtitle": "Real-time tracking of success rate and latency per (operator × gateway). Data comes from actual attempts — fallbacks included.",
+    "pageSubtitle": "Real-time tracking of success rate and latency per (operator × gateway). Data comes from actual attempts, fallbacks included.",
     "pageTitle": "Routing health · Zayono",
     "filters": {
       "window": "Window",
@@ -1670,7 +1706,7 @@
         "copiedRedacted": "cURL command copied. Remember to replace ***REDACTED*** fields before running.",
         "copiedOk": "cURL command in clipboard.",
         "copyFailedSummary": "Failed",
-        "copyFailed": "Couldn't copy — clipboard permission denied."
+        "copyFailed": "Couldn't copy, clipboard permission denied."
       },
       "relativeNow": "just now",
       "relativeMin": "{n} min ago",
@@ -1770,7 +1806,7 @@
     "formNameLabel": "Name",
     "formNamePlaceholder": "Main store",
     "formDescLabel": "Description",
-    "formDescPlaceholder": "Optional — internal use only",
+    "formDescPlaceholder": "Optional, internal use only",
     "cancel": "Cancel",
     "createBtn": "Create",
     "createError": "Could not create application"
@@ -1869,7 +1905,7 @@
     "genericError": "Something went wrong",
     "saveSuccess": "Saved successfully",
     "copySuccess": "Copied to clipboard",
-    "copyError": "Couldn't copy — clipboard permission denied.",
+    "copyError": "Couldn't copy, clipboard permission denied.",
     "deleteConfirm": "Are you sure you want to delete?",
     "unsavedChanges": "You have unsaved changes",
     "loadError": "Couldn't load data",
@@ -1948,8 +1984,8 @@
     "payoutGateways": "Payout gateways",
     "payoutMethods": "Payout methods",
     "customers": "Customers",
-    "statsPayments": "Statistics — Payments",
-    "statsPayouts": "Statistics — Payouts",
+    "statsPayments": "Statistics: Payments",
+    "statsPayouts": "Statistics: Payouts",
     "statsGlobal": "Global statistics",
     "apiKeys": "API keys",
     "webhooks": "Webhooks",
@@ -1983,83 +2019,414 @@
     },
     "ipay_money": {
       "description": "Mobile Money collection in Benin and Niger (payment only).",
-      "descriptionLong": "iPay Money is a Mobile Money acquirer in Benin and Niger. Note: iPay Money supports inbound payments (collection) only — no outbound transfers."
+      "descriptionLong": "iPay Money is a Mobile Money acquirer in Benin and Niger. Note: iPay Money supports inbound payments (collection) only, no outbound transfers."
     },
     "paydunya": {
       "description": "Mobile Money aggregator for francophone Africa (UEMOA + CEMAC).",
       "descriptionLong": "PayDunya covers Benin, Ivory Coast, Senegal, Mali, Burkina Faso and Cameroon. Includes a two-step redistribution (payout) API for compliance."
     },
     "hub2_ci": {
-      "description": "Hub2 meta-aggregator — Ivory Coast account.",
+      "description": "Hub2 meta-aggregator, Ivory Coast account.",
       "descriptionLong": "Hub2 aggregates operators (Orange CI, MTN CI, Moov CI, Wave CI) behind a unified API. Hub2 account registered separately for Ivory Coast; credentials are country-specific."
     },
     "hub2_sn": {
-      "description": "Hub2 meta-aggregator — Senegal account.",
+      "description": "Hub2 meta-aggregator, Senegal account.",
       "descriptionLong": "Hub2 aggregates operators (Orange SN, Free Money, Wave SN) behind a unified API. Hub2 account registered separately for Senegal; credentials are country-specific."
     },
     "hub2_bj": {
-      "description": "Hub2 meta-aggregator — Benin account.",
+      "description": "Hub2 meta-aggregator, Benin account.",
       "descriptionLong": "Hub2 aggregates operators (MTN BJ, Moov BJ, Celtiis) behind a unified API. Hub2 account registered separately for Benin; credentials are country-specific."
     },
     "hub2_ml": {
-      "description": "Hub2 meta-aggregator — Mali account.",
+      "description": "Hub2 meta-aggregator, Mali account.",
       "descriptionLong": "Hub2 aggregates operators (Orange ML, Moov ML) behind a unified API. Hub2 account registered separately for Mali; credentials are country-specific."
     },
     "hub2_cm": {
-      "description": "Hub2 meta-aggregator — Cameroon account.",
+      "description": "Hub2 meta-aggregator, Cameroon account.",
       "descriptionLong": "Hub2 aggregates operators (MTN CM, Orange CM) behind a unified API. Hub2 account registered separately for Cameroon; credentials are country-specific. XAF currency (BEAC), distinct from XOF."
     },
     "hub2_tg": {
-      "description": "Hub2 meta-aggregator — Togo account.",
+      "description": "Hub2 meta-aggregator, Togo account.",
       "descriptionLong": "Hub2 aggregates operators (MTN TG, Moov TG, T-Money) behind a unified API. Hub2 account registered separately for Togo; credentials are country-specific."
     },
     "hub2_bf": {
-      "description": "Hub2 meta-aggregator — Burkina Faso account.",
+      "description": "Hub2 meta-aggregator, Burkina Faso account.",
       "descriptionLong": "Hub2 aggregates operators (Orange BF, Moov BF, MTN BF) behind a unified API. Hub2 account registered separately for Burkina Faso; credentials are country-specific."
     },
     "pal_africa": {
-      "description": "Pan-African meta-PSP (UEMOA + CEMAC + Nigeria + Ghana) — a single account for 8 countries.",
-      "descriptionLong": "PAL Africa (pals.africa) aggregates Mobile Money operators across 7 UEMOA/CEMAC countries (Benin, Ivory Coast, Senegal, Togo, Mali, Burkina Faso, Cameroon) under a single API key pair. Also includes mobile payouts to Ghana (MTN, Airtel) and bank transfers in Nigeria. Transaction status via polling (`/getcollection`, `/gettransfer`) or webhook (unsigned — verified on our side by re-fetching status; see integration doc)."
+      "description": "Pan-African meta-PSP (UEMOA + CEMAC + Nigeria + Ghana), a single account for 8 countries.",
+      "descriptionLong": "PAL Africa (pals.africa) aggregates Mobile Money operators across 7 UEMOA/CEMAC countries (Benin, Ivory Coast, Senegal, Togo, Mali, Burkina Faso, Cameroon) under a single API key pair. Also includes mobile payouts to Ghana (MTN, Airtel) and bank transfers in Nigeria. Transaction status via polling (`/getcollection`, `/gettransfer`) or webhook (unsigned, verified on our side by re-fetching status; see integration doc)."
     },
     "paystack": {
-      "description": "Hosted-checkout gateway for 5 African countries — cards, MoMo, EFT, USSD.",
+      "description": "Hosted-checkout gateway for 5 African countries: cards, MoMo, EFT, USSD.",
       "descriptionLong": "Paystack (paystack.com) covers Nigeria (NGN), Ghana (GHS), South Africa (ZAR), Kenya (KES) and Ivory Coast (XOF), with announced beta rollouts in Egypt (EGP) and Rwanda (RWF). Methods: Visa/Mastercard cards, Mobile Money (MTN, Telecel, AirtelTigo, M-Pesa, Wave, Orange), Nigerian USSD, South African EFT, Nigerian bank transfers. Native refunds + payouts via API. HMAC-SHA512-signed webhooks with a documented IP allowlist (52.31.139.75, 52.49.173.169, 52.214.14.220). Native idempotency via the `reference` field. A Stripe subsidiary since 2020, but with a distinct API."
     },
     "paytech": {
       "description": "Hosted-checkout MoMo + card gateway for 4 UEMOA countries (SN, CI, ML, BJ).",
-      "descriptionLong": "PayTech (paytech.sn) is a Senegalese gateway covering Senegal (Orange, Wave, Free, Wizall, E-Money), Ivory Coast (Orange, MTN, Moov, Wave), Mali (Orange, Moov), Benin (MTN, Moov) and Visa/Mastercard cards. Hosted checkout only (redirect to paytech.sn/payment/checkout/...) — no direct push-to-pay. Native MoMo payouts, native refunds. Doubly signed webhook (HMAC-SHA256 + SHA256 of credentials) — the driver accepts either method."
+      "descriptionLong": "PayTech (paytech.sn) is a Senegalese gateway covering Senegal (Orange, Wave, Free, Wizall, E-Money), Ivory Coast (Orange, MTN, Moov, Wave), Mali (Orange, Moov), Benin (MTN, Moov) and Visa/Mastercard cards. Hosted checkout only (redirect to paytech.sn/payment/checkout/...), no direct push-to-pay. Native MoMo payouts, native refunds. Doubly signed webhook (HMAC-SHA256 + SHA256 of credentials), the driver accepts either method."
     },
     "payplus": {
       "description": "Mobile Money + card gateway for 4 UEMOA countries (Benin, Togo, Burkina, Ivory Coast).",
-      "descriptionLong": "PayPlus (payplus.africa) is a Beninese gateway covering Benin (MTN, Moov), Togo (Moov), Burkina Faso (Orange, Onatel) and Ivory Coast (MTN). Also accepts Visa / Mastercard / Amex cards on its checkout page. Two flows: hosted checkout (redirect — available in sandbox + live) and direct push-to-pay (straight — live only). Unsigned webhooks — verified on our side by re-fetching status via /confirm. No payout API."
+      "descriptionLong": "PayPlus (payplus.africa) is a Beninese gateway covering Benin (MTN, Moov), Togo (Moov), Burkina Faso (Orange, Onatel) and Ivory Coast (MTN). Also accepts Visa / Mastercard / Amex cards on its checkout page. Two flows: hosted checkout (redirect, available in sandbox + live) and direct push-to-pay (straight, live only). Unsigned webhooks, verified on our side by re-fetching status via /confirm. No payout API."
     },
     "cryptomus": {
-      "description": "Crypto payments and payouts (BTC, ETH, USDT, USDC, 100+) — fees from 0.4%.",
-      "descriptionLong": "Cryptomus is a crypto-currency payment and payout gateway covering 100+ assets (BTC, ETH, USDT TRC20/ERC20, USDC, SOL, TRX, LTC…). Hosted-checkout flow only (pay.cryptomus.com/pay/{uuid}) — the customer picks their crypto and network on the Cryptomus page. Worldwide coverage, no country restrictions. Native refunds via API. MD5-signed webhook embedded in the body (unique pattern), single source IP to allowlist (91.227.144.54)."
+      "description": "Crypto payments and payouts (BTC, ETH, USDT, USDC, 100+), fees from 0.4%.",
+      "descriptionLong": "Cryptomus is a crypto-currency payment and payout gateway covering 100+ assets (BTC, ETH, USDT TRC20/ERC20, USDC, SOL, TRX, LTC…). Hosted-checkout flow only (pay.cryptomus.com/pay/{uuid}), the customer picks their crypto and network on the Cryptomus page. Worldwide coverage, no country restrictions. Native refunds via API. MD5-signed webhook embedded in the body (unique pattern), single source IP to allowlist (91.227.144.54)."
     },
     "qosic": {
       "description": "Mobile Money + card gateway for Benin and Togo (MTN, Moov, Celtiis, Togocel).",
-      "descriptionLong": "QOSPAY (qosic.com) is a Benin-based payment gateway covering Benin (MTN, Moov, Celtiis) and Togo (Togocel/Yas, Moov Togo). Authentication via HTTP Basic. Quirk: 5 distinct payment endpoints depending on the operator (URL routing by operator in the driver), plus a distinct `clientid` per operator that the merchant must configure (Qosic issues one clientid per MoMo subscription). Native refunds via API. ⚠ Webhook is UNSIGNED — Qosic does not publish a signature algorithm; the driver systematically verifies via status re-fetch (`gettransactionstatus`) after each callback to prevent forgeries. Sandbox over HTTP `staging.qosic.net:9010` (production must be HTTPS via the URL provided on the merchant dashboard)."
+      "descriptionLong": "QOSPAY (qosic.com) is a Benin-based payment gateway covering Benin (MTN, Moov, Celtiis) and Togo (Togocel/Yas, Moov Togo). Authentication via HTTP Basic. Quirk: 5 distinct payment endpoints depending on the operator (URL routing by operator in the driver), plus a distinct `clientid` per operator that the merchant must configure (Qosic issues one clientid per MoMo subscription). Native refunds via API. ⚠ Webhook is UNSIGNED, Qosic does not publish a signature algorithm; the driver systematically verifies via status re-fetch (`gettransactionstatus`) after each callback to prevent forgeries. Sandbox over HTTP `staging.qosic.net:9010` (production must be HTTPS via the URL provided on the merchant dashboard)."
     },
     "notchpay": {
-      "description": "Hosted-checkout MoMo + card gateway for 5 African countries (CM, NG, GH, KE, ZA) — native refunds.",
+      "description": "Hosted-checkout MoMo + card gateway for 5 African countries (CM, NG, GH, KE, ZA), native refunds.",
       "descriptionLong": "Notch Pay (notchpay.co) is a Cameroonian payment gateway covering Cameroon (MTN, Orange Money + cards), Nigeria, Ghana (MTN, Telecel, AirtelTigo), Kenya (M-Pesa) and South Africa (cards). Hosted-checkout by default (the customer picks the operator on the Notch Pay page); a direct push-to-pay flow is also available in 2-step mode via /payments then /payments/{ref} with channel + phone. Native refunds (full or partial) via POST /refunds. Payouts via /beneficiaries (create) then /transfers (send). Dual-header auth (`Authorization: pk_*` + `X-Grant: sk_*` for sensitive ops). HMAC-SHA256-signed webhook over the raw body, header `X-Notch-Signature`, per-webhook secret separate from the API key."
     },
     "magma_onepay": {
-      "description": "Francophone MoMo gateway (UEMOA + CEMAC + Guinea) — 8 countries, Wave CI included.",
-      "descriptionLong": "Magma OnePay (magmaonepay.com) is a Mobile Money gateway built on magmasend.com, covering 8 francophone African countries: Benin, Ivory Coast, Senegal, Togo, Mali, Burkina Faso, Cameroon and Guinea. Channels: mobile_money (operator auto-detection via the payee prefix), Wave (Ivory Coast), credit_card (collection) and bank_account (payout). Native payin + payout APIs with multi-country balance and transfer history. Auth via two headers (`Authorization: Bearer` + `X-User-Secret`). HMAC-SHA256-signed webhook in the `X-SIGNATURE` header (the same private_key serves as both auth AND HMAC secret). No published IP allowlist — the signature is the sole line of defense. No documented refund API; refunds must be issued via the Magma dashboard."
+      "description": "Francophone MoMo gateway (UEMOA + CEMAC + Guinea), 8 countries, Wave CI included.",
+      "descriptionLong": "Magma OnePay (magmaonepay.com) is a Mobile Money gateway built on magmasend.com, covering 8 francophone African countries: Benin, Ivory Coast, Senegal, Togo, Mali, Burkina Faso, Cameroon and Guinea. Channels: mobile_money (operator auto-detection via the payee prefix), Wave (Ivory Coast), credit_card (collection) and bank_account (payout). Native payin + payout APIs with multi-country balance and transfer history. Auth via two headers (`Authorization: Bearer` + `X-User-Secret`). HMAC-SHA256-signed webhook in the `X-SIGNATURE` header (the same private_key serves as both auth AND HMAC secret). No published IP allowlist, the signature is the sole line of defense. No documented refund API; refunds must be issued via the Magma dashboard."
     },
     "coinbase_commerce": {
-      "description": "Accept BTC, ETH, LTC, BCH and USDC — price shown in XAF/XOF/NGN/GHS/USD/EUR, settlement in crypto.",
-      "descriptionLong": "Coinbase Commerce (commerce.coinbase.com) is Coinbase's hosted crypto checkout for international merchants. Accepts payments in Bitcoin (BTC), Bitcoin Cash (BCH), Ethereum (ETH), Litecoin (LTC) and USD Coin (USDC). The merchant sets the price IN A LOCAL CURRENCY (XAF, XOF, NGN, GHS, USD, EUR) — Coinbase computes the crypto equivalent at the current rate. SETTLEMENT to the merchant happens IN CRYPTO (the merchant's Coinbase wallet receives BTC/ETH/etc.), or in USDC if the Auto-Convert option is enabled on the Coinbase dashboard. Final fiat conversion is the merchant's responsibility (Coinbase Business / external off-ramp). Worldwide coverage (30+ countries, including CEMAC + UEMOA + NG + GH + USA + EU). No payout API (capabilities = payment only). No refund API (crypto refunds are issued manually via the Coinbase dashboard). HMAC-SHA256-signed webhook over the raw body, header `X-CC-Webhook-Signature`. No published IP allowlist (Coinbase uses a CDN) — the HMAC signature is the sole line of defense. 1% fee on Coinbase's side, to pass on to the merchant."
+      "description": "Accept BTC, ETH, LTC, BCH and USDC, price shown in XAF/XOF/NGN/GHS/USD/EUR, settlement in crypto.",
+      "descriptionLong": "Coinbase Commerce (commerce.coinbase.com) is Coinbase's hosted crypto checkout for international merchants. Accepts payments in Bitcoin (BTC), Bitcoin Cash (BCH), Ethereum (ETH), Litecoin (LTC) and USD Coin (USDC). The merchant sets the price IN A LOCAL CURRENCY (XAF, XOF, NGN, GHS, USD, EUR), Coinbase computes the crypto equivalent at the current rate. SETTLEMENT to the merchant happens IN CRYPTO (the merchant's Coinbase wallet receives BTC/ETH/etc.), or in USDC if the Auto-Convert option is enabled on the Coinbase dashboard. Final fiat conversion is the merchant's responsibility (Coinbase Business / external off-ramp). Worldwide coverage (30+ countries, including CEMAC + UEMOA + NG + GH + USA + EU). No payout API (capabilities = payment only). No refund API (crypto refunds are issued manually via the Coinbase dashboard). HMAC-SHA256-signed webhook over the raw body, header `X-CC-Webhook-Signature`. No published IP allowlist (Coinbase uses a CDN), the HMAC signature is the sole line of defense. 1% fee on Coinbase's side, to pass on to the merchant."
     },
     "stripe": {
       "description": "Visa / Mastercard / Amex cards, Apple Pay and Google Pay internationally.",
       "descriptionLong": "Stripe is the reference aggregator for international card payments. 130+ currency coverage (USD, EUR, GBP, XOF…), with native wallets (Apple Pay, Google Pay, Link) auto-enabled. Typical use case: an African merchant who wants to charge an international customer base by card."
     },
     "flutterwave": {
-      "description": "Mobile Money in 11 countries + bank payouts in USD/EUR/GBP/NGN/GHS/INR — pan-African gateway.",
-      "descriptionLong": "Flutterwave (flutterwave.com) is one of the largest African payment aggregators, covering Mobile Money in 11 countries (BF, CM, CI, GH, KE, RW, SN, TZ, UG, ZM + Malawi/Ethiopia for payout only) and bank-payout in 11 currencies (USD, EUR, GBP, NGN, GHS, ZAR, INR, EGP, ETB, MWK, AUD). v4 API uses OAuth 2.0 client_credentials with a short-lived token (10 min) — the driver handles caching + refresh. Orchestrator flow (POST /orchestration/direct-charges) bundles customer + payment_method + charge into a single API call. HMAC-SHA256-signed webhook in the `flutterwave-signature` header using the merchant's « secret hash ». Native refunds via POST /refunds. ⚠ Cards not implemented on the Zayono side (Flutterwave v4 requires RSA-OAEP encryption of the PAN inside the driver — PCI-DSS exposure; deferred)."
+      "description": "Mobile Money in 11 countries + bank payouts in USD/EUR/GBP/NGN/GHS/INR, pan-African gateway.",
+      "descriptionLong": "Flutterwave (flutterwave.com) is one of the largest African payment aggregators, covering Mobile Money in 11 countries (BF, CM, CI, GH, KE, RW, SN, TZ, UG, ZM + Malawi/Ethiopia for payout only) and bank-payout in 11 currencies (USD, EUR, GBP, NGN, GHS, ZAR, INR, EGP, ETB, MWK, AUD). v4 API uses OAuth 2.0 client_credentials with a short-lived token (10 min), the driver handles caching + refresh. Orchestrator flow (POST /orchestration/direct-charges) bundles customer + payment_method + charge into a single API call. HMAC-SHA256-signed webhook in the `flutterwave-signature` header using the merchant's « secret hash ». Native refunds via POST /refunds. ⚠ Cards not implemented on the Zayono side (Flutterwave v4 requires RSA-OAEP encryption of the PAN inside the driver, PCI-DSS exposure; deferred)."
+    }
+  },
+  "errorPage": {
+    "notFoundTitle": "Page not found",
+    "notFoundMessage": "The page you are looking for does not exist or has moved.",
+    "genericTitle": "Something went wrong",
+    "genericMessage": "An error occurred on our side. Please try again in a moment.",
+    "cta": "Back to dashboard"
+  },
+  "checkout": {
+    "action": {
+      "abandon": "Abandon",
+      "backToSite": "Back to the site",
+      "cancelChangeMethod": "Cancel and change method",
+      "changeOperator": "Change operator",
+      "changePaymentMethod": "Change payment method",
+      "checkNow": "Check now",
+      "iDialedCode": "I dialed the code",
+      "reload": "Reload",
+      "retry": "Try again",
+      "returnToSite": "Return to the site",
+      "validate": "Validate"
+    },
+    "amount": {
+      "totalLabel": "Total"
+    },
+    "common": {
+      "theMerchant": "the merchant"
+    },
+    "countrySelector": {
+      "ariaSelectedCountry": "Selected country: {country}"
+    },
+    "cta": {
+      "loadingLabel": "Processing…",
+      "payAmount": "Pay {amount}"
+    },
+    "disclaimer": {
+      "feesMayApply": "Additional fees may apply"
+    },
+    "empty": {
+      "noMethods": "No payment method available. Please contact the merchant."
+    },
+    "error": {
+      "processingFailed": "An error occurred during processing.",
+      "sessionLoadFailed": "Unable to load the payment session."
+    },
+    "failure": {
+      "aggregatorUnreachable": {
+        "body": "The {operatorName} payment service is temporarily unavailable. Try again in a minute or choose another method.",
+        "title": "Service unavailable"
+      },
+      "amountAboveMax": {
+        "body": "This amount exceeds the per-transaction limit for {operatorName}. Try paying by bank card or contact your operator to raise the cap.",
+        "title": "Amount too high"
+      },
+      "amountBelowMin": {
+        "body": "The minimum amount for {operatorName} has not been reached. Contact {merchantName} to adjust the amount.",
+        "title": "Amount too low"
+      },
+      "cta": {
+        "cancel": "Cancel",
+        "contactMerchant": "Contact merchant",
+        "restart": "Start over",
+        "retry": "Try again",
+        "switchOperator": "Change operator"
+      },
+      "currencyUnsupported": {
+        "body": "{operatorName} does not accept payments in {currency}. Choose another payment method.",
+        "title": "Currency not supported"
+      },
+      "customerRejected": {
+        "body": "You declined the payment. If it was a mistake, start over.",
+        "title": "Payment declined on your phone"
+      },
+      "customerTimeout": {
+        "body": "You did not confirm the payment in time on your phone. Start over and keep your phone ready to confirm.",
+        "title": "Time expired"
+      },
+      "duplicateTransaction": {
+        "body": "An identical payment has just been processed. Check your history. Reference: {reference}.",
+        "title": "Payment already made"
+      },
+      "insufficientFunds": {
+        "body": "Your {operatorName} account balance is insufficient for this payment. Top up your account then try again, or try another method.",
+        "title": "Insufficient balance"
+      },
+      "invalidPhoneFormat": {
+        "body": "The number you entered is not valid for {operatorName}. Expected format: {phoneHint}. Check your number or choose another operator.",
+        "primaryCta": "Edit number",
+        "title": "Invalid phone number"
+      },
+      "merchantNoOperators": {
+        "body": "{merchantName} has not configured any payment method compatible with your currency. Contact the merchant to have one enabled.",
+        "title": "No payment method available"
+      },
+      "networkTimeout": {
+        "body": "The connection seems slow. Try again or check your Internet access.",
+        "title": "Slow connection"
+      },
+      "operatorUnavailable": {
+        "body": "The {operatorName} service is experiencing disruptions. Try again in a few minutes or choose another payment method.",
+        "title": "Operator unavailable"
+      },
+      "otpExpired": {
+        "body": "The confirmation code has expired. Start the payment over to receive a new code.",
+        "title": "Code expired"
+      },
+      "otpInvalid": {
+        "body": "The code you entered is incorrect. Check the SMS and try again.",
+        "title": "Incorrect code"
+      },
+      "otpLocked": {
+        "body": "The code was entered incorrectly several times. Start the payment over or change operator.",
+        "title": "Too many attempts"
+      },
+      "unknown": {
+        "body": "An unexpected error occurred. Reference: {reference}. Try again or contact the merchant if the problem persists.",
+        "title": "An error occurred"
+      },
+      "contactSubject": "Payment {reference}"
+    },
+    "fees": {
+      "operatorFee": "Operator fee ({percent}%)",
+      "subtotal": "Subtotal",
+      "totalToPay": "Total to pay"
+    },
+    "field": {
+      "countryLabel": "Your country",
+      "methodLabel": "Payment method",
+      "otpLabel": "Code received by SMS",
+      "otpPlaceholder": "4 to 8 digits",
+      "phoneLabel": "Phone number"
+    },
+    "footer": {
+      "poweredBy": "Powered by Zayono"
+    },
+    "footnote": {
+      "poweredBy": "Powered by"
+    },
+    "form": {
+      "backAriaLabel": "Go back to the previous step",
+      "backButton": "Back",
+      "countryLabel": "Your country",
+      "errorExpectedFormat": "Expected format: {hint}.",
+      "errorInvalidPhone": "Please enter a valid phone number.",
+      "errorInvalidPhoneForOperator": "Invalid number for this operator. Expected format: {hint}.",
+      "errorInvalidRedirectUrl": "Invalid redirect URL. Try again or contact the merchant.",
+      "errorOtpRequired": "Please enter the payment code (OTP).",
+      "errorSelectOperator": "Please select a payment operator.",
+      "eyebrow": "Payment",
+      "otpAriaLabel": "Confirmation code received by SMS",
+      "otpLabel": "Payment code",
+      "otpPlaceholder": "6-digit code",
+      "otpPlaceholderSms": "Code received by SMS",
+      "paymentMethodLabel": "Payment method",
+      "phoneLabel": "Phone number"
+    },
+    "fx": {
+      "conversionDisabled": "Conversion disabled",
+      "unavailableCurrency": "Unavailable (currency)"
+    },
+    "head": {
+      "titleDefault": "Secure payment",
+      "titleWithMerchant": "Payment at {merchant}"
+    },
+    "header": {
+      "backAriaLabel": "Go back to the previous step",
+      "fallbackMerchantName": "Payment",
+      "langAriaLabel": "Language",
+      "merchantFallback": "Payment"
+    },
+    "heading": {
+      "paymentBare": "Payment",
+      "paymentWithMerchant": "Payment at {merchant}"
+    },
+    "info": {
+      "redirectSecurePage": "You will be redirected to the secure payment page."
+    },
+    "intro": {
+      "subtitle": "Complete your payment",
+      "welcomeNamed": "Welcome, {name}!",
+      "welcome": "Welcome!"
+    },
+    "kkiapay": {
+      "button": {
+        "cancelReturn": "Cancel and return to the merchant",
+        "loading": "Loading…",
+        "openWidget": "Open the KKiaPay widget",
+        "retry": "Try again",
+        "returnMerchant": "Return to the merchant"
+      },
+      "cancelled": {
+        "title": "Payment cancelled"
+      },
+      "error": {
+        "loadPayment": "Unable to load the KKiaPay payment.",
+        "loadWidget": "Unable to load the KKiaPay widget. Please check your connection.",
+        "notFound": "This transaction cannot be found or has expired.",
+        "paymentCancelled": "The KKiaPay payment was cancelled.",
+        "title": "Error"
+      },
+      "expired": {
+        "title": "Transaction not found"
+      },
+      "failed": {
+        "fallbackText": "The payment could not be completed.",
+        "title": "Payment failed"
+      },
+      "info": {
+        "instructions": "Payment is made through the secure KKiaPay widget. Click \"Open the widget\" to begin: KKiaPay will ask you to choose your operator, your number and to confirm."
+      },
+      "loading": "Loading…",
+      "payTo": "You are paying",
+      "processing": {
+        "line1": "Confirm the payment on your phone if requested.",
+        "line2": "Do not close this page.",
+        "title": "Processing…"
+      },
+      "success": {
+        "line1": "Your payment was processed successfully.",
+        "line2": "Redirecting…",
+        "returnButton": "Return to the merchant",
+        "title": "Payment successful"
+      },
+      "trust": {
+        "securedBy": "Secure payment · Zayono via KKiaPay"
+      }
+    },
+    "lang": {
+      "switch": "Switch language"
+    },
+    "merchant": {
+      "fallbackName": "Payment"
+    },
+    "method": {
+      "fxConversionDisabled": "Conversion disabled",
+      "fxUnavailable": "Unavailable"
+    },
+    "methodCard": {
+      "loadingAriaLabel": "Loading"
+    },
+    "nav": {
+      "backAriaLabel": "Go back to the previous step"
+    },
+    "phoneInput": {
+      "ariaLabel": "Phone number",
+      "ariaLabelBase": "Phone number",
+      "ariaLabelWithCode": "Phone number, dialing code +{dialCode}"
+    },
+    "receipt": {
+      "copied": "Copied",
+      "copy": "Copy",
+      "copyReferenceAriaLabel": "Copy reference {reference}",
+      "dateLabel": "Date",
+      "download": "Download the receipt",
+      "emailPlaceholder": "your{'@'}email.com",
+      "emailSent": "Sent ✓",
+      "errorEmailRequired": "Enter an email address to receive the receipt.",
+      "errorEmailSendFailed": "Unable to send the receipt at the moment.",
+      "methodLabel": "Method",
+      "paidTo": "paid to",
+      "phoneLabel": "Number",
+      "referenceLabel": "Reference",
+      "sendByEmail": "Send by email",
+      "title": "Payment confirmed"
+    },
+    "sandbox": {
+      "ariaLabel": "Test mode",
+      "badge": "TEST MODE",
+      "notice": "no amount will be charged. Do not use a real number for this payment."
+    },
+    "selected": {
+      "eyebrow": "Method"
+    },
+    "state": {
+      "aggregatorDownMessage": "The service is temporarily unavailable. Try another payment method.",
+      "aggregatorDownTitle": "Payment service unavailable",
+      "cancelledMessage": "This payment was cancelled by {merchant}. No amount will be charged to you.",
+      "cancelledTitle": "Payment cancelled",
+      "errorMessage": "An unexpected error occurred. Please reload the page.",
+      "errorTitle": "Technical error",
+      "expiredMessage": "This payment session has expired. Return to the merchant's site to create a new one.",
+      "expiredTitle": "Session expired",
+      "failedMessage": "The payment could not be completed.",
+      "failedTitle": "Payment failed",
+      "loadingTitle": "Loading your payment…",
+      "noPaymentMethods": "No payment method available. Please contact the merchant.",
+      "otpMessage": "A confirmation code has been sent to {phone}.",
+      "otpTitle": "Enter the SMS code",
+      "processingMessage": "Enter your Mobile Money PIN code to validate the payment. This page will update automatically.",
+      "processingTitle": "Confirm on your phone",
+      "redirectingMessageTo": "To {host}",
+      "redirectingMessageWait": "Please wait.",
+      "redirectingTitle": "Redirecting to the secure page…",
+      "sessionUnknownMessage": "The payment link is invalid or has expired. Ask the merchant for a new link.",
+      "sessionUnknownTitle": "Link not found",
+      "staleMessage": "If you validated on your phone, the payment may be being processed by the operator. We keep checking.",
+      "staleTitle": "This is taking longer than expected",
+      "timeoutMessage": "If the charge appears on your account, contact {merchant} with the reference below.",
+      "timeoutTitle": "Timed out",
+      "ussdCodeToDial": "Code to dial:",
+      "ussdMessageDefault": "Dial the code you received to complete the payment.",
+      "ussdTitle": "Validate on your phone",
+      "validatingMessage": "Verifying your information.",
+      "validatingTitle": "Preparing your payment…"
+    },
+    "stateScreen": {
+      "referenceLabel": "Reference:"
+    },
+    "step1": {
+      "countryLabel": "Your country",
+      "methodLabel": "Payment method",
+      "noMethods": "No payment method is available. Please contact the merchant.",
+      "subtitle": "Complete your payment"
+    },
+    "step2": {
+      "otpLabel": "Payment code",
+      "otpPlaceholder": "Code received by SMS",
+      "phoneLabel": "Phone number",
+      "redirectInfo": "You will be redirected to the secure payment page."
+    },
+    "summary": {
+      "amountLabel": "Amount",
+      "chargeCurrencyLabel": "Charge currency",
+      "eyebrow": "Summary",
+      "operatorFeeLabel": "Operator fee ({percent} %)",
+      "totalLabel": "Total",
+      "totalToPay": "Total to pay"
+    },
+    "support": {
+      "label": "Support"
     }
   }
 }

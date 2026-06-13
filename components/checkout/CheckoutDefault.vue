@@ -11,7 +11,7 @@
         v-if="step === 2"
         type="button"
         class="ck-card__back"
-        aria-label="Revenir à l'étape précédente"
+        :aria-label="t('checkout.header.backAriaLabel')"
         @click="$emit('back')"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -27,29 +27,23 @@
           class="ck-card__brand-logo"
           @error="logoFailed = true"
         />
-        <span class="ck-card__brand-name">{{ session?.merchant?.name || 'Paiement' }}</span>
+        <span class="ck-card__brand-name">{{ session?.merchant?.name || t('checkout.header.merchantFallback') }}</span>
       </div>
 
-      <span class="ck-card__lang" aria-label="Langue">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
-          <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" stroke="currentColor" stroke-width="1.5" />
-        </svg>
-        FR
-      </span>
+      <CheckoutLangToggle />
     </div>
 
     <!-- ─── Step 1: greeting + total + country + methods ─── -->
     <template v-if="step === 1">
       <div class="ck-card__greeting">
         <h2 class="ck-card__welcome">
-          Bienvenue{{ customerFirstName ? `, ${customerFirstName}` : '' }} !
+          {{ customerFirstName ? t('checkout.intro.welcomeNamed', { name: customerFirstName }) : t('checkout.intro.welcome') }}
         </h2>
-        <p class="ck-card__subtitle">Finalisez votre paiement</p>
+        <p class="ck-card__subtitle">{{ t('checkout.step1.subtitle') }}</p>
       </div>
 
       <div class="ck-card__total">
-        <span class="ck-card__total-label">Total</span>
+        <span class="ck-card__total-label">{{ t('checkout.amount.totalLabel') }}</span>
         <span class="ck-card__total-value">
           {{ formatAmount(session?.amount ?? 0, session?.currency ?? 'XOF') }}<span class="ck-card__total-star">*</span>
         </span>
@@ -57,7 +51,7 @@
 
       <!-- Country picker (only when >1 country, otherwise hidden) -->
       <div v-if="countries.length > 1" class="ck-section">
-        <label class="ck-label">Votre pays</label>
+        <label class="ck-label">{{ t('checkout.step1.countryLabel') }}</label>
         <CheckoutCountrySelector
           :countries="countries"
           :model-value="selectedCountry"
@@ -66,11 +60,11 @@
       </div>
 
       <div v-if="!filteredOperators.length" class="ck-empty">
-        Aucun moyen de paiement n'est disponible. Contactez le marchand.
+        {{ t('checkout.step1.noMethods') }}
       </div>
 
       <div v-else class="ck-section">
-        <label class="ck-label">Moyen de paiement</label>
+        <label class="ck-label">{{ t('checkout.step1.methodLabel') }}</label>
         <div class="ck-methods">
           <CheckoutMethodCard
             v-for="op in filteredOperators"
@@ -90,7 +84,7 @@
     <!-- ─── Step 2: total (with FX) + operator + phone + CTA ─── -->
     <template v-else>
       <CheckoutAmountDisplay
-        label="Total"
+        :label="t('checkout.amount.totalLabel')"
         :amount="displayChargeAmount"
         :currency="displayChargeCurrency"
         :source-currency="session?.currency"
@@ -122,15 +116,15 @@
       <!-- Fee breakdown — only when the operator has a fee_percent > 0 -->
       <div v-if="feeAmount > 0" class="ck-fees">
         <div class="ck-fees__line">
-          <span>Sous-total</span>
+          <span>{{ t('checkout.fees.subtotal') }}</span>
           <span>{{ formatAmount(session?.amount ?? 0, session?.currency ?? 'XOF') }}</span>
         </div>
         <div class="ck-fees__line">
-          <span>Frais opérateur ({{ feePct }} %)</span>
+          <span>{{ t('checkout.fees.operatorFee', { percent: feePct }) }}</span>
           <span>+ {{ formatAmount(feeAmount, session?.currency ?? 'XOF') }}</span>
         </div>
         <div class="ck-fees__line ck-fees__line--total">
-          <span>Total à payer</span>
+          <span>{{ t('checkout.fees.totalToPay') }}</span>
           <span>{{ formatAmount(totalCharged, session?.currency ?? 'XOF') }}</span>
         </div>
       </div>
@@ -138,7 +132,7 @@
       <!-- Phone collected only for Mobile Money operators (push-to-pay). -->
       <div v-if="phoneRequired" class="ck-section">
         <label class="ck-label" for="phone">
-          Numéro de téléphone <span class="ck-required">*</span>
+          {{ t('checkout.step2.phoneLabel') }} <span class="ck-required">*</span>
         </label>
         <CheckoutPhoneInput
           id="phone"
@@ -152,11 +146,11 @@
       </div>
 
       <div v-else class="ck-info">
-        Vous serez redirigé vers la page sécurisée de paiement.
+        {{ t('checkout.step2.redirectInfo') }}
       </div>
 
       <div v-if="otpRequired" class="ck-section">
-        <label class="ck-label" for="otp">Code de paiement</label>
+        <label class="ck-label" for="otp">{{ t('checkout.step2.otpLabel') }}</label>
         <input
           id="otp"
           :value="otp"
@@ -164,7 +158,7 @@
           inputmode="numeric"
           autocomplete="one-time-code"
           maxlength="8"
-          placeholder="Code reçu par SMS"
+          :placeholder="t('checkout.step2.otpPlaceholder')"
           class="ck-otp"
           :class="{ 'ck-otp--error': formError && otpRequired && !otp }"
           @input="(e: any) => $emit('update:otp', e.target.value)"
@@ -174,14 +168,14 @@
       <p v-if="formError && !phoneError" class="ck-form-error" role="alert">{{ formError }}</p>
 
       <CheckoutCTA
-        :label="session?.merchant?.branding?.cta_label || `Payer ${formatAmount(displayChargeAmount, displayChargeCurrency)}`"
+        :label="session?.merchant?.branding?.cta_label || t('checkout.cta.payAmount', { amount: formatAmount(displayChargeAmount, displayChargeCurrency) })"
         :loading="submitting"
         :disabled="!canSubmit"
         @click="$emit('submit')"
       />
 
       <p class="ck-footnote">
-        Propulsé par <strong>Zayono</strong>
+        {{ t('checkout.footer.poweredBy') }}
       </p>
     </template>
   </div>
@@ -222,6 +216,7 @@ const emit = defineEmits<{
 }>()
 
 const { resolveOperatorBrand } = useOperatorLogo()
+const { t } = useI18n()
 const logoFailed = ref(false)
 
 const customerFirstName = computed(() => {
@@ -320,8 +315,8 @@ function countryLabel(iso: string): string {
 
 function fxUnavailableLabel(op: any): string | null {
   if (op.fx_available !== false) return null
-  if (op.fx_reason === 'conversion_disabled') return 'Conversion désactivée'
-  return 'Indisponible (devise)'
+  if (op.fx_reason === 'conversion_disabled') return t('checkout.fx.conversionDisabled')
+  return t('checkout.fx.unavailableCurrency')
 }
 
 const formatAmount = props.formatAmount

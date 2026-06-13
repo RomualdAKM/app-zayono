@@ -65,7 +65,6 @@
       @connect="confirmConnectFromModal"
     />
 
-    <Toast position="top-right" />
   </div>
 </template>
 

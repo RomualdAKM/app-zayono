@@ -79,7 +79,6 @@
       </template>
     </Dialog>
 
-    <Toast position="top-right" />
   </div>
 </template>
 

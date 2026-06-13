@@ -63,6 +63,19 @@
         <small v-if="fieldErrors.password_confirmation" class="field-error">{{ fieldErrors.password_confirmation }}</small>
       </div>
 
+      <div class="form-field terms-field">
+        <label class="terms-label">
+          <input type="checkbox" v-model="form.terms_accepted" class="terms-checkbox" />
+          <span>
+            {{ $t('auth.register.termsPrefix') }}
+            <a href="https://zayono.com/cgu" target="_blank" rel="noopener">{{ $t('auth.register.termsLink') }}</a>
+            {{ $t('auth.register.termsAnd') }}
+            <a href="https://zayono.com/confidentialite" target="_blank" rel="noopener">{{ $t('auth.register.privacyLink') }}</a>.
+          </span>
+        </label>
+        <small v-if="fieldErrors.terms_accepted" class="field-error">{{ fieldErrors.terms_accepted }}</small>
+      </div>
+
       <div v-if="globalError" class="form-error">{{ globalError }}</div>
 
       <Button type="submit" :label="$t('auth.register.submitButton')" :loading="loading" class="w-full" />
@@ -87,6 +100,7 @@ const form = reactive({
   email: '',
   password: '',
   password_confirmation: '',
+  terms_accepted: false,
 })
 
 const clearErrors = () => {
@@ -96,6 +110,12 @@ const clearErrors = () => {
 
 const handleRegister = async () => {
   clearErrors()
+  // Client-side guard so the user gets immediate feedback before the
+  // server's `accepted` validation kicks in.
+  if (!form.terms_accepted) {
+    fieldErrors.terms_accepted = t('auth.register.termsRequired')
+    return
+  }
   try {
     await register(form)
     // Fresh accounts always get one default application created server-side,
@@ -169,6 +189,36 @@ const handleRegister = async () => {
 .field-error {
   font-size: 12px;
   color: var(--ze-danger-fg);
+}
+
+.terms-field {
+  gap: 4px;
+}
+
+.terms-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ze-text-muted);
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.terms-checkbox {
+  margin-top: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.terms-label a {
+  color: var(--ze-brand);
+  text-decoration: none;
+}
+
+.terms-label a:hover {
+  text-decoration: underline;
 }
 
 .form-error {

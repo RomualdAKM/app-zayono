@@ -8,7 +8,7 @@
   <div class="cot">
     <aside class="cot__summary">
       <div class="cot__summary-head">
-        <span class="cot__summary-eyebrow">Récapitulatif</span>
+        <span class="cot__summary-eyebrow">{{ t('checkout.summary.eyebrow') }}</span>
       </div>
 
       <div class="cot__merchant">
@@ -20,31 +20,31 @@
           @error="logoFailed = true"
         />
         <div class="cot__merchant-text">
-          <span class="cot__merchant-name">{{ session?.merchant?.name || 'Paiement' }}</span>
+          <span class="cot__merchant-name">{{ session?.merchant?.name || t('checkout.merchant.fallbackName') }}</span>
           <span v-if="session?.description" class="cot__merchant-desc">{{ session.description }}</span>
         </div>
       </div>
 
       <div class="cot__lines">
         <div class="cot__line">
-          <span class="cot__line-label">Montant</span>
+          <span class="cot__line-label">{{ t('checkout.summary.amountLabel') }}</span>
           <span class="cot__line-dots" aria-hidden="true"></span>
           <span class="cot__line-value">{{ formatAmount(session?.amount ?? 0, session?.currency ?? 'XOF') }}</span>
         </div>
         <div v-if="feeAmount > 0" class="cot__line">
-          <span class="cot__line-label">Frais opérateur ({{ feePct }} %)</span>
+          <span class="cot__line-label">{{ t('checkout.summary.operatorFeeLabel', { percent: feePct }) }}</span>
           <span class="cot__line-dots" aria-hidden="true"></span>
           <span class="cot__line-value">+ {{ formatAmount(feeAmount, session?.currency ?? 'XOF') }}</span>
         </div>
         <div v-if="isForeignCurrencyOp && step === 2" class="cot__line cot__line--muted">
-          <span class="cot__line-label">Devise charge</span>
+          <span class="cot__line-label">{{ t('checkout.summary.chargeCurrencyLabel') }}</span>
           <span class="cot__line-dots" aria-hidden="true"></span>
           <span class="cot__line-value">{{ displayChargeCurrency }}</span>
         </div>
       </div>
 
       <div class="cot__total">
-        <span class="cot__total-label">Total</span>
+        <span class="cot__total-label">{{ t('checkout.summary.totalLabel') }}</span>
         <span class="cot__total-value">
           {{ formatAmount(displayChargeAmount, displayChargeCurrency) }}<span v-if="anyOperatorHasFees || feeAmount > 0" class="cot__total-star">*</span>
         </span>
@@ -55,7 +55,7 @@
       </div>
 
       <div v-if="session?.merchant?.support_email" class="cot__support">
-        <span class="cot__support-label">Assistance</span>
+        <span class="cot__support-label">{{ t('checkout.support.label') }}</span>
         <a :href="`mailto:${session.merchant.support_email}`">{{ session.merchant.support_email }}</a>
       </div>
     </aside>
@@ -66,25 +66,26 @@
           v-if="step === 2"
           type="button"
           class="cot__back"
-          aria-label="Revenir à l'étape précédente"
+          :aria-label="t('checkout.form.backAriaLabel')"
           @click="$emit('back')"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          Retour
+          {{ t('checkout.form.backButton') }}
         </button>
         <div class="cot__form-titles">
-          <span class="cot__form-eyebrow">Paiement</span>
+          <span class="cot__form-eyebrow">{{ t('checkout.form.eyebrow') }}</span>
           <h2 class="cot__form-welcome">
-            Bienvenue{{ customerFirstName ? `, ${customerFirstName}` : '' }} !
+            {{ customerFirstName ? t('checkout.intro.welcomeNamed', { name: customerFirstName }) : t('checkout.intro.welcome') }}
           </h2>
         </div>
+        <CheckoutLangToggle />
       </header>
 
       <template v-if="step === 1">
         <div v-if="countries.length > 1" class="cot__field">
-          <label class="cot__label">Votre pays</label>
+          <label class="cot__label">{{ t('checkout.field.countryLabel') }}</label>
           <CheckoutCountrySelector
             :countries="countries"
             :model-value="selectedCountry"
@@ -93,11 +94,11 @@
         </div>
 
         <div v-if="!filteredOperators.length" class="cot__empty">
-          Aucun moyen de paiement disponible. Contactez le marchand.
+          {{ t('checkout.empty.noMethods') }}
         </div>
 
         <div v-else class="cot__field">
-          <label class="cot__label">Moyen de paiement</label>
+          <label class="cot__label">{{ t('checkout.field.methodLabel') }}</label>
           <ul class="cot__methods">
             <li
               v-for="op in filteredOperators"
@@ -155,13 +156,13 @@
             <span v-else>{{ (selectedOperatorName || '?').substring(0, 2).toUpperCase() }}</span>
           </span>
           <div class="cot__selected-text">
-            <span class="cot__selected-eyebrow">Méthode</span>
+            <span class="cot__selected-eyebrow">{{ t('checkout.selected.eyebrow') }}</span>
             <strong class="cot__selected-name">{{ selectedOperatorName }}</strong>
           </div>
         </div>
 
         <div v-if="phoneRequired" class="cot__field">
-          <label class="cot__label" for="phone">Numéro de téléphone <span class="cot__required">*</span></label>
+          <label class="cot__label" for="phone">{{ t('checkout.field.phoneLabel') }} <span class="cot__required">*</span></label>
           <CheckoutPhoneInput
             id="phone"
             required
@@ -174,11 +175,11 @@
         </div>
 
         <div v-else class="cot__info">
-          Vous serez redirigé vers la page sécurisée de paiement.
+          {{ t('checkout.info.redirectSecurePage') }}
         </div>
 
         <div v-if="otpRequired" class="cot__field">
-          <label class="cot__label" for="otp">Code reçu par SMS</label>
+          <label class="cot__label" for="otp">{{ t('checkout.field.otpLabel') }}</label>
           <input
             id="otp"
             :value="otp"
@@ -186,7 +187,7 @@
             inputmode="numeric"
             autocomplete="one-time-code"
             maxlength="8"
-            placeholder="4 à 8 chiffres"
+            :placeholder="t('checkout.field.otpPlaceholder')"
             class="cot__otp"
             @input="(e: any) => $emit('update:otp', e.target.value)"
           />
@@ -195,14 +196,14 @@
         <p v-if="formError && !phoneError" class="cot__form-error" role="alert">{{ formError }}</p>
 
         <CheckoutCTA
-          :label="session?.merchant?.branding?.cta_label || `Payer ${formatAmount(displayChargeAmount, displayChargeCurrency)}`"
+          :label="session?.merchant?.branding?.cta_label || t('checkout.cta.payAmount', { amount: formatAmount(displayChargeAmount, displayChargeCurrency) })"
           :loading="submitting"
           :disabled="!canSubmit"
           @click="$emit('submit')"
         />
 
         <p class="cot__footnote">
-          Propulsé par <strong>Zayono</strong>
+          {{ t('checkout.footer.poweredBy') }}
         </p>
       </template>
     </section>
@@ -217,6 +218,7 @@ import type { CheckoutCountry } from './atoms/CheckoutCountrySelector.vue'
 import { useOperatorLogo } from '~/composables/useOperatorLogo'
 
 const { resolveOperatorBrand } = useOperatorLogo()
+const { t } = useI18n()
 
 const props = defineProps<{
   session: any
@@ -340,8 +342,8 @@ function countryLabel(iso: string): string {
 
 function fxUnavailableLabel(op: any): string | null {
   if (op.fx_available !== false) return null
-  if (op.fx_reason === 'conversion_disabled') return 'Conversion désactivée'
-  return 'Indisponible (devise)'
+  if (op.fx_reason === 'conversion_disabled') return t('checkout.fx.conversionDisabled')
+  return t('checkout.fx.unavailableCurrency')
 }
 
 function currencyShort(code: string | null | undefined): string {

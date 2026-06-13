@@ -131,6 +131,11 @@ interface ApiResponse<T> {
 export const useCheckout = () => {
   const config = useRuntimeConfig()
   const base = config.public.apiBase
+  const { locale: activeLocale } = useI18n()
+
+  // Map the i18n locale to a BCP-47 tag for Intl. Re-read on each call so
+  // amounts re-format when the customer switches language.
+  const intlLocale = () => (activeLocale.value === 'en' ? 'en-US' : 'fr-FR')
 
   const getSession = async (token: string): Promise<ApiResponse<CheckoutSession>> => {
     return await $fetch<ApiResponse<CheckoutSession>>(`${base}/checkout/${token}`, {
@@ -187,8 +192,11 @@ export const useCheckout = () => {
    * symbol is what `Intl.NumberFormat` returns — accept the locale's
    * convention (XOF → "F CFA" or "XOF" depending on browser).
    */
-  const formatAmount = (amount: number, currency: string, locale = 'fr-FR'): string => {
-    const zeroDecimal = ['XOF', 'XAF', 'RWF', 'UGX', 'GNF', 'MWK', 'KES', 'JPY']
+  const formatAmount = (amount: number, currency: string, locale = intlLocale()): string => {
+    // ISO 4217 zero-decimal currencies only. KES and MWK are 2-decimal
+    // (a KES amount of 100.50 must NOT render as "101", which differs from
+    // what the customer is actually debited).
+    const zeroDecimal = ['XOF', 'XAF', 'RWF', 'UGX', 'GNF', 'JPY']
     const useZeroDecimal = zeroDecimal.includes(currency.toUpperCase())
     try {
       return new Intl.NumberFormat(locale, {

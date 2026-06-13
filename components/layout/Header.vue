@@ -116,6 +116,14 @@ const pageTitle = computed(() => {
   const last = route.path.split('/').filter(Boolean).pop() || ''
   return last.charAt(0).toUpperCase() + last.slice(1).replace(/-/g, ' ')
 })
+
+// Drive the browser tab title from the same localized, route-aware title
+// the header bar shows. The header renders on every merchant page, so this
+// gives each page a distinct, translated <title> without touching ~30 pages
+// (they previously all inherited the default FR title from nuxt.config).
+useHead({
+  title: () => `${pageTitle.value} · Zayono`,
+})
 </script>
 
 <style scoped>

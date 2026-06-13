@@ -26,7 +26,7 @@
       <span v-if="subtitle" class="ck-method__subtitle">{{ subtitle }}</span>
     </span>
 
-    <span v-if="loading" class="ck-method__spinner" aria-label="Chargement">
+    <span v-if="loading" class="ck-method__spinner" :aria-label="t('checkout.methodCard.loadingAriaLabel')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" stroke-opacity="0.25" />
         <path
@@ -95,6 +95,7 @@ const props = defineProps<{
 
 defineEmits<{ click: [] }>()
 
+const { t } = useI18n()
 const logoFailed = ref(false)
 
 const initials = computed(() =>

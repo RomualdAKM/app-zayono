@@ -14,6 +14,7 @@
         <label for="password">{{ $t('auth.login.passwordLabel') }}</label>
         <Password id="password" v-model="password" :feedback="false" toggle-mask placeholder="••••••••" class="w-full auth-password" input-class="w-full" :class="{ 'p-invalid': fieldErrors.password }" />
         <small v-if="fieldErrors.password" class="field-error" role="alert">{{ fieldErrors.password }}</small>
+        <NuxtLink to="/auth/forgot-password" class="forgot-link">{{ $t('auth.login.forgotPassword') }}</NuxtLink>
       </div>
       <div v-if="globalError" class="form-error" role="alert">{{ globalError }}</div>
       <Button type="submit" :label="$t('auth.login.submitButton')" :loading="loading" class="w-full" />
@@ -118,6 +119,18 @@ const handleLogin = async () => {
 .field-error {
   font-size: 12px;
   color: var(--ze-danger-fg);
+}
+
+.forgot-link {
+  align-self: flex-end;
+  font-size: 12px;
+  color: var(--ze-brand);
+  text-decoration: none;
+  margin-top: 2px;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
 }
 
 .form-error {

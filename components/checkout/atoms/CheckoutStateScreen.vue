@@ -18,7 +18,7 @@
          the default slot below. R1 audit BLOCKING fix. -->
     <p v-if="message" class="ck-state__message">{{ message }}</p>
     <p v-if="reference" class="ck-state__reference">
-      Référence : <code>{{ reference }}</code>
+      {{ t('checkout.stateScreen.referenceLabel') }} <code>{{ reference }}</code>
     </p>
     <div v-if="$slots.actions" class="ck-state__actions">
       <slot name="actions" />
@@ -61,6 +61,8 @@ const props = defineProps<{
   message?: string
   reference?: string | null
 }>()
+
+const { t } = useI18n()
 
 // Icons sourced from Lucide (lucide.dev, ISC license — paths only, no
 // runtime dependency). The wrapper (`.ck-state__icon`) renders a soft

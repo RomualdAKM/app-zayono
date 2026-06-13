@@ -60,6 +60,8 @@
         <slot />
       </main>
     </div>
+    <!-- Single global toast outlet for the admin area (see default.vue). -->
+    <Toast position="top-right" />
   </div>
 </template>
 

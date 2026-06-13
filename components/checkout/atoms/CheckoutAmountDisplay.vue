@@ -40,11 +40,14 @@ const props = defineProps<{
   fxRate?: number | null
 }>()
 
+const { locale } = useI18n()
+
 const formatted = computed(() => {
-  const zeroDecimal = ['XOF', 'XAF', 'RWF', 'UGX', 'GNF', 'MWK', 'KES', 'JPY']
+  // ISO 4217 zero-decimal currencies only (KES/MWK are 2-decimal).
+  const zeroDecimal = ['XOF', 'XAF', 'RWF', 'UGX', 'GNF', 'JPY']
   const useZeroDecimal = zeroDecimal.includes(props.currency.toUpperCase())
   try {
-    return new Intl.NumberFormat('fr-FR', {
+    return new Intl.NumberFormat(locale.value === 'en' ? 'en-US' : 'fr-FR', {
       style: 'currency',
       currency: props.currency,
       // R2 audit MED N2 — enforce 2 decimals for non-zero-decimal

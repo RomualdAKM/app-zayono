@@ -131,11 +131,11 @@
 
     <!-- Footer links -->
     <div class="sidebar-footer">
-      <a href="https://docs.zayono.io" target="_blank" rel="noopener" class="footer-item">
+      <a href="https://docs.zayono.com" target="_blank" rel="noopener" class="footer-item">
         <IconsBook class="nav-svg-icon" />
         <span>{{ $t('nav.documentation') }}</span>
       </a>
-      <a href="mailto:support@zayono.io" class="footer-item">
+      <a href="mailto:support@zayono.com" class="footer-item">
         <IconsHelp class="nav-svg-icon" />
         <span>{{ $t('nav.helpCenter') }}</span>
       </a>

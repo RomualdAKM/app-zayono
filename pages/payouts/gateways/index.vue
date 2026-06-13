@@ -48,7 +48,6 @@
       </DataTable>
     </div>
 
-    <Toast position="top-right" />
   </div>
 </template>
 

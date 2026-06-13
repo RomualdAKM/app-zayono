@@ -54,8 +54,9 @@ const props = defineProps<{
 
 defineEmits<{ back: [] }>()
 
+const { t } = useI18n()
 const logoFailed = ref(false)
-const backLabel = computed(() => props.backLabel || 'Revenir à l\'étape précédente')
+const backLabel = computed(() => props.backLabel || t('checkout.header.backAriaLabel'))
 
 // Reset failed flag when logoUrl changes (merchant edited their logo).
 watch(() => props.logoUrl, () => { logoFailed.value = false })

@@ -11,7 +11,7 @@
         v-if="step === 2"
         type="button"
         class="abj__back"
-        aria-label="Revenir à l'étape précédente"
+        :aria-label="t('checkout.nav.backAriaLabel')"
         @click="$emit('back')"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -26,28 +26,28 @@
           class="abj__brand-logo"
           @error="logoFailed = true"
         />
-        <span class="abj__brand-name">{{ session?.merchant?.name || 'Paiement' }}</span>
+        <span class="abj__brand-name">{{ session?.merchant?.name || t('checkout.header.fallbackMerchantName') }}</span>
       </div>
-      <span class="abj__lang">FR</span>
+      <CheckoutLangToggle />
     </header>
 
     <template v-if="step === 1">
       <div class="abj__intro">
         <h2 class="abj__welcome">
-          Bienvenue{{ customerFirstName ? `, ${customerFirstName}` : '' }} !
+          {{ customerFirstName ? t('checkout.intro.welcomeNamed', { name: customerFirstName }) : t('checkout.intro.welcome') }}
         </h2>
-        <p class="abj__subtitle">Finalisez votre paiement</p>
+        <p class="abj__subtitle">{{ t('checkout.intro.subtitle') }}</p>
       </div>
 
       <div class="abj__total-box">
-        <span class="abj__total-label">Total à payer</span>
+        <span class="abj__total-label">{{ t('checkout.summary.totalToPay') }}</span>
         <span class="abj__total-value">
           {{ formatAmount(session?.amount ?? 0, session?.currency ?? 'XOF') }}<span class="abj__star">*</span>
         </span>
       </div>
 
       <div v-if="countries.length > 1" class="abj__field">
-        <label class="abj__label">Votre pays</label>
+        <label class="abj__label">{{ t('checkout.form.countryLabel') }}</label>
         <CheckoutCountrySelector
           :countries="countries"
           :model-value="selectedCountry"
@@ -56,11 +56,11 @@
       </div>
 
       <div v-if="!filteredOperators.length" class="abj__empty">
-        Aucun moyen de paiement disponible. Contactez le marchand.
+        {{ t('checkout.state.noPaymentMethods') }}
       </div>
 
       <div v-else class="abj__field">
-        <label class="abj__label">Moyen de paiement</label>
+        <label class="abj__label">{{ t('checkout.form.paymentMethodLabel') }}</label>
         <div class="abj__grid">
           <CheckoutMethodTile
             v-for="op in filteredOperators"
@@ -79,7 +79,7 @@
 
     <template v-else>
       <CheckoutAmountDisplay
-        label="Total"
+        :label="t('checkout.summary.totalLabel')"
         :amount="displayChargeAmount"
         :currency="displayChargeCurrency"
         :source-currency="session?.currency"
@@ -108,21 +108,21 @@
 
       <div v-if="feeAmount > 0" class="abj__fees">
         <div class="abj__fees-line">
-          <span>Sous-total</span>
+          <span>{{ t('checkout.fees.subtotal') }}</span>
           <span>{{ formatAmount(session?.amount ?? 0, session?.currency ?? 'XOF') }}</span>
         </div>
         <div class="abj__fees-line">
-          <span>Frais opérateur ({{ feePct }} %)</span>
+          <span>{{ t('checkout.fees.operatorFee', { percent: feePct }) }}</span>
           <span>+ {{ formatAmount(feeAmount, session?.currency ?? 'XOF') }}</span>
         </div>
         <div class="abj__fees-line abj__fees-line--total">
-          <span>Total à payer</span>
+          <span>{{ t('checkout.summary.totalToPay') }}</span>
           <span>{{ formatAmount(totalCharged, session?.currency ?? 'XOF') }}</span>
         </div>
       </div>
 
       <div v-if="phoneRequired" class="abj__field">
-        <label class="abj__label" for="phone">Numéro de téléphone <span class="abj__required">*</span></label>
+        <label class="abj__label" for="phone">{{ t('checkout.form.phoneLabel') }} <span class="abj__required">*</span></label>
         <CheckoutPhoneInput
           id="phone"
           required
@@ -135,11 +135,11 @@
       </div>
 
       <div v-else class="abj__info">
-        Vous serez redirigé vers la page sécurisée de paiement.
+        {{ t('checkout.info.redirectSecurePage') }}
       </div>
 
       <div v-if="otpRequired" class="abj__field">
-        <label class="abj__label" for="otp">Code de paiement</label>
+        <label class="abj__label" for="otp">{{ t('checkout.form.otpLabel') }}</label>
         <input
           id="otp"
           :value="otp"
@@ -147,7 +147,7 @@
           inputmode="numeric"
           autocomplete="one-time-code"
           maxlength="8"
-          placeholder="Code reçu par SMS"
+          :placeholder="t('checkout.form.otpPlaceholder')"
           class="abj__otp"
           @input="(e: any) => $emit('update:otp', e.target.value)"
         />
@@ -156,14 +156,14 @@
       <p v-if="formError && !phoneError" class="abj__form-error" role="alert">{{ formError }}</p>
 
       <CheckoutCTA
-        :label="session?.merchant?.branding?.cta_label || `Payer ${formatAmount(displayChargeAmount, displayChargeCurrency)}`"
+        :label="session?.merchant?.branding?.cta_label || t('checkout.cta.payAmount', { amount: formatAmount(displayChargeAmount, displayChargeCurrency) })"
         :loading="submitting"
         :disabled="!canSubmit"
         @click="$emit('submit')"
       />
 
       <p class="abj__footnote">
-        Propulsé par <strong>Zayono</strong>
+        {{ t('checkout.footer.poweredBy') }}
       </p>
     </template>
   </div>
@@ -204,6 +204,7 @@ const emit = defineEmits<{
 }>()
 
 const { resolveOperatorBrand } = useOperatorLogo()
+const { t } = useI18n()
 const logoFailed = ref(false)
 
 const customerFirstName = computed(() => {
@@ -292,8 +293,8 @@ function onMethodPick(code: string) {
 
 function fxUnavailableLabel(op: any): string | undefined {
   if (op.fx_available !== false) return undefined
-  if (op.fx_reason === 'conversion_disabled') return 'Conversion désactivée'
-  return 'Indisponible'
+  if (op.fx_reason === 'conversion_disabled') return t('checkout.method.fxConversionDisabled')
+  return t('checkout.method.fxUnavailable')
 }
 
 const formatAmount = props.formatAmount

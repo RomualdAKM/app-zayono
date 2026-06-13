@@ -83,7 +83,8 @@
           <AppIcon name="inbox" class="empty-icon" />
           <p class="empty-text">{{ $t('billing.empty') }}</p>
         </div>
-        <DataTable v-else :value="invoices" class="zayono-table">
+        <div v-else class="table-scroll">
+        <DataTable :value="invoices" class="zayono-table">
           <Column :header="$t('billing.invoiceNumber')">
             <template #body="{ data }">
               <span class="tabular">{{ data.invoice_number }}</span>
@@ -134,6 +135,7 @@
             </template>
           </Column>
         </DataTable>
+        </div>
       </div>
     </template>
   </div>
@@ -266,6 +268,14 @@ onMounted(load)
 </script>
 
 <style scoped>
+/* Let the invoice table scroll horizontally on narrow screens instead of
+   forcing the whole page to overflow (7 columns don't fit on mobile). */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .page-subtitle {
   color: var(--ze-text-muted);
   margin: 0 0 var(--ze-sp-4) 0;

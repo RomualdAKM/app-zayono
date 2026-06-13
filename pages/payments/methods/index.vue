@@ -124,7 +124,6 @@
       @submit="handleAssign"
     />
 
-    <Toast position="top-right" />
   </div>
 </template>
 

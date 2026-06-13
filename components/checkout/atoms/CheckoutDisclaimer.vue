@@ -1,7 +1,7 @@
 <template>
   <p class="ck-disclaimer">
     <span v-if="asterisk" class="ck-disclaimer__star">*</span>
-    <slot>Des frais supplémentaires peuvent s'appliquer</slot>
+    <slot>{{ t('checkout.disclaimer.feesMayApply') }}</slot>
   </p>
 </template>
 
@@ -14,6 +14,8 @@
 defineProps<{
   asterisk?: boolean
 }>()
+
+const { t } = useI18n()
 </script>
 
 <style scoped>

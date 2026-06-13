@@ -68,7 +68,7 @@
                 </div>
                 <div v-else class="empty-state">
                   <AppIcon name="inbox" class="empty-icon" />
-                  <p class="empty-text">{{ $t('statisticsPage.overview.chartComing') }}</p>
+                  <p class="empty-text">{{ $t('statisticsPage.noDataPeriod') }}</p>
                 </div>
                 <div v-if="hasStatusData" class="chart-legend">
                   <span class="legend-item"><span class="legend-dot" style="background:#22C55E"></span> {{ $t('statisticsPage.legend.success') }}</span>
@@ -141,7 +141,7 @@
               </div>
               <div v-else class="empty-state">
                 <AppIcon name="inbox" class="empty-icon" />
-                <p class="empty-text">{{ $t('statisticsPage.overview.chartComing') }}</p>
+                <p class="empty-text">{{ $t('statisticsPage.noDataPeriod') }}</p>
               </div>
             </div>
           </div>
@@ -367,7 +367,10 @@ function fetchAll() {
   fetchTransactions()
 }
 
-onMounted(() => {
+onMounted(async () => {
+  // Apply chart font before the data arrives (the charts are gated on the
+  // fetched data, so they never render before this resolves).
+  await useChartDefaults()
   fetchAll()
 })
 

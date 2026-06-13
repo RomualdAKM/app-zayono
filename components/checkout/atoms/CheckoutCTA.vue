@@ -44,7 +44,8 @@ const props = defineProps<{
 
 defineEmits<{ click: [] }>()
 
-const loadingLabel = computed(() => props.loadingLabel ?? 'Traitement…')
+const { t } = useI18n()
+const loadingLabel = computed(() => props.loadingLabel ?? t('checkout.cta.loadingLabel'))
 </script>
 
 <style scoped>

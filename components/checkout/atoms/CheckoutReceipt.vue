@@ -12,9 +12,9 @@
           />
         </svg>
       </span>
-      <h2 class="ck-receipt__title">Paiement confirmé</h2>
+      <h2 class="ck-receipt__title">{{ t('checkout.receipt.title') }}</h2>
       <p v-if="merchantName" class="ck-receipt__merchant">
-        versé à <strong>{{ merchantName }}</strong>
+        {{ t('checkout.receipt.paidTo') }} <strong>{{ merchantName }}</strong>
       </p>
       <CheckoutAmountDisplay
         :amount="amount"
@@ -25,13 +25,13 @@
 
     <dl class="ck-receipt__details">
       <div v-if="reference" class="ck-receipt__row">
-        <dt>Référence</dt>
+        <dt>{{ t('checkout.receipt.referenceLabel') }}</dt>
         <dd>
           <code>{{ reference }}</code>
           <button
             type="button"
             class="ck-receipt__copy"
-            :aria-label="`Copier la référence ${reference}`"
+            :aria-label="t('checkout.receipt.copyReferenceAriaLabel', { reference })"
             @click="copy(reference)"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -44,20 +44,20 @@
                 stroke="currentColor" stroke-width="2"
               />
             </svg>
-            <span>{{ copied ? 'Copié' : 'Copier' }}</span>
+            <span>{{ copied ? t('checkout.receipt.copied') : t('checkout.receipt.copy') }}</span>
           </button>
         </dd>
       </div>
       <div v-if="paidAt" class="ck-receipt__row">
-        <dt>Date</dt>
+        <dt>{{ t('checkout.receipt.dateLabel') }}</dt>
         <dd>{{ formattedDate }}</dd>
       </div>
       <div v-if="operatorLabel" class="ck-receipt__row">
-        <dt>Moyen</dt>
+        <dt>{{ t('checkout.receipt.methodLabel') }}</dt>
         <dd>{{ operatorLabel }}</dd>
       </div>
       <div v-if="maskedPhone" class="ck-receipt__row">
-        <dt>Numéro</dt>
+        <dt>{{ t('checkout.receipt.phoneLabel') }}</dt>
         <dd>{{ maskedPhone }}</dd>
       </div>
     </dl>
@@ -88,13 +88,14 @@ const props = defineProps<{
   maskedPhone?: string | null
 }>()
 
+const { t, locale } = useI18n()
 const copied = ref(false)
 
 const formattedDate = computed(() => {
   if (!props.paidAt) return ''
   try {
     const d = new Date(props.paidAt)
-    return new Intl.DateTimeFormat('fr-FR', {
+    return new Intl.DateTimeFormat(locale.value === 'en' ? 'en-US' : 'fr-FR', {
       dateStyle: 'long',
       timeStyle: 'short',
     }).format(d)

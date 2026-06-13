@@ -197,6 +197,8 @@ const monthlyChartOptions = {
 }
 
 onMounted(async () => {
+  // Chart font ready before the monthly chart's data resolves.
+  await useChartDefaults()
   await Promise.all([loadStats(), loadMonthly(), loadTop()])
 })
 
