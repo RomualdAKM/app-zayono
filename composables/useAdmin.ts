@@ -8,6 +8,10 @@ export const useAdmin = () => {
   const updateMerchant = (id: string, data: Record<string, any>) => apiFetch(`${prefix}/merchants/${id}`, { method: 'PUT', body: data })
   const suspendMerchant = (id: string) => apiFetch(`${prefix}/merchants/${id}/suspend`, { method: 'POST' })
   const activateMerchant = (id: string) => apiFetch(`${prefix}/merchants/${id}/activate`, { method: 'POST' })
+  // Live-mode toggle. New accounts are auto-approved for live at signup;
+  // these let an admin revoke (compliance) or restore live for a merchant.
+  const approveLiveMerchant = (id: string) => apiFetch(`${prefix}/merchants/${id}/approve-live`, { method: 'POST' })
+  const revokeLiveMerchant = (id: string) => apiFetch(`${prefix}/merchants/${id}/revoke-live`, { method: 'POST' })
   const fetchMerchantStats = (params?: Record<string, any>) => apiFetch(`${prefix}/merchants/statistics`, { params })
 
   const fetchTransactions = (params?: Record<string, any>) => apiFetch(`${prefix}/transactions`, { params })
@@ -33,6 +37,8 @@ export const useAdmin = () => {
     updateMerchant,
     suspendMerchant,
     activateMerchant,
+    approveLiveMerchant,
+    revokeLiveMerchant,
     fetchMerchantStats,
     fetchTransactions,
     fetchTransaction,

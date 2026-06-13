@@ -27,6 +27,27 @@
           :loading="roleSaving"
           @click="handlePromote"
         />
+        <!-- Live toggle is hidden for the platform merchant: disabling its
+             live mode would halt all invoice collection (guarded server-side
+             too). -->
+        <Button
+          v-if="merchant && !merchant.is_platform && merchant.live_approved_at"
+          :label="$t('admin.merchantDetail.revokeLive')"
+          icon="pi pi-lock"
+          severity="warn"
+          outlined
+          :loading="liveSaving"
+          @click="handleRevokeLive"
+        />
+        <Button
+          v-else-if="merchant && !merchant.is_platform"
+          :label="$t('admin.merchantDetail.approveLive')"
+          icon="pi pi-lock-open"
+          severity="success"
+          outlined
+          :loading="liveSaving"
+          @click="handleApproveLive"
+        />
         <Button v-if="merchant?.is_active" :label="$t('admin.merchantDetail.suspend')" icon="pi pi-ban" severity="danger" outlined @click="handleSuspend" />
         <Button v-else :label="$t('admin.merchantDetail.activate')" icon="pi pi-check" severity="success" outlined @click="handleActivate" />
       </div>
@@ -48,6 +69,13 @@
           <div class="info-row">
             <span class="info-label">{{ $t('admin.merchantDetail.fields.verified') }}</span>
             <span class="info-value">{{ merchant?.email_verified_at ? $t('admin.merchantDetail.yes') : $t('admin.merchantDetail.no') }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">{{ $t('admin.merchantDetail.fields.liveMode') }}</span>
+            <Tag
+              :value="merchant?.live_approved_at ? $t('admin.merchantDetail.liveEnabled') : $t('admin.merchantDetail.liveDisabled')"
+              :severity="merchant?.live_approved_at ? 'success' : 'warn'"
+            />
           </div>
         </div>
       </div>
@@ -121,7 +149,7 @@ definePageMeta({
 
 const route = useRoute()
 const adminStore = useAdminStore()
-const { fetchMerchant, updateMerchant, suspendMerchant, activateMerchant } = useAdmin()
+const { fetchMerchant, updateMerchant, suspendMerchant, activateMerchant, approveLiveMerchant, revokeLiveMerchant } = useAdmin()
 const { apiFetch } = useApi()
 const { t, locale } = useI18n()
 
@@ -140,6 +168,7 @@ const editFee = ref<number>(0.1)
 const editStatus = ref('active')
 const saving = ref(false)
 const roleSaving = ref(false)
+const liveSaving = ref(false)
 
 const isSuperAdmin = computed(() => {
   const roles = merchant.value?.roles ?? []
@@ -196,6 +225,30 @@ const handleActivate = async () => {
   try { await activateMerchant(route.params.id as string) } catch {}
   if (merchant.value) merchant.value.is_active = true
   editStatus.value = 'active'
+}
+
+const handleApproveLive = async () => {
+  liveSaving.value = true
+  try {
+    const res = await approveLiveMerchant(route.params.id as string) as any
+    if (merchant.value) merchant.value.live_approved_at = res?.data?.live_approved_at ?? new Date().toISOString()
+  } catch {
+    // Error surfaced by the API layer
+  } finally {
+    liveSaving.value = false
+  }
+}
+
+const handleRevokeLive = async () => {
+  liveSaving.value = true
+  try {
+    await revokeLiveMerchant(route.params.id as string)
+    if (merchant.value) merchant.value.live_approved_at = null
+  } catch {
+    // Error surfaced by the API layer
+  } finally {
+    liveSaving.value = false
+  }
 }
 
 const handlePromote = async () => {

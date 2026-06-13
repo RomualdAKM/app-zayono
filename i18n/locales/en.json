@@ -326,7 +326,8 @@
         "phone": "Phone",
         "country": "Country",
         "status": "Status",
-        "verified": "Verified"
+        "verified": "Verified",
+        "liveMode": "Live mode"
       },
       "active": "Active",
       "suspended": "Suspended",
@@ -351,7 +352,11 @@
         "activeCommission": "Active commission",
         "applications": "Applications"
       },
-      "demoteError": "Couldn't remove super admin role."
+      "demoteError": "Couldn't remove super admin role.",
+      "liveEnabled": "Enabled",
+      "liveDisabled": "Disabled",
+      "approveLive": "Enable live",
+      "revokeLive": "Disable live"
     },
     "audit": {
       "title": "Audit Logs",
