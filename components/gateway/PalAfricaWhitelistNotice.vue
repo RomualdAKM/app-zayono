@@ -1,5 +1,13 @@
 <template>
   <div class="pal-notice">
+    <div class="pal-notice-liveonly">
+      <span class="pal-notice-icon"><AppIcon name="exclamation-triangle" /></span>
+      <div>
+        <h4 class="pal-notice-title">{{ t('palAfricaNotice.liveOnlyTitle') }}</h4>
+        <p class="pal-notice-sub">{{ t('palAfricaNotice.liveOnlyBody') }}</p>
+      </div>
+    </div>
+
     <div class="pal-notice-head">
       <span class="pal-notice-icon">
         <AppIcon name="exclamation-triangle" />
@@ -109,6 +117,19 @@ const copy = async (text: string) => {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.pal-notice-liveonly {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+.pal-notice-liveonly .pal-notice-icon {
+  background: #dc2626;
 }
 
 .pal-notice-head {

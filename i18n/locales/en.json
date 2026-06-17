@@ -1980,7 +1980,9 @@
     "copyTemplate": "Copy template",
     "envProduction": "Production",
     "envSandbox": "Sandbox / Dev",
-    "emailTemplate": "Hello,\n\nI just created my PAL Africa account and I am using Zayono as my\npayment orchestrator to integrate your APIs.\n\nPlease whitelist the following IP on my account for the\n{envLabel} environment:\n\n  {outboundIp}\n\nBest regards."
+    "emailTemplate": "Hello,\n\nI just created my PAL Africa account and I am using Zayono as my\npayment orchestrator to integrate your APIs.\n\nPlease whitelist the following IP on my account for the\n{envLabel} environment:\n\n  {outboundIp}\n\nBest regards.",
+    "liveOnlyTitle": "PAL Africa is live-only",
+    "liveOnlyBody": "PAL has no sandbox environment. All PAL transactions are real and move real money, even in test mode. Configure PAL in live and test with small amounts."
   },
   "pageTitles": {
     "dashboard": "Dashboard",
