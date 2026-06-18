@@ -896,8 +896,11 @@ function runFailureCta(action: string) {
       {{ session?.merchant?.name ? t('checkout.heading.paymentWithMerchant', { merchant: session.merchant.name }) : t('checkout.heading.paymentBare') }}
     </h1>
 
-    <!-- Customer-facing language selector (FR / EN). -->
-    <div class="checkout-lang-row">
+    <!-- Customer-facing language selector (FR / EN). On the FORM state each
+         template renders its own toggle inside the card header (Moneroo
+         convention), so this page-level one is shown ONLY on the non-form
+         state screens (loading / success / failed / …) to avoid a duplicate. -->
+    <div v-if="pageState !== 'form'" class="checkout-lang-row">
       <CheckoutLangToggle />
     </div>
 
