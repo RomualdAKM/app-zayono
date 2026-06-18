@@ -766,6 +766,31 @@ function pickOnPrimary(hex: string): string {
   // L <= 0.30. A typical brand green (L around 0.28) therefore gets white.
   return l > 0.30 ? '#111827' : '#ffffff'
 }
+
+// Derive the soft (tinted) + hover (darkened) brand variants from the
+// merchant's primary so a themed checkout doesn't fall back to the default
+// BLUE --ck-primary-soft / --ck-primary-hover (which would clash, e.g. a
+// green brand showing green text on a pale-blue selected tile).
+function hexToRgb(hex: string): number[] {
+  const clean = hex.replace('#', '')
+  const full = clean.length === 3 ? clean.split('').map(c => c + c).join('') : clean
+  return [0, 2, 4].map(i => parseInt(full.slice(i, i + 2), 16))
+}
+function rgbToHex(r: number, g: number, b: number): string {
+  const h = (v: number) => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0')
+  return '#' + h(r) + h(g) + h(b)
+}
+// 12% of the brand over white: a pale brand tint for soft backgrounds.
+function softTint(hex: string): string {
+  const [r, g, b] = hexToRgb(hex)
+  const mix = (c: number) => c * 0.12 + 255 * 0.88
+  return rgbToHex(mix(r), mix(g), mix(b))
+}
+// ~18% darker for hover / pressed states.
+function darkenShade(hex: string): string {
+  const [r, g, b] = hexToRgb(hex)
+  return rgbToHex(r * 0.82, g * 0.82, b * 0.82)
+}
 // Whitelist mapping for the radius preset. The backend stores an enum
 // key (sharp|soft|rounded|pill) and we materialise it into pixel
 // values here — keeping the mapping client-side means a future tweak
@@ -804,6 +829,8 @@ const brandingStyle = computed(() => {
   if (primary && /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(primary)) {
     style['--ck-primary'] = primary
     style['--ck-text-on-primary'] = pickOnPrimary(primary)
+    style['--ck-primary-soft'] = softTint(primary)
+    style['--ck-primary-hover'] = darkenShade(primary)
     style['--ck-focus-ring'] = primary + '66'
     // R1 audit H2: when the merchant picks the OUTLINE button style, the
     // primary color becomes TEXT on a white background — the opposite

@@ -164,7 +164,7 @@
 
       <p class="abj__footnote">
         {{ t('checkout.footer.poweredBy') }}
-        <a href="https://zayono.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Zayono</a>
+        <a href="https://zayono.com" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Zayono</a>
       </p>
     </template>
   </div>
