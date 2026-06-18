@@ -189,6 +189,15 @@ const iconComponent = computed(() => {
 
 <style scoped>
 .ck-state {
+  /* Same white card as the form steps: white surface, 1px border, small
+     radius, at the shared card width (matches the Default .ck-card and the
+     page-level language row that sits directly above these state screens). */
+  width: 100%;
+  max-width: var(--ck-card-max-width);
+  margin: 0 auto;
+  background: var(--ck-surface);
+  border: 1px solid var(--ck-border);
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
   align-items: center;
