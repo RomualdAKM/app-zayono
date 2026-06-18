@@ -70,9 +70,8 @@ const loadingLabel = computed(() => props.loadingLabel ?? t('checkout.cta.loadin
               transform var(--ck-duration-quick) var(--ck-easing-fast);
 }
 
-.ck-cta:hover:not(:disabled) {
-  background: var(--ck-primary-hover);
-}
+/* Intentionally no :hover colour change: the CTA keeps its brand fill so the
+   button colour stays constant on hover. Press feedback is the :active scale. */
 
 .ck-cta:active:not(:disabled) {
   transform: scale(0.99);

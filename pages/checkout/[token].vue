@@ -757,9 +757,14 @@ function relativeLuminance(hex: string): number {
 }
 function pickOnPrimary(hex: string): string {
   const l = relativeLuminance(hex)
-  // White (#fff, L=1) needs (1 + 0.05) / (L + 0.05) >= 4.5 → L <= 0.179.
-  // Dark (#111, L≈0.011) needs (L + 0.05) / 0.061 >= 4.5 → L >= 0.225.
-  return l > 0.179 ? '#111827' : '#ffffff'
+  // The filled CTA label is bold and sits on a saturated brand fill, and the
+  // dashboard colour picker already validates the brand colour against WHITE
+  // text, so white is the intended on-primary colour (Stripe/Moneroo style).
+  // We only flip to dark for genuinely light primaries (pale yellow, lime)
+  // where white would be unreadable, using the 3:1 large-text / UI threshold:
+  // white (#fff, L=1) reaches 3:1 when (1 + 0.05) / (L + 0.05) >= 3, i.e.
+  // L <= 0.30. A typical brand green (L around 0.28) therefore gets white.
+  return l > 0.30 ? '#111827' : '#ffffff'
 }
 // Whitelist mapping for the radius preset. The backend stores an enum
 // key (sharp|soft|rounded|pill) and we materialise it into pixel
