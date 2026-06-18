@@ -303,8 +303,8 @@ type ButtonStyleKey = '' | 'filled' | 'outline' | 'pill'
 
 const form = reactive({
   routing_strategy: 'custom',
-  currency_conversion: false,
-  correction_rate: 2,
+  currency_conversion: true,
+  correction_rate: 0,
   checkout_template: 'default' as TplKey,
   // Empty string = use Zayono's default. The backend persists null in that
   // case so /checkout/show falls back to each template's baseline color.
@@ -452,8 +452,8 @@ const loadSettings = async () => {
     if (res.data) {
       const s = res.data.settings || {}
       form.routing_strategy = s.routing_strategy || 'custom'
-      form.currency_conversion = s.currency_conversion || false
-      form.correction_rate = s.correction_rate ?? 2
+      form.currency_conversion = s.currency_conversion ?? true
+      form.correction_rate = s.correction_rate ?? 0
       form.checkout_template = (s.checkout_template as TplKey) || 'default'
       form.checkout_primary_color = s.checkout_primary_color || ''
       form.checkout_radius = (s.checkout_radius as RadiusKey) || ''
