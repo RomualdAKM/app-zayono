@@ -116,7 +116,7 @@
             </div>
             <div class="info-row" v-if="transaction.failure_reason">
               <span class="info-label">{{ $t('paymentsPage.detail.failureReason') }}</span>
-              <span class="info-value error-text">{{ transaction.failure_reason }}</span>
+              <span class="info-value error-text">{{ humanizeError(transaction.failure_reason, transaction.failure_code) }}</span>
             </div>
           </div>
         </div>
@@ -447,6 +447,8 @@ const ERROR_MAP: { match: RegExp; key: string }[] = [
   { match: /timeout|timed out/i, key: 'paymentsPage.detail.errors.timeout' },
   { match: /invalid.*phone|wrong.*number/i, key: 'paymentsPage.detail.errors.invalidPhone' },
   { match: /pin|otp.*incorrect/i, key: 'paymentsPage.detail.errors.wrongOtp' },
+  // PayDunya Orange Money French payment-code reject ("CODE ERRONNE OU DEJA EXPIRE OU UTILISE").
+  { match: /code\s+erron|d[ée]j[àa]\s+(expir|utilis)|(code|otp).*(expir|incorrect)/i, key: 'paymentsPage.detail.errors.wrongOtp' },
   { match: /temporarily unavailable|gateway.*unavailable/i, key: 'paymentsPage.detail.errors.gatewayUnavailable' },
   { match: /declined|rejected/i, key: 'paymentsPage.detail.errors.declined' },
   { match: /duplicate|already exists/i, key: 'paymentsPage.detail.errors.duplicate' },
