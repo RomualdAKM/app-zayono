@@ -180,6 +180,7 @@
 
         <div v-if="otpRequired" class="cot__field">
           <label class="cot__label" for="otp">{{ t('checkout.field.otpLabel') }}</label>
+          <p class="cot__otp-hint" style="font-size:12px;color:#6b7280;margin:4px 0 10px;line-height:1.45;">{{ t('checkout.step2.otpHint') }}</p>
           <input
             id="otp"
             :value="otp"

@@ -2237,7 +2237,7 @@
     "field": {
       "countryLabel": "Your country",
       "methodLabel": "Payment method",
-      "otpLabel": "Code received by SMS",
+      "otpLabel": "Payment code",
       "otpPlaceholder": "4 to 8 digits",
       "phoneLabel": "Phone number"
     },
@@ -2255,7 +2255,7 @@
       "errorOtpRequired": "Please enter the payment code (OTP).",
       "errorSelectOperator": "Please select a payment operator.",
       "eyebrow": "Payment",
-      "otpAriaLabel": "Confirmation code received by SMS",
+      "otpAriaLabel": "Payment code generated on your phone",
       "otpLabel": "Payment code",
       "otpPlaceholder": "6-digit code",
       "otpPlaceholderSms": "Code received by SMS",
@@ -2422,7 +2422,8 @@
     },
     "step2": {
       "otpLabel": "Payment code",
-      "otpPlaceholder": "Code received by SMS",
+      "otpPlaceholder": "Your payment code",
+      "otpHint": "Generate your payment code on your phone (your mobile money menu), then enter it below. Valid for a few minutes, single use.",
       "phoneLabel": "Phone number",
       "redirectInfo": "You will be redirected to the secure payment page."
     },

@@ -151,6 +151,7 @@
 
       <div v-if="otpRequired" class="ck-section">
         <label class="ck-label" for="otp">{{ t('checkout.step2.otpLabel') }}</label>
+        <p class="ck-otp-hint" style="font-size:12px;color:#6b7280;margin:4px 0 10px;line-height:1.45;">{{ t('checkout.step2.otpHint') }}</p>
         <input
           id="otp"
           :value="otp"
