@@ -43,10 +43,11 @@ function persist(mode: ThemeMode) {
 }
 
 function detectInitial(): ThemeMode {
-  const stored = readStored()
-  if (stored) return stored
-  if (typeof window === 'undefined') return 'light'
-  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  // Light is the product default. We honour ONLY an explicit user choice
+  // (persisted via the toggle) and deliberately do NOT follow the OS
+  // prefers-color-scheme, so the dashboard + auth pages open in light mode
+  // for everyone who hasn't opted into dark.
+  return readStored() ?? 'light'
 }
 
 function ensureInit() {
