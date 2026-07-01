@@ -510,9 +510,11 @@ function schedulePoll(iteration: number, generation: number) {
     if (generation !== pollGeneration) return
 
     if (document.visibilityState === 'hidden') {
-      // Throttle when the tab is hidden — re-schedule without
-      // hitting the network.
-      schedulePoll(iteration, generation)
+      // Throttle when the tab is hidden — re-schedule (no network hit) at the
+      // normal cadence. Floor to iteration 1 so a tab hidden AT iteration 0
+      // (interval 0 = the immediate first poll) doesn't spin a setTimeout(0)
+      // busy-loop while the customer is backgrounded in their Mobile Money app.
+      schedulePoll(Math.max(iteration, 1), generation)
       return
     }
     try {
