@@ -2399,6 +2399,7 @@
       "redirectingMessageTo": "To {host}",
       "redirectingMessageWait": "Please wait.",
       "redirectingTitle": "Redirecting to the secure page…",
+      "redirectSuccessTitle": "Payment confirmed, redirecting…",
       "sessionUnknownMessage": "The payment link is invalid or has expired. Ask the merchant for a new link.",
       "sessionUnknownTitle": "Link not found",
       "staleMessage": "If you validated on your phone, the payment may be being processed by the operator. We keep checking.",

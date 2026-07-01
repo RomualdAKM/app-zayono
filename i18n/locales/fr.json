@@ -2399,6 +2399,7 @@
       "redirectingMessageTo": "Vers {host}",
       "redirectingMessageWait": "Veuillez patienter.",
       "redirectingTitle": "Redirection vers la page sécurisée…",
+      "redirectSuccessTitle": "Paiement confirmé, redirection…",
       "sessionUnknownMessage": "Le lien de paiement est invalide ou a expiré. Demandez un nouveau lien au marchand.",
       "sessionUnknownTitle": "Lien introuvable",
       "staleMessage": "Si vous avez validé sur votre téléphone, le paiement peut être en cours de traitement par l'opérateur. Nous continuons à vérifier.",

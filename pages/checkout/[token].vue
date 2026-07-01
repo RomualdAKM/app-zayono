@@ -56,6 +56,10 @@ const session = ref<any>(null)
 const error = ref<string | null>(null)
 const pageState = ref<PageState>('loading')
 const redirectingTo = ref<string | null>(null)
+// True while the `redirecting` screen is the post-success bounce back to the
+// merchant (green checkmark + "Paiement confirmé"), false for the pre-payment
+// hosted-redirect to the aggregator (neutral spinner).
+const redirectAfterSuccess = ref(false)
 
 // R1 audit A11y V12 — dynamic page title so the browser tab + screen
 // reader announce the merchant context. Updates reactively when
@@ -226,8 +230,12 @@ async function fetchSession() {
       pageState.value = 'expired'
       session.value = successData
     } else if (status === 409) {
-      pageState.value = 'success'
+      // Session already completed (eg a COLD reload of a paid session). Show the
+      // static receipt and do NOT auto-redirect: bouncing forward here would
+      // turn the browser Back button into a trap. Only fresh in-session
+      // completions (process / polling / manual) skip straight to the merchant.
       session.value = successData
+      pageState.value = 'success'
     } else if (status === 404) {
       pageState.value = 'session_unknown'
     } else {
@@ -576,19 +584,40 @@ async function manualStatusCheck() {
 // Success → return_url, failure/expired/cancelled → cancel_url
 // (fallback to return_url if cancel_url not provided).
 let autoRedirectTimer: ReturnType<typeof setTimeout> | null = null
+// Validated http(s) return_url (or null). Reused to decide whether we can
+// skip the receipt screen AND to label the redirecting screen with the host.
+function validatedReturnUrl(): URL | null {
+  const raw = session.value?.return_url
+  if (typeof raw !== 'string' || raw === '') return null
+  try {
+    const u = new URL(raw)
+    return ['http:', 'https:'].includes(u.protocol) ? u : null
+  } catch {
+    return null
+  }
+}
+
 function scheduleAutoRedirectToReturnUrl() {
-  // R2 audit Edge N8: cancel any previously-scheduled timer first.
-  // A race between /process success and a polling-success could
-  // schedule TWO 8s timers, only the second is referenced by
-  // `autoRedirectTimer`, so cancelAutoRedirect later would only
-  // clear one — the other fires unconditionally.
+  // R2 audit Edge N8: cancel any previously-scheduled timer first so a race
+  // between /process success and a polling-success can't leave a stray timer.
   cancelAutoRedirect()
-  if (!session.value?.return_url) return
+  // Skip the "Paiement confirmé" receipt screen: the customer came to pay, not
+  // to read a receipt, so as soon as the payment is confirmed we send them
+  // straight back to the merchant. We still show a brief success-styled beat
+  // (green checkmark + "Paiement confirmé") so the customer clearly sees it
+  // worked before leaving. When there is no usable http(s) return_url we return
+  // early and the caller's `pageState = 'success'` stays as the full receipt.
+  const target = validatedReturnUrl()
+  if (!target) return
+  redirectingTo.value = target.host
+  redirectAfterSuccess.value = true
+  pageState.value = 'redirecting'
   autoRedirectTimer = setTimeout(() => {
-    // R2 audit HIGH: same protocol-validated navigation as the manual
-    // path. A merchant-controlled `javascript:` URL must not execute.
-    navigateSafely(session.value?.return_url)
-  }, 8000)
+    // Navigate on the ALREADY-validated URL (not a fresh session re-read) so the
+    // shown host and the real destination can't drift. navigateSafely still
+    // re-checks the protocol — a merchant `javascript:` URL must never execute.
+    navigateSafely(target.href)
+  }, 900)
 }
 
 // Symmetric to scheduleAutoRedirectToReturnUrl but for terminal
@@ -1042,8 +1071,8 @@ function runFailureCta(action: string) {
 
       <CheckoutStateScreen
         v-else-if="pageState === 'redirecting'"
-        variant="redirecting"
-        :title="t('checkout.state.redirectingTitle')"
+        :variant="redirectAfterSuccess ? 'success' : 'redirecting'"
+        :title="redirectAfterSuccess ? t('checkout.state.redirectSuccessTitle') : t('checkout.state.redirectingTitle')"
         :message="redirectingTo ? t('checkout.state.redirectingMessageTo', { host: redirectingTo }) : t('checkout.state.redirectingMessageWait')"
       />
 
