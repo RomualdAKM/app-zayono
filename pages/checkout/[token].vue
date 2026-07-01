@@ -69,10 +69,37 @@ const redirectAfterSuccess = ref(false)
 // eagerly during setup to compute the initial title. Calling useHead
 // before the ref is declared throws ReferenceError (temporal dead
 // zone), crashes the page, and Nuxt falls back to `/` → `/dashboard`.
+// API origin (backend.zayono.com in prod) — static, resolved once at setup so
+// we can warm the connection to it (see the `link` getter below). Defensive:
+// a missing/invalid apiBase just skips the hint.
+const apiOrigin = (() => {
+  try {
+    return new URL(useRuntimeConfig().public.apiBase as string).origin
+  } catch {
+    return null
+  }
+})()
+
 useHead({
   title: () => {
     const m = session.value?.merchant?.name
     return m ? t('checkout.head.titleWithMerchant', { merchant: m }) : t('checkout.head.titleDefault')
+  },
+  // Resource hints to strip cold DNS+TCP+TLS handshakes off the critical path:
+  //  - the API origin, so getSession/process/status fire on an open connection;
+  //  - the merchant return_url origin as soon as the session resolves it, so the
+  //    post-success bounce doesn't pay a cold handshake to the merchant domain.
+  // Reactive: the getter re-runs when `session` (hence validatedReturnUrl) changes.
+  link: () => {
+    const links: Array<Record<string, string>> = []
+    if (apiOrigin) {
+      links.push({ rel: 'preconnect', href: apiOrigin, crossorigin: '' }, { rel: 'dns-prefetch', href: apiOrigin })
+    }
+    const ret = validatedReturnUrl()
+    if (ret) {
+      links.push({ rel: 'preconnect', href: ret.origin, crossorigin: '' }, { rel: 'dns-prefetch', href: ret.origin })
+    }
+    return links
   },
 })
 
@@ -99,7 +126,17 @@ let consecutiveFailures = 0
 // generation counter lets every poll iteration check it's still the
 // active polling session before scheduling its successor.
 let pollGeneration = 0
-const POLL_INTERVALS = [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 5000, 5000, 5000, 8000]
+// Hold the tight 3s cadence through the realistic MoMo approval window
+// (~0-60s) and only back off afterwards, so late approvals are still caught
+// within ~3s instead of the old 5s/8s penalty that kicked in at 30s/45s. The
+// 3s floor is aligned with the backend inline-verify throttle (once/3s), so
+// every poll triggers a real aggregator verify. Iteration 0 is fired
+// immediately (see schedulePoll), independent of this array.
+const POLL_INTERVALS = [
+  ...Array(20).fill(3000), // 0-60s: tight
+  ...Array(12).fill(5000), // 60-120s
+  8000,                    // >120s until the soft/hard poll timeout
+]
 const POLL_SOFT_TIMEOUT_MS = 3 * 60 * 1000  // 3 min → polling_stale
 const POLL_HARD_TIMEOUT_MS = 5 * 60 * 1000  // 5 min → timeout
 const VALIDATION_TIMEOUT_MS = 30 * 1000      // /process must respond within 30 s
@@ -459,7 +496,14 @@ function schedulePoll(iteration: number, generation: number) {
   if (elapsed >= POLL_SOFT_TIMEOUT_MS && pageState.value !== 'polling_stale') {
     pageState.value = 'polling_stale'
   }
-  const interval = POLL_INTERVALS[Math.min(iteration, POLL_INTERVALS.length - 1)]
+  // Fire the very first status check IMMEDIATELY (iteration 0) instead of
+  // waiting a full first interval: an already-settled payment (resumed session,
+  // fast provider, approval that landed during /process) surfaces at once
+  // rather than after a dead 3s spinner. /status only reads + verifies (never
+  // charges), so an eager first call cannot double-charge.
+  const interval = iteration === 0
+    ? 0
+    : POLL_INTERVALS[Math.min(iteration, POLL_INTERVALS.length - 1)]
   pollTimer = setTimeout(async () => {
     // Guard before any side-effect — even before the await — in case
     // stopPolling was called while this setTimeout was queued.
@@ -617,7 +661,9 @@ function scheduleAutoRedirectToReturnUrl() {
     // shown host and the real destination can't drift. navigateSafely still
     // re-checks the protocol — a merchant `javascript:` URL must never execute.
     navigateSafely(target.href)
-  }, 900)
+    // 600ms: a checkmark reads well under this, and it keeps the "it worked"
+    // confirmation while shaving ~300ms of dead time off every success.
+  }, 600)
 }
 
 // Symmetric to scheduleAutoRedirectToReturnUrl but for terminal
