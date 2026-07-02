@@ -264,6 +264,35 @@ export default defineNuxtConfig({
       },
     },
   },
+  nitro: {
+    /*
+     * DEV-ONLY proxy — lets local dev (localhost:3000) talk to the online
+     * backend without hitting CORS.
+     *
+     * The production backend only allows the `https://app.zayono.com`
+     * origin (`access-control-allow-origin`), so a direct browser call from
+     * `http://localhost:3000` to `https://backend.zayono.com` is blocked by
+     * the browser. Routing `/api/**` through the Nuxt dev server means the
+     * browser makes a same-origin request (no CORS), and the dev server
+     * forwards it server-to-server to the real backend (CORS doesn't apply
+     * to server-side requests).
+     *
+     * `devProxy` runs ONLY during `nuxt dev` — it's ignored in production
+     * builds, where `NUXT_PUBLIC_API_BASE` points at the real backend and
+     * the deployed frontend is served from an allowed origin.
+     *
+     * Pairs with `NUXT_PUBLIC_API_BASE=/api` in the local `.env`.
+     */
+    devProxy: {
+      // devProxy strips the matched `/api` prefix, so the target must
+      // re-add it: `/api/auth/login` -> strip `/api` -> `/auth/login`
+      // -> appended to target -> `https://backend.zayono.com/api/auth/login`.
+      '/api': {
+        target: 'https://backend.zayono.com/api',
+        changeOrigin: true,
+      },
+    },
+  },
   runtimeConfig: {
     public: {
       // Nuxt auto-binds `NUXT_PUBLIC_API_BASE` from the environment to this

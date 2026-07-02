@@ -3,8 +3,7 @@
     <!-- Header bar: logo left, user menu right (matches Moneroo's chrome) -->
     <header class="apps-topbar">
       <NuxtLink to="/apps" class="brand">
-        <span class="brand-mark">Z</span>
-        <span class="brand-name">zayono</span>
+        <img src="/logo.gif" alt="Zayono" class="brand-logo" />
       </NuxtLink>
       <div class="topbar-actions">
         <LayoutLanguageSwitcher compact />
@@ -26,9 +25,8 @@
     </header>
 
     <main class="apps-main">
-      <!-- Welcome message — Moneroo style with waving emoji + 2 lines -->
+      <!-- Welcome message — greeting + subtitle (no emoji, kept professional) -->
       <section class="apps-welcome">
-        <span class="apps-wave" aria-hidden="true">👋</span>
         <div>
           <h1 class="apps-greeting">
             {{ $t('appsPage.greeting', { name: auth.merchant?.name || $t('appsPage.fallbackMerchant') }) }}
@@ -258,24 +256,10 @@ const initialsFor = (name: string): string => {
   color: var(--ze-text-strong);
 }
 
-.brand-mark {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  background: linear-gradient(135deg, #fbbf24, #2563eb);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-weight: 800;
-  font-size: 14px;
-  letter-spacing: -0.5px;
-}
-
-.brand-name {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
+.brand-logo {
+  height: 28px;
+  width: auto;
+  display: block;
 }
 
 .topbar-actions {
@@ -400,11 +384,6 @@ const initialsFor = (name: string): string => {
   border-radius: 8px;
   padding: 16px 20px;
   margin-bottom: 32px;
-}
-
-.apps-wave {
-  font-size: 22px;
-  line-height: 1.3;
 }
 
 .apps-greeting {

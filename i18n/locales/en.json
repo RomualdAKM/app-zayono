@@ -556,7 +556,7 @@
   },
   "billing": {
     "title": "Billing",
-    "subtitle": "Zayono platform fees: deferred billing. For each successful live transaction, a small USD amount accrues. When the total reaches $1, an invoice is generated which you pay through your dashboard.",
+    "subtitle": "Platform fees and your invoice history.",
     "currentBalance": "Current balance",
     "accumulatedTx": "Accumulated transactions",
     "feePerTx": "Fee per transaction",
@@ -582,7 +582,7 @@
       "writtenOff": "Written off",
       "expired": "Expired"
     },
-    "empty": "No invoices yet. Keep using Zayono, your first invoice will be generated after 200 successful live transactions."
+    "empty": "No invoices yet."
   },
   "billingInvoiceStatus": {
     "pageTitle": "Payment status",

@@ -483,8 +483,7 @@ onMounted(refreshStatus)
   background: var(--ze-bg-card);
 }
 
-.status-card--neutral { border-left: 4px solid var(--ze-text-muted); }
-.status-card--success { border-left: 4px solid var(--ze-success, #15803D); background: color-mix(in srgb, var(--ze-success, #15803D) 4%, var(--ze-bg-card)); }
+.status-card--success { background: color-mix(in srgb, var(--ze-success, #15803D) 4%, var(--ze-bg-card)); }
 
 .status-icon {
   flex-shrink: 0;

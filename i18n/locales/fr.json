@@ -556,7 +556,7 @@
   },
   "billing": {
     "title": "Facturation",
-    "subtitle": "Frais de plateforme Zayono : facturation différée. Pour chaque transaction live réussie, un petit montant en USD est accumulé. Quand le total atteint $1, une facture est générée que vous payez via votre dashboard.",
+    "subtitle": "Frais de plateforme et historique de vos factures.",
     "currentBalance": "Solde courant",
     "accumulatedTx": "Transactions accumulées",
     "feePerTx": "Tarif par transaction",
@@ -582,7 +582,7 @@
       "writtenOff": "Perte",
       "expired": "Expirée"
     },
-    "empty": "Aucune facture pour le moment. Continuez d'utiliser Zayono, votre première facture sera générée après 200 transactions live réussies."
+    "empty": "Aucune facture pour le moment."
   },
   "billingInvoiceStatus": {
     "pageTitle": "Statut du paiement",

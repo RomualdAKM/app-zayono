@@ -326,7 +326,8 @@ body {
    Without a dedicated white variant, invert + brighten so it stays legible
    on the dark surface. Applied globally to all logo images. */
 html.dark-mode .logo-image,
-html.dark-mode .auth-logo {
+html.dark-mode .auth-logo,
+html.dark-mode .brand-logo {
   filter: brightness(0) invert(1);
 }
 
@@ -351,6 +352,31 @@ html.dark-mode .auth-logo {
   .auth-card {
     padding: 24px;
   }
+}
+
+/*
+ * Auth CTAs — brand blue (not indigo).
+ *
+ * The global `.p-button` rule paints primary buttons with
+ * `--primary-500` (#4F46E5), which reads as violet. On the auth screens
+ * (login "Se connecter", register "S'inscrire", forgot/reset password,
+ * 2FA) we want the CTA to match the Zayono brand blue instead. Scoped to
+ * `.auth-layout` so only the auth cards change — the rest of the app is
+ * left exactly as-is. Higher specificity than the base `.p-button`, so it
+ * wins without `!important`.
+ */
+.auth-layout .p-button {
+  background: var(--ze-brand);
+  border-color: var(--ze-brand);
+}
+
+.auth-layout .p-button:hover:not(:disabled):not(.p-disabled) {
+  background: var(--ze-brand-hover);
+  border-color: var(--ze-brand-hover);
+}
+
+.auth-layout .p-button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.20);
 }
 
 /* Tabular-num utility — apply on financial figures (amounts, KPIs, tables). */
