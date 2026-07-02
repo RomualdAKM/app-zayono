@@ -405,7 +405,7 @@ const formatAmount = props.formatAmount
   color: var(--ck-text-muted);
 }
 
-/* ─── Total box ─── */
+
 .abj__total-box {
   display: flex;
   align-items: baseline;
