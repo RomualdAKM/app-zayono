@@ -64,9 +64,7 @@
       </div>
 
       <div v-for="group in operatorGroups" :key="group.key" class="ck-section">
-        <label class="ck-label">
-          <span v-if="group.key === 'international'" aria-hidden="true">🌍 </span>{{ group.label }}
-        </label>
+        <label class="ck-label">{{ group.label }}</label>
         <div class="ck-methods">
           <CheckoutMethodCard
             v-for="op in group.operators"

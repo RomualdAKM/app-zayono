@@ -60,9 +60,7 @@
       </div>
 
       <div v-for="group in operatorGroups" :key="group.key" class="abj__field">
-        <label class="abj__label">
-          <span v-if="group.key === 'international'" aria-hidden="true">🌍 </span>{{ group.label }}
-        </label>
+        <label class="abj__label">{{ group.label }}</label>
         <div class="abj__grid">
           <CheckoutMethodTile
             v-for="op in group.operators"

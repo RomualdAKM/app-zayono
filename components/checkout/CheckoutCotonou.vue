@@ -98,9 +98,7 @@
         </div>
 
         <div v-for="group in operatorGroups" :key="group.key" class="cot__field">
-          <label class="cot__label">
-            <span v-if="group.key === 'international'" aria-hidden="true">🌍 </span>{{ group.label }}
-          </label>
+          <label class="cot__label">{{ group.label }}</label>
           <ul class="cot__methods">
             <li
               v-for="op in group.operators"

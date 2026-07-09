@@ -2423,7 +2423,7 @@
       "countryLabel": "Your country",
       "methodLabel": "Payment method",
       "momoLabel": "Mobile Money",
-      "internationalLabel": "International · available worldwide",
+      "internationalLabel": "International, available worldwide",
       "noMethods": "No payment method is available. Please contact the merchant.",
       "subtitle": "Complete your payment"
     },
