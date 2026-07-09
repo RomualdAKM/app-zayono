@@ -2268,6 +2268,7 @@
     },
     "fx": {
       "conversionDisabled": "Conversion désactivée",
+      "amountBelowMin": "Montant trop faible pour la crypto",
       "unavailableCurrency": "Indisponible (devise)"
     },
     "head": {
@@ -2345,6 +2346,7 @@
     },
     "method": {
       "fxConversionDisabled": "Conversion désactivée",
+      "fxAmountBelowMin": "Montant trop faible pour la crypto",
       "fxUnavailable": "Indisponible"
     },
     "methodCard": {

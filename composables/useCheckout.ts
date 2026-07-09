@@ -50,13 +50,14 @@ export interface Operator {
   //  - charge_amount: amount to be charged in the operator's currency
   //  - charge_currency: ISO-4217 of charge_amount
   //  - fx_rate: rate applied (1.0 when no conversion needed)
-  //  - fx_available: false when no exchange rate exists between
-  //    session.currency and operator.currency — the operator is
-  //    surfaced but disabled in the UI.
+  //  - fx_available: false when the operator is surfaced but disabled
+  //    in the UI (no exchange rate, conversion off, or below the crypto
+  //    minimum). fx_reason carries WHY so the tile can show a label.
   charge_amount?: number | null
   charge_currency?: string
   fx_rate?: number | null
   fx_available?: boolean
+  fx_reason?: 'amount_below_min' | 'conversion_disabled' | 'no_rate' | null
 }
 
 export interface CheckoutSession {

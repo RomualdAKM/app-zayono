@@ -327,6 +327,7 @@ function onMethodPick(code: string) {
 
 function fxUnavailableLabel(op: any): string | undefined {
   if (op.fx_available !== false) return undefined
+  if (op.fx_reason === 'amount_below_min') return t('checkout.method.fxAmountBelowMin')
   if (op.fx_reason === 'conversion_disabled') return t('checkout.method.fxConversionDisabled')
   return t('checkout.method.fxUnavailable')
 }

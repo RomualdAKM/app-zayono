@@ -2268,6 +2268,7 @@
     },
     "fx": {
       "conversionDisabled": "Conversion disabled",
+      "amountBelowMin": "Amount too small for crypto",
       "unavailableCurrency": "Unavailable (currency)"
     },
     "head": {
@@ -2345,6 +2346,7 @@
     },
     "method": {
       "fxConversionDisabled": "Conversion disabled",
+      "fxAmountBelowMin": "Amount too small for crypto",
       "fxUnavailable": "Unavailable"
     },
     "methodCard": {

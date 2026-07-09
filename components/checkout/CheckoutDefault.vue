@@ -352,6 +352,7 @@ function countryLabel(iso: string): string {
 
 function fxUnavailableLabel(op: any): string | null {
   if (op.fx_available !== false) return null
+  if (op.fx_reason === 'amount_below_min') return t('checkout.fx.amountBelowMin')
   if (op.fx_reason === 'conversion_disabled') return t('checkout.fx.conversionDisabled')
   return t('checkout.fx.unavailableCurrency')
 }
