@@ -55,15 +55,17 @@
         />
       </div>
 
-      <div v-if="!filteredOperators.length" class="abj__empty">
+      <div v-if="!operatorGroups.length" class="abj__empty">
         {{ t('checkout.state.noPaymentMethods') }}
       </div>
 
-      <div v-else class="abj__field">
-        <label class="abj__label">{{ t('checkout.form.paymentMethodLabel') }}</label>
+      <div v-for="group in operatorGroups" :key="group.key" class="abj__field">
+        <label class="abj__label">
+          <span v-if="group.key === 'international'" aria-hidden="true">🌍 </span>{{ group.label }}
+        </label>
         <div class="abj__grid">
           <CheckoutMethodTile
-            v-for="op in filteredOperators"
+            v-for="op in group.operators"
             :key="op.code"
             :name="op.name"
             :subtitle="fxUnavailableLabel(op)"
@@ -234,10 +236,42 @@ const countries = computed<CheckoutCountry[]>(() => {
   return Array.from(seen.values())
 })
 
-const filteredOperators = computed(() => {
-  const ops = props.session?.operators ?? []
+// International / hosted methods (crypto, card, any redirect-flow or no-phone
+// operator) do NOT depend on the customer's country, so they get their own
+// "available worldwide" section — a customer outside the listed countries never
+// thinks the checkout is country-locked.
+const isInternational = (op: any) =>
+  op?.redirect_flow === true || op?.phone_required === false || op?.country === 'XX'
+
+const internationalOperators = computed(() =>
+  (props.session?.operators ?? []).filter(isInternational),
+)
+
+const momoOperators = computed(() => {
+  const ops = (props.session?.operators ?? []).filter((op: any) => !isInternational(op))
   if (countries.value.length <= 1) return ops
-  return ops.filter((op: any) => op.country === props.selectedCountry || op.country === 'XX')
+  return ops.filter((op: any) => op.country === props.selectedCountry)
+})
+
+const operatorGroups = computed<{ key: string; label: string; operators: any[] }[]>(() => {
+  const groups: { key: string; label: string; operators: any[] }[] = []
+  if (momoOperators.value.length) {
+    groups.push({
+      key: 'momo',
+      label: internationalOperators.value.length
+        ? t('checkout.step1.momoLabel')
+        : t('checkout.form.paymentMethodLabel'),
+      operators: momoOperators.value,
+    })
+  }
+  if (internationalOperators.value.length) {
+    groups.push({
+      key: 'international',
+      label: t('checkout.step1.internationalLabel'),
+      operators: internationalOperators.value,
+    })
+  }
+  return groups
 })
 
 const selectedOperatorObj = computed(() =>

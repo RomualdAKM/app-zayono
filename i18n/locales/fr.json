@@ -2422,6 +2422,8 @@
     "step1": {
       "countryLabel": "Votre pays",
       "methodLabel": "Moyen de paiement",
+      "momoLabel": "Mobile Money",
+      "internationalLabel": "International · disponible partout",
       "noMethods": "Aucun moyen de paiement n'est disponible. Contactez le marchand.",
       "subtitle": "Finalisez votre paiement"
     },
