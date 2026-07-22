@@ -663,6 +663,11 @@
       "invoiceMarkedPaid": "Invoice marked as paid",
       "invoiceCancelled": "Invoice cancelled",
       "invoiceCreated": "Invoice created"
+    },
+    "defaultFee": {
+      "label": "Default fee (new merchants)",
+      "hint": "Applied automatically to every new merchant at signup. Does not affect merchants that already registered, edit them individually in the list below.",
+      "saved": "Default fee updated"
     }
   },
   "paymentsPage": {

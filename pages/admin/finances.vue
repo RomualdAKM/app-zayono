@@ -253,7 +253,7 @@ function openMerchant(id: string) {
 
 // Two distinct money formatters live here because this page mixes
 // currencies: tx volume is in XOF (transaction native currency) but
-// platform revenue is in USD (platform_billing model — $0.005/tx).
+// platform revenue is in USD (platform_billing model, $0.01/tx).
 // Using a single XOF helper for both surfaces silent unit confusion
 // like "Revenu plateforme: 2 F CFA" instead of "$2.00".
 function formatRevenueUsd(amount: number) {

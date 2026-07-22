@@ -47,6 +47,33 @@
         </div>
       </div>
 
+      <!-- Global default fee applied to NEW merchants (super-admin tunable) -->
+      <div class="default-fee-card">
+        <div class="default-fee-info">
+          <div class="default-fee-title">{{ $t('platformBilling.defaultFee.label') }}</div>
+          <div class="default-fee-hint">{{ $t('platformBilling.defaultFee.hint') }}</div>
+        </div>
+        <div class="default-fee-controls">
+          <span class="default-fee-prefix">$</span>
+          <InputNumber
+            v-model="defaultFee"
+            :minFractionDigits="2"
+            :maxFractionDigits="5"
+            :min="0"
+            :max="999.99999"
+            :step="0.005"
+            class="default-fee-input"
+          />
+          <Button
+            :label="$t('common.save')"
+            severity="primary"
+            :loading="savingDefaultFee"
+            :disabled="defaultFee == null"
+            @click="saveDefaultFee"
+          />
+        </div>
+      </div>
+
       <!-- Tabs -->
       <Tabs v-model:value="activeTab">
         <TabList>
@@ -355,6 +382,9 @@ const statusOptions = computed(() => [
   { label: t('billing.invoiceStatus.writtenOff'), value: 'written_off' },
 ])
 
+const defaultFee = ref<number | null>(null)
+const savingDefaultFee = ref(false)
+
 const merchantModalOpen = ref(false)
 const activeMerchant = ref<{ merchant: MerchantRow; invoices: Invoice[] } | null>(null)
 const feeOverride = ref<number>(0)
@@ -379,6 +409,7 @@ async function loadOverview() {
   try {
     const res = await apiFetch<{ data: OverviewKpis }>('/admin/platform-billing/overview')
     overview.value = res.data
+    defaultFee.value = Number(res.data.default_fee_per_tx_usd)
     await loadMerchants()
     await loadInvoices()
   } catch (e: any) {
@@ -386,6 +417,21 @@ async function loadOverview() {
   } finally {
     loading.value = false
   }
+}
+
+async function saveDefaultFee() {
+  if (defaultFee.value == null) return
+  savingDefaultFee.value = true
+  try {
+    const res = await apiFetch<{ data: { default_fee_per_tx_usd: number } }>('/admin/platform-billing/default-fee', {
+      method: 'PUT',
+      body: { default_fee_per_tx_usd: defaultFee.value },
+    })
+    overview.value.default_fee_per_tx_usd = res.data.default_fee_per_tx_usd
+    defaultFee.value = Number(res.data.default_fee_per_tx_usd)
+    toast?.add?.({ severity: 'success', summary: t('platformBilling.defaultFee.saved'), life: 2000 })
+  } catch (e: any) { handleError(e) }
+  finally { savingDefaultFee.value = false }
 }
 
 async function loadMerchants() {
@@ -561,6 +607,13 @@ onMounted(loadOverview)
 .alert { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 4px; font-size: 13px; flex: 1; min-width: 280px; }
 .alert--warn { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
 .alert--info { background: #fefce8; border: 1px solid #fde68a; color: #92400e; }
+
+.default-fee-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 16px 20px; margin-bottom: 24px; background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; }
+.default-fee-title { font-weight: 600; color: #111827; font-size: 14px; }
+.default-fee-hint { font-size: 12px; color: #6b7280; margin-top: 3px; max-width: 62ch; }
+.default-fee-controls { display: flex; align-items: center; gap: 8px; }
+.default-fee-prefix { font-weight: 600; color: #6b7280; }
+.default-fee-input { width: 150px; }
 
 .filters-row { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
 .filter-label { font-size: 13px; color: #4b5563; cursor: pointer; }

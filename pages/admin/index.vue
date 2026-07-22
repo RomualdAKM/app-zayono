@@ -34,7 +34,7 @@
         <div class="kpi-content">
           <!--
             Zayono platform revenue is USD-denominated (platform_billing
-            business model — $0.005/tx flat accrual). Volume above stays
+            business model, $0.01/tx flat accrual). Volume above stays
             XOF (transaction native currency).
           -->
           <span class="kpi-value">{{ formatRevenueUsd(dashboard?.revenue.today ?? 0) }}</span>

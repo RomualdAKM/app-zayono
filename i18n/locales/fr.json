@@ -663,6 +663,11 @@
       "invoiceMarkedPaid": "Facture marquée payée",
       "invoiceCancelled": "Facture annulée",
       "invoiceCreated": "Facture créée"
+    },
+    "defaultFee": {
+      "label": "Tarif par défaut (nouveaux marchands)",
+      "hint": "Appliqué automatiquement à chaque nouveau marchand à l'inscription. N'affecte pas les marchands déjà inscrits, modifiez-les individuellement dans la liste ci-dessous.",
+      "saved": "Tarif par défaut mis à jour"
     }
   },
   "paymentsPage": {
