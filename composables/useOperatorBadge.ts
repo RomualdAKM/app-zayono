@@ -73,10 +73,12 @@ export function operatorLogo(name: string): string | null {
     return '/operator-logos/tmoney.png'
   }
 
-  // Celtiis (Bénin) — sourced from celtiis.bj's favicon directly.
-  if (lower.includes('celtiis')) {
-    return '/operator-logos/celtiis.png'
-  }
+  // Celtiis (Bénin): no PNG asset is committed under public/operator-logos,
+  // so we deliberately fall through to the branded badge below (purple "C")
+  // instead of pointing <img> at a missing file — a 404 would render a
+  // broken-image icon because the operator-logo <img> has no @error fallback.
+  // To restore the real logo: drop `celtiis.png` (celtiis.bj favicon) into
+  // public/operator-logos and return '/operator-logos/celtiis.png' here.
 
   // Free Money (Sénégal). Logo sourced from Saga Africa Holdings, the
   // parent company — the two share corporate identity. If a future
